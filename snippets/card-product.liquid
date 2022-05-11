@@ -36,6 +36,7 @@
       {% if extend_height %} card--extend-height{% endif %}
       {% if card_product.featured_media == nil and settings.card_style == 'card' %} ratio{% endif %}"
       style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
+      id="product-card--{{ card_product.handle }}"
     >
       <div class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }}{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}" style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;">
         {%- if card_product.featured_media -%}
@@ -139,7 +140,7 @@
 
 
 
-            <product-form-{{ card_product.id }} class="large-up-hide">
+            <product-form-{{ card_product.id }} class="">
               {%- assign product_form_id = 'product-form-' | append: card_product.id -%}
             {%- form 'product', card_product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
               <input type="hidden" id="Quantity-{{ card_product.id }}" value="1" min="1" aria-label="quantity" pattern="[0-9]*" name="quantity">
