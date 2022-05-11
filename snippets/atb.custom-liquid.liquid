@@ -1,0 +1,122 @@
+{% comment %}
+ATB-SCHEMA{
+  "name": "t:sections.custom-liquid.name",
+  "tag": "section",
+  "class": "section",
+  "id": "custom-liquid",
+  "banner": "",
+  "icon": "",
+  "tags": "",
+  "description": "",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "info": "Enter a unique ID with only letters and numbers, no spaces",
+      "default": ""
+    },
+    {
+      "type": "liquid",
+      "id": "atb_custom_liquid",
+      "label": "t:sections.custom-liquid.settings.custom_liquid.label",
+      "info": "t:sections.custom-liquid.settings.custom_liquid.info"
+    },
+    {
+      "type": "select",
+      "id": "atb_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.all.colors.inverse.label"
+        }
+      ],
+      "default": "background-1",
+      "label": "t:sections.all.colors.label",
+      "info": ""
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading",
+      "info": ""
+    },
+    {
+      "type": "range",
+      "id": "atb_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 40,
+      "info": ""
+    },
+    {
+      "type": "range",
+      "id": "atb_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 52,
+      "info": ""
+    }
+  ],
+  "warnings": []
+}ATB-SCHEMA
+{% endcomment %}
+
+
+{%- include 'atb-render' field:'section_id' -%}
+{%- assign section_id = val -%}
+{%- include 'atb-render' field:'atb_custom_liquid' -%}
+{%- assign atb_custom_liquid = val -%}
+{%- include 'atb-render' field:'atb_color_scheme' -%}
+{%- assign atb_color_scheme = val -%}
+{%- include 'atb-render' field:'atb_padding_top' -%}
+{%- assign atb_padding_top = val -%}
+{%- include 'atb-render' field:'atb_padding_bottom' -%}
+{%- assign atb_padding_bottom = val -%}
+{%- assign atb_padding_top = atb_padding_top | plus: 0 -%}
+{%- assign atb_padding_bottom = atb_padding_bottom | plus: 0 -%}
+{%- assign no_image = images['no_image_comparison'] -%}
+
+<section id="shopify-section-{{section_id}}" class="shopify-section section">
+{%- style -%}
+.section-{{ section_id }}-padding {
+  padding-top: calc({{ atb_padding_top }}px * 0.75);
+  padding-bottom: calc({{ atb_padding_bottom }}px  * 0.75);
+}
+
+@media screen and (min-width: 750px) {
+  .section-{{ section_id }}-padding {
+    padding-top: {{ atb_padding_top }}px;
+    padding-bottom: {{ atb_padding_bottom }}px;
+  }
+}
+{%- endstyle -%}
+<div class="color-{{ atb_color_scheme }} gradient">
+  <div class="section-{{ section_id }}-padding">
+    {{ atb_custom_liquid }}
+  </div>
+</div>
+
+
+</section>

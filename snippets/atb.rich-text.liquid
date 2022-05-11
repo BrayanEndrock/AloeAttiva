@@ -1,0 +1,268 @@
+{% comment %}
+ATB-SCHEMA{
+  "name": "t:sections.rich-text.name",
+  "tag": "section",
+  "class": "section",
+  "id": "rich-text",
+  "banner": "",
+  "icon": "",
+  "tags": "",
+  "description": "",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "info": "Enter a unique ID with only letters and numbers, no spaces",
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "atb_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.rich-text.settings.color_scheme.options__1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.rich-text.settings.color_scheme.options__2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.rich-text.settings.color_scheme.options__3.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.rich-text.settings.color_scheme.options__4.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.rich-text.settings.color_scheme.options__5.label"
+        }
+      ],
+      "default": "background-1",
+      "label": "t:sections.rich-text.settings.color_scheme.label",
+      "info": ""
+    },
+    {
+      "type": "checkbox",
+      "id": "atb_full_width",
+      "default": true,
+      "label": "t:sections.rich-text.settings.full_width.label",
+      "info": ""
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading",
+      "info": ""
+    },
+    {
+      "type": "range",
+      "id": "atb_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 40,
+      "info": ""
+    },
+    {
+      "type": "range",
+      "id": "atb_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 52,
+      "info": ""
+    },
+    {
+      "type": "select",
+      "id": "block_type",
+      "label": "Block Type",
+      "info": "",
+      "default": "",
+      "options": [
+        {
+          "value": "heading",
+          "label": "heading"
+        },
+        {
+          "value": "text",
+          "label": "text"
+        },
+        {
+          "value": "button",
+          "label": "button"
+        }
+      ],
+      "repeatable": "block"
+    },
+    {
+      "type": "text",
+      "id": "blocks",
+      "label": "Block ID",
+      "info": "Enter a unique ID with only letters and numbers, no spaces",
+      "default": "",
+      "repeatable": "block"
+    },
+    {
+      "type": "text",
+      "id": "block_heading",
+      "default": "Talk about your brand",
+      "label": "t:sections.rich-text.blocks.heading.settings.heading.label",
+      "repeatable": "block",
+      "info": "",
+      "conditional": "block_type:heading"
+    },
+    {
+      "type": "select",
+      "id": "block_heading_size",
+      "options": [
+        {
+          "value": "h2",
+          "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "h1",
+          "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "h0",
+          "label": "t:sections.rich-text.blocks.heading.settings.heading_size.options__3.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.rich-text.blocks.heading.settings.heading_size.label",
+      "repeatable": "block",
+      "info": "",
+      "conditional": "block_type:heading"
+    },
+    {
+      "type": "wysiwyg",
+      "id": "block_text",
+      "default": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>",
+      "label": "t:sections.rich-text.blocks.text.settings.text.label",
+      "repeatable": "block",
+      "info": "",
+      "conditional": "block_type:text"
+    },
+    {
+      "type": "text",
+      "id": "block_button_label",
+      "default": "Button label",
+      "label": "t:sections.rich-text.blocks.button.settings.button_label.label",
+      "repeatable": "block",
+      "info": "",
+      "conditional": "block_type:button"
+    },
+    {
+      "type": "text",
+      "id": "block_button_link",
+      "label": "t:sections.rich-text.blocks.button.settings.button_link.label",
+      "repeatable": "block",
+      "info": "",
+      "conditional": "block_type:button"
+    },
+    {
+      "type": "checkbox",
+      "id": "block_button_style_secondary",
+      "default": false,
+      "label": "t:sections.rich-text.blocks.button.settings.button_style_secondary.label",
+      "repeatable": "block",
+      "info": "",
+      "conditional": "block_type:button"
+    }
+  ],
+  "warnings": [
+    "repeating checkbox fields may not be properly handled"
+  ]
+}ATB-SCHEMA
+{% endcomment %}
+
+
+{%- include 'atb-render' field:'section_id' -%}
+{%- assign section_id = val -%}
+{%- include 'atb-render' field:'atb_color_scheme' -%}
+{%- assign atb_color_scheme = val -%}
+{%- include 'atb-render' field:'atb_full_width' -%}
+{%- assign atb_full_width = val -%}
+{%- include 'atb-render' field:'atb_padding_top' -%}
+{%- assign atb_padding_top = val -%}
+{%- include 'atb-render' field:'atb_padding_bottom' -%}
+{%- assign atb_padding_bottom = val -%}
+{%- include 'atb-render' field:'block_type' -%}
+{%- assign block_type = val -%}
+{%- include 'atb-render' field:'blocks' -%}
+{%- assign blocks = val -%}
+{%- include 'atb-render' field:'block_heading' -%}
+{%- assign block_heading = val -%}
+{%- include 'atb-render' field:'block_heading_size' -%}
+{%- assign block_heading_size = val -%}
+{%- include 'atb-render' field:'block_text' -%}
+{%- assign block_text = val -%}
+{%- include 'atb-render' field:'block_button_label' -%}
+{%- assign block_button_label = val -%}
+{%- include 'atb-render' field:'block_button_link' -%}
+{%- assign block_button_link = val -%}
+{%- include 'atb-render' field:'block_button_style_secondary' -%}
+{%- assign block_button_style_secondary = val -%}
+{%- if atb_full_width == blank -%}
+{%- assign atb_full_width = false -%}
+{%- else -%}
+{%- assign atb_full_width = true -%}
+{%- endif -%}
+{%- assign atb_padding_top = atb_padding_top | plus: 0 -%}
+{%- assign atb_padding_bottom = atb_padding_bottom | plus: 0 -%}
+{%- assign no_image = images['no_image_comparison'] -%}
+
+<section id="shopify-section-{{section_id}}" class="shopify-section section">
+<link rel="stylesheet" href="{{ 'component-rte.css' | asset_url }}" media="print" onload="this.media='all'">
+<link rel="stylesheet" href="{{ 'section-rich-text.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+<noscript>{{ 'section-rich-text.css' | asset_url | stylesheet_tag }}</noscript>
+
+{%- style -%}
+  .section-{{ section_id }}-padding {
+    padding-top: {{ atb_padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ atb_padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section_id }}-padding {
+      padding-top: {{ atb_padding_top }}px;
+      padding-bottom: {{ atb_padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="isolate{% unless atb_full_width %} page-width{% endunless %}">
+  <div class="rich-text content-container color-{{ atb_color_scheme }} gradient{% if atb_full_width %} rich-text--full-width content-container--full-width{% endif %} section-{{ section_id }}-padding">
+    <div class="rich-text__blocks">
+      {%- for block0 in blocks -%}
+{%- if block_button_style_secondary[forloop.index0] == blank -%}
+{%- assign my_checkbox0 = false -%}
+{%- else -%}
+{%- assign my_checkbox0 = true -%}
+{%- endif -%}
+        {%- case block_type[forloop.index0] -%}
+          {%- when 'heading' -%}
+            <h2 class="{{ block_heading_size[forloop.index0] }}" {{ block.shopify_attributes }}>{{ block_heading[forloop.index0] | escape }}</h2>
+          {%- when 'text' -%}
+            <div class="rich-text__text rte" {{ block.shopify_attributes }}>{{ block_text[forloop.index0] }}</div>
+          {%- when 'button' -%}
+            <a{% if block_button_link[forloop.index0] == blank %} role="link" aria-disabled="true"{% else %} href="{{ block_button_link[forloop.index0] }}"{% endif %} class="button{% if my_checkbox0 %} button--secondary{% else %} button--primary{% endif %}" {{ block.shopify_attributes }}>
+              {{ block_button_label[forloop.index0] | escape }}
+            </a>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+
+</section>

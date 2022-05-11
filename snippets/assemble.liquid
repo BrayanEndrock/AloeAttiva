@@ -1,0 +1,320 @@
+{%- comment -%}
+  This file is verbose so that it can be shared for both legacy inclusion and extensions.
+  You can pass optional params to the render to allow for extra compatibility.
+
+  Optional Params:
+  For the basic installation these should not be needed but are available for compatibility and troubleshooting.
+
+  - enable_form_selector : Boolean - enables a custom form selector to retrieve an id
+  - implicit_form_selector: String - CSS / JS selector used to query the form
+  - enable_webcomponent: Boolean - enable anm additional webcomponent root lookup
+  - webcomponent_selector: String - CSS / JS selector used to query the form
+  - price_selector: String - CSS / JS selector string for the price element
+  - prefix: String if you havbe multiple instances selected the prefix can be switched.
+
+  Debug Output:
+  if needed you can out put these alongside the file to reference set values for oddities.
+    <pre>
+      {{enable_form_selector | json}}
+      {{implicit_form_selector | json}}
+      {{enable_webcomponent | json}}
+      {{webcomponent_selector | json}}
+      {{price_selector | json}}
+      {{prefix | json}}
+      {{fieldSetIdentifier | json}}
+    </pre>
+
+{%- endcomment -%}
+
+{% comment %}
+  We set variables so these can be passed in
+{% endcomment %}
+{% assign enable_form_selector = enable_form_selector | default: false %}
+{% assign implicit_form_selector = implicit_form_selector | default: '' %}
+{% assign enable_webcomponent = enable_webcomponent | default: false%}
+{% assign webcomponent_selector = webcomponent_selector | default: '' %}
+{% assign price_selector = price_selector | default: '' %}
+{% assign prefix = prefix | default: '/apps/assemble' %}
+{% assign fieldSetIdentifier = block.id | default: 'manual-install' %}
+{% assign one-time-purchase-label = one-time-purchase-label | default: 'One-time purchase'  %}
+{% assign purchase-options-label = purchase-options-label | default: 'Purchase options' %}
+
+
+{%- if type == 'product-plan' -%}
+
+  {% if product.selling_plan_groups.size > 0 %}
+
+    {% comment %}
+      If the theme is using Vue or something similar, the style tag might get stripped on render,
+      we'll store it in the script and then reattach it from the ScriptTag
+    {% endcomment %}
+
+    {% capture styles %}
+        *[class^="assemble--plan-group"] {
+            margin: 0;
+            padding: 0;
+        }
+
+        .assemble--plan-group-plan > label {
+            margin-right: 0.5rem;
+        }
+
+        .assemble--plan-group {
+            display: grid;
+            align-items: center;
+            grid-template-columns: auto 1fr auto;
+            grid-template-areas:
+                "checkbox label price"
+                "plan plan plan";
+        }
+        .assemble--plan-group-label {
+            margin-left: 0.5rem;
+            grid-area: label;
+        }
+        .assemble--plan-group .assemble--plan-group-input {
+            grid-area: checkbox;
+            min-height: auto !important;
+            margin: 1rem 0.5rem;
+        }
+        .assemble--plan-group-price {
+            grid-area: price;
+            margin-left: 1rem;
+        }
+        .assemble--plan-group-plan {
+            grid-area: plan;
+            margin-left: 2rem;
+        }
+        .assemble--plan-group-input:not(:checked) ~ .assemble--plan-group-plan {
+            /* Hide plans when group is not selected */
+            display: none;
+        }
+
+        /* Show groups and prices only for selected variant */
+        {% for variant in product.variants %}
+            [data-variant-ids~="{{ variant.id }}"] {
+                display: none;
+            }
+
+            [data-selected-variant-id="{{ variant.id }}"] .assemble--plan-group[data-variant-ids~="{{ variant.id }}"] {
+                display: grid;
+            }
+            [data-selected-variant-id="{{ variant.id }}"] .assemble--plan-group-price[data-variant-ids~="{{ variant.id }}"] {
+                display: block;
+            }
+        {% endfor %}
+
+        /* Show plan prices only for selected plan */
+        {% for group in product.selling_plan_groups %}
+            {% for plan in group.selling_plans %}
+                [data-plan-id="{{ plan.id }}"] {
+                    visibility: hidden;
+                }
+                [data-selected-plan-id="{{ plan.id }}"] [data-plan-id="{{ plan.id }}"] {
+                    visibility: visible;
+                }
+            {% endfor %}
+        {% endfor %}
+
+        /* Hide plan and group prices if group or plan is not selected */
+        .assemble--plan-group-price-for-plan {
+            display: none;
+        }
+        .assemble--plan-group-input:checked ~ .assemble--plan-group-price-for-group {
+            display: none;
+        }
+        .assemble--plan-group-input:not(:checked) ~ .assemble--plan-group-price-for-plan {
+            display: none;
+        }
+        {% if settings.padding-top %}
+          .assemble-subscription-widget {
+            padding-top: {{settings.padding-top}}px;
+            padding-bottom: {{settings.padding-bottom}}px;
+          }
+        {% endif %}
+
+    {% endcapture %}
+    <style id="assemble--styles">{{ styles }}</style>
+    <script type="text/css" class="assemble--styles">{{ styles }}</script>
+    <fieldset
+        data-assemble-selling-plans
+        data-assemble-selling-plan-block="{{fieldSetIdentifier}}"
+        data-enable-custom-form-id="{{enable_form_selector}}"
+        data-enable-custom-form-id-string="{{implicit_form_selector}}"
+        data-enable-webcomponent-selector="{{enable_webcomponent}}"
+        data-webcomponet-selector="{{webcomponent_selector}}"
+        data-price-selector="{{price_selector}}"
+        class="assemble--selling-plans"
+        {% if product.selected_or_first_available_variant.selling_plan_allocations.size == 0 %} style="display: none"{% endif %}
+        data-selected-variant-id="{{ product.selected_or_first_available_variant.id }}"
+        data-selected-plan-id="{{ product.selected_selling_plan.id }}"
+    >
+        <script type="application/json" class="assemble--product-json" data-assemble-product-json>
+            {
+                "product": {{ product | json }},
+                "money_format": {{ shop.money_format | url_param_escape | json }}
+            }
+        </script>
+
+        <legend data-i18n="plan-selector-title">
+            {{ purchase-options-label }}
+        </legend>
+
+        {% unless product.requires_selling_plan %}
+            {% if product.selected_selling_plan == blank %}
+                {% assign group_selected = true %}
+            {% else %}
+                {% assign group_selected = false %}
+            {% endif %}
+            <div
+                data-assemble-plan-group="one-shot"
+                class="assemble--plan-group assemble--plan-one-shop-group"
+            >
+                <label
+                    class="assemble--plan-group-label"
+                    for="assemble--plan-one-shot"
+                    data-i18n="one-time-purchase-label"
+                >
+                    <span>{{ one-time-purchase-label }}</span>
+                </label>
+                <input
+                    type="radio"
+                    id="assemble--plan-one-shot"
+                    name="assemble--plan-group"
+                    class="assemble--plan-group-input"
+                    data-assemble-plan-group-input="one-shot"
+                    {% if group_selected %} checked{% endif %}
+                    value=""
+                />
+                <div class="assemble--plan-group-plan">
+                    <select
+                      data-assemble-selling-plan-selector
+                      name="selling_plan"
+                      style="display: none"
+                      {% unless group_selected %}disabled{% endunless %}
+                    >
+                      <option value=""></option>
+                    </select>
+                </div>
+                {% for variant in product.variants %}
+                    <div class="assemble--plan-group-price" data-variant-ids="{{ variant.id }}">
+                        {{ variant.price | money }}
+                        <span class="assemble--plan-group-price-each">each</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endunless %}
+
+        {% for selling_plan_group in product.selling_plan_groups %}
+            {% if product.selected_selling_plan.group_id == selling_plan_group.id %}
+                {% assign group_selected = true %}
+            {% elsif product.requires_selling_plan and forloop.first %}
+                {% assign group_selected = true %}
+            {% else %}
+                {% assign group_selected = false %}
+            {% endif %}
+            <div
+                class="assemble--plan-group"
+                data-assemble-plan-group="{{ selling_plan_group.id }}"
+                data-group-id="{{ selling_plan_group.id }}"
+                data-variant-ids="
+                {%- for variant in product.variants -%}
+                    {%- assign found = false -%}
+                    {%- for allo in variant.selling_plan_allocations -%}
+                        {%- if allo.selling_plan_group_id == selling_plan_group.id -%}
+                            {%- assign found = true -%}
+                        {%- endif -%}
+                    {%- endfor -%}
+                    {%- if found %} {{ variant.id }}{%- endif -%}
+                {%- endfor -%}"
+            >
+                <label
+                    class="assemble--plan-group-label"
+                    for="assemble--selling-plan-{{ selling_plan_group.id }}"
+                >
+                    {{ selling_plan_group.name }}
+                </label>
+                <input
+                    type="radio"
+                    id="assemble--selling-plan-{{ selling_plan_group.id }}"
+                    data-assemble-plan-group-input="{{ selling_plan_group.id }}"
+                    class="assemble--plan-group-input"
+                    name="assemble--plan-group"
+                    value="{{ selling_plan_group.id }}"
+                    {% if group_selected %}checked{% endif %}
+                />
+                <div class="assemble--plan-group-plan">
+                    <label for="assemble--selling-plan-select-{{ selling_plan_group.id }}">
+                        {{ selling_plan_group.options[0].name }}
+                    </label>
+                    <select
+                      data-assemble-selling-plan-selector
+                      id="assemble--selling-plan-select-{{ selling_plan_group.id }}"
+                      name="selling_plan"
+                      {% unless group_selected %}disabled{% endunless %}
+
+                    >
+                      {% for plan in selling_plan_group.selling_plans %}
+                          <option
+                              value="{{ plan.id }}"
+                              {% if product.selected_selling_plan.id == plan.id %}selected{% endif %}1
+                          >
+                              {{ plan.options[0].value }}
+                          </option>
+                      {% endfor %}
+                  </select>
+                </div>
+                {% for variant in product.variants %}
+                    {% assign price = nil %}
+                    {% assign varies = false %}
+                    {% for allo in variant.selling_plan_allocations %}
+                        {% if allo.selling_plan_group_id != selling_plan_group.id %}
+                            {% continue %}
+                        {% endif %}
+
+                        <div
+                            class="assemble--plan-group-price assemble--plan-group-price-for-plan"
+                            data-plan-id="{{ allo.selling_plan.id }}"
+                            data-variant-ids="{{ variant.id }}"
+                        >
+                            {{ allo.per_delivery_price | money }}
+                            <span class="assemble--plan-group-price-each">each</span>
+                        </div>
+
+                        {% if price == nil %}
+                            {% assign price = allo.per_delivery_price %}
+                        {% elsif price > allo.per_delivery_price %}
+                            {% assign price = allo.per_delivery_price %}
+                            {% assign varies = true %}
+                        {% elsif price < allo.per_delivery_price %}
+                            {% assign varies = true %}
+                        {% endif %}
+                    {% endfor %}
+
+                    <div
+                        class="assemble--plan-group-price assemble--plan-group-price-for-group"
+                        data-group-id="{{ selling_plan_group.id }}"
+                        data-variant-ids="{{ variant.id }}"
+                    >
+                        {% if varies %}<span class="assemble--plan-group-price-from">from</span>{% endif %}
+                        {{ price | money }}
+                        <span class="assemble--plan-group-price-each">each</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </fieldset>
+  {% endif %}
+
+<script>
+  window.addEventListener('ASSEMBLE:SCRIPT:LOADED', () => {
+    if(!window.eight) {return false}
+    window.eight.assemble.assembleAttachFormAttributes("{{fieldSetIdentifier}}")
+    window.eight.assemble.elements.addPrice("{{fieldSetIdentifier}}", "{{price_selector}}")
+    window.eight.assemble.installPlanSelector("{{fieldSetIdentifier}}")
+  })
+
+</script>
+
+{%- elsif type == 'subscription-link' -%}
+  <a href="{{ prefix }}/subscriptions" id="assemble-subscription-link">{{ title | default: 'Subscriptions' }}</a>
+{%- endif -%}

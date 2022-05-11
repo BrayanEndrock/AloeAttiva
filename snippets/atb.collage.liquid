@@ -1,0 +1,452 @@
+{% comment %}
+ATB-SCHEMA{
+  "name": "t:sections.collage.name",
+  "tag": "section",
+  "class": "section",
+  "max_blocks": 3,
+  "id": "collage",
+  "banner": "",
+  "icon": "",
+  "tags": "",
+  "description": "",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "info": "Enter a unique ID with only letters and numbers, no spaces",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "atb_heading",
+      "default": "Multimedia collage",
+      "label": "t:sections.collage.settings.heading.label",
+      "info": ""
+    },
+    {
+      "type": "select",
+      "id": "atb_desktop_layout",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.collage.settings.desktop_layout.options__1.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.collage.settings.desktop_layout.options__2.label"
+        }
+      ],
+      "default": "left",
+      "label": "t:sections.collage.settings.desktop_layout.label",
+      "info": ""
+    },
+    {
+      "type": "select",
+      "id": "atb_mobile_layout",
+      "options": [
+        {
+          "value": "collage",
+          "label": "t:sections.collage.settings.mobile_layout.options__1.label"
+        },
+        {
+          "value": "column",
+          "label": "t:sections.collage.settings.mobile_layout.options__2.label"
+        }
+      ],
+      "default": "collage",
+      "label": "t:sections.collage.settings.mobile_layout.label",
+      "info": ""
+    },
+    {
+      "type": "select",
+      "id": "atb_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.all.colors.accent_1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.all.colors.accent_2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.all.colors.background_1.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.all.colors.background_2.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.all.colors.inverse.label"
+        }
+      ],
+      "default": "background-1",
+      "label": "t:sections.all.colors.label",
+      "info": "t:sections.all.colors.has_cards_info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading",
+      "info": ""
+    },
+    {
+      "type": "range",
+      "id": "atb_padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 36,
+      "info": ""
+    },
+    {
+      "type": "range",
+      "id": "atb_padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 36,
+      "info": ""
+    },
+    {
+      "type": "select",
+      "id": "block_type",
+      "label": "Block Type",
+      "info": "",
+      "default": "",
+      "options": [
+        {
+          "value": "image",
+          "label": "image"
+        },
+        {
+          "value": "product",
+          "label": "product"
+        },
+        {
+          "value": "collection",
+          "label": "collection"
+        },
+        {
+          "value": "video",
+          "label": "video"
+        }
+      ],
+      "repeatable": "block"
+    },
+    {
+      "type": "text",
+      "id": "blocks",
+      "label": "Block ID",
+      "info": "Enter a unique ID with only letters and numbers, no spaces",
+      "default": "",
+      "repeatable": "block"
+    },
+    {
+      "type": "image_picker",
+      "id": "block_image",
+      "label": "t:sections.collage.blocks.image.settings.image.label",
+      "repeatable": "block",
+      "info": "",
+      "conditional": "block_type:image"
+    },
+    {
+      "type": "checkbox",
+      "id": "block_image_padding",
+      "default": false,
+      "label": "t:sections.collage.blocks.image.settings.image_padding.label",
+      "info": "t:sections.collage.blocks.image.settings.image_padding.info",
+      "repeatable": "block",
+      "conditional": "block_type:image,video"
+    },
+    {
+      "type": "product",
+      "id": "block_product",
+      "label": "t:sections.collage.blocks.product.settings.product.label",
+      "repeatable": "block",
+      "info": "",
+      "conditional": "block_type:product"
+    },
+    {
+      "type": "checkbox",
+      "id": "block_second_image",
+      "default": false,
+      "label": "t:sections.collage.blocks.product.settings.second_image.label",
+      "repeatable": "block",
+      "info": "",
+      "conditional": "block_type:product"
+    },
+    {
+      "type": "collection",
+      "id": "block_collection",
+      "label": "t:sections.collage.blocks.collection.settings.collection.label",
+      "repeatable": "block",
+      "info": "",
+      "conditional": "block_type:collection"
+    },
+    {
+      "type": "image_picker",
+      "id": "block_cover_image",
+      "label": "t:sections.collage.blocks.video.settings.cover_image.label",
+      "repeatable": "block",
+      "info": "",
+      "conditional": "block_type:video"
+    },
+    {
+      "type": "select",
+      "id": "block_video_url_type",
+      "label": "t:sections.collage.blocks.video.settings.video_url.label Type",
+      "default": "youtube",
+      "options": [
+        {
+          "value": "youtube",
+          "label": "Youtube"
+        },
+        {
+          "value": "vimeo",
+          "label": "Vimeo"
+        }
+      ],
+      "repeatable": "block",
+      "conditional": "block_type:video"
+    },
+    {
+      "type": "text",
+      "id": "block_video_url_id",
+      "label": "YouTube or Vimeo ID",
+      "default": "_9VUPq3SxOc",
+      "repeatable": "block",
+      "conditional": "block_type:video"
+    },
+    {
+      "type": "text",
+      "id": "block_description",
+      "default": "Describe the video",
+      "label": "t:sections.collage.blocks.video.settings.description.label",
+      "info": "t:sections.collage.blocks.video.settings.description.info",
+      "repeatable": "block",
+      "conditional": "block_type:video"
+    }
+  ],
+  "warnings": [
+    "repeating checkbox fields may not be properly handled",
+    "repeating image fields may not be properly handled",
+    "some fields may be named the same"
+  ]
+}ATB-SCHEMA
+{% endcomment %}
+
+
+{%- include 'atb-render' field:'section_id' -%}
+{%- assign section_id = val -%}
+{%- include 'atb-render' field:'atb_heading' -%}
+{%- assign atb_heading = val -%}
+{%- include 'atb-render' field:'atb_desktop_layout' -%}
+{%- assign atb_desktop_layout = val -%}
+{%- include 'atb-render' field:'atb_mobile_layout' -%}
+{%- assign atb_mobile_layout = val -%}
+{%- include 'atb-render' field:'atb_color_scheme' -%}
+{%- assign atb_color_scheme = val -%}
+{%- include 'atb-render' field:'atb_padding_top' -%}
+{%- assign atb_padding_top = val -%}
+{%- include 'atb-render' field:'atb_padding_bottom' -%}
+{%- assign atb_padding_bottom = val -%}
+{%- include 'atb-render' field:'block_type' -%}
+{%- assign block_type = val -%}
+{%- include 'atb-render' field:'blocks' -%}
+{%- assign blocks = val -%}
+{%- include 'atb-render' field:'block_image' -%}
+{%- assign block_image = val -%}
+{%- include 'atb-render' field:'block_image_padding' -%}
+{%- assign block_image_padding = val -%}
+{%- include 'atb-render' field:'block_product' -%}
+{%- assign block_product = val -%}
+{%- include 'atb-render' field:'block_second_image' -%}
+{%- assign block_second_image = val -%}
+{%- include 'atb-render' field:'block_collection' -%}
+{%- assign block_collection = val -%}
+{%- include 'atb-render' field:'block_cover_image' -%}
+{%- assign block_cover_image = val -%}
+{%- include 'atb-render' field:'block_description' -%}
+{%- assign block_description = val -%}
+{%- include 'atb-render' field:'block_video_url_id' -%}
+{%- assign block_video_url_id = val -%}
+{%- include 'atb-render' field:'block_video_url_type' -%}
+{%- assign block_video_url_type = val -%}
+{%- assign atb_padding_top = atb_padding_top | plus: 0 -%}
+{%- assign atb_padding_bottom = atb_padding_bottom | plus: 0 -%}
+{%- assign no_image = images['no_image_comparison'] -%}
+
+<section id="shopify-section-{{section_id}}" class="shopify-section section">
+{{ 'collage.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-modal-video.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section_id }}-padding {
+    padding-top: {{ atb_padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ atb_padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section_id }}-padding {
+      padding-top: {{ atb_padding_top }}px;
+      padding-bottom: {{ atb_padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<link rel="stylesheet" href="{{ 'component-deferred-media.css' | asset_url }}" media="print" onload="this.media='all'">
+
+<div class="color-{{ atb_color_scheme }} gradient isolate">
+  <div class="page-width{% if atb_heading == blank %} no-heading{% endif %} section-{{ section_id }}-padding">
+    <h2 class="collage-wrapper-title">{{ atb_heading | escape }}</h2>
+    <div class="collage{% if atb_mobile_layout == 'collage' %} collage--mobile{% endif %}">
+      {%- for block0 in blocks -%}
+{%- if block_second_image[forloop.index0] == blank -%}
+{%- assign my_checkbox1 = false -%}
+{%- else -%}
+{%- assign my_checkbox1 = true -%}
+{%- endif -%}
+{%- if block_image_padding[forloop.index0] == blank -%}
+{%- assign my_checkbox0 = false -%}
+{%- else -%}
+{%- assign my_checkbox0 = true -%}
+{%- endif -%}
+{%- assign my_image_key1 = block_cover_image[forloop.index0]| split: '/files/' | last -%}
+{%- assign my_image1 = images[my_image_key1] -%}
+{%- assign my_image_key0 = block_image[forloop.index0]| split: '/files/' | last -%}
+{%- assign my_image0 = images[my_image_key0] -%}
+        <div class="collage__item collage__item--{{ block_type[forloop.index0] }} collage__item--{{ atb_desktop_layout }}" {{ block.shopify_attributes }}>
+          {%- case block_type[forloop.index0] -%}
+            {%- when 'image' -%}
+              <div class="collage-card color-{{ settings.card_color_scheme }}{% if my_checkbox0 %} collage-card-spacing{% endif %}">
+                <div class="media media--transparent ratio"{% if my_image0 != blank %} style="--ratio-percent: {{ 1 | divided_by: block_image[forloop.index0].aspect_ratio | times: 100 }}%"{% else %} style="--ratio-percent: 100%"{% endif %}>
+                  {%- if my_image0 != blank -%}
+                    <img
+                      srcset="{%- if my_image0.width >= 550 -%}{{ block_image[forloop.index0] | img_url: '550x' }} 550w,{%- endif -%}
+                        {%- if my_image0.width >= 720 -%}{{ block_image[forloop.index0] | img_url: '720x' }} 720w,{%- endif -%}
+                        {%- if my_image0.width >= 990 -%}{{ block_image[forloop.index0] | img_url: '990x' }} 990w,{%- endif -%}
+                        {%- if my_image0.width >= 1100 -%}{{ block_image[forloop.index0] | img_url: '1100x' }} 1100w,{%- endif -%}
+                        {%- if my_image0.width >= 1500 -%}{{ block_image[forloop.index0] | img_url: '1500x' }} 1500w,{%- endif -%}
+                        {%- if my_image0.width >= 2200 -%}{{ block_image[forloop.index0] | img_url: '2200x' }} 2200w,{%- endif -%}
+                        {%- if my_image0.width >= 3000 -%}{{ block_image[forloop.index0] | img_url: '3000x' }} 3000w,{%- endif -%}
+                        {{ my_image0 | img_url: 'master' }} {{ block_image[forloop.index0].width }}w"
+                      src="{{ my_image0 | img_url: '1500x' }}"
+                      sizes="(min-width: {{ settings.page_width }}px) {% if blocks.size == 1 %}calc({{ settings.page_width }}px - 100px){% else %}{{ settings.page_width | minus: 100 | times: 0.67 | round }}px{% endif %}, (min-width: 750px){% if blocks.size == 1 %} calc(100vw - 100px){% else %} 500px{% endif %}, calc(100vw - 30px)"
+                      alt="{{ my_image0.alt | escape }}"
+                      loading="lazy"
+                      width="{{ my_image0.width }}"
+                      height="{{ my_image0.height }}"
+                    >
+                  {%- else -%}
+                    {{ 'image' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- when 'product' -%}
+              {% render 'card-product',
+                card_product: block_product[forloop.index0],
+                media_aspect_ratio: 'adapt',
+                show_secondary_image: my_checkbox1,
+                extend_height: true
+              %}
+            {%- when 'collection' -%}
+              {% render 'card-collection',
+                card_collection: block_collection[forloop.index0],
+                media_aspect_ratio: 'adapt',
+                columns: 2,
+                extend_height: true
+              %}
+            {%- when 'video' -%}
+              <div class="collage-card color-{{ settings.card_color_scheme }}">
+                <noscript>
+                  <a href="{{ block_video_url_id[forloop.index0] }}" class="collage-card__link{% if my_checkbox0 %} collage-card-spacing{% endif %}">
+                    <div class="media media--transparent ratio"{% if my_image1 != blank %} style="--ratio-percent: {{ 1 | divided_by: block_cover_image[forloop.index0].aspect_ratio | times: 100 }}%"{% else %} style="--ratio-percent: 100%"{% endif %}>
+                      {%- if my_image1 != blank -%}
+                        <img
+                          srcset="{%- if my_image1.width >= 550 -%}{{ block_cover_image[forloop.index0] | img_url: '550x' }} 550w,{%- endif -%}
+                            {%- if my_image1.width >= 720 -%}{{ block_cover_image[forloop.index0] | img_url: '720x' }} 720w,{%- endif -%}
+                            {%- if my_image1.width >= 990 -%}{{ block_cover_image[forloop.index0] | img_url: '990x' }} 990w,{%- endif -%}
+                            {%- if my_image1.width >= 1100 -%}{{ block_cover_image[forloop.index0] | img_url: '1100x' }} 1100w,{%- endif -%}
+                            {%- if my_image1.width >= 1500 -%}{{ block_cover_image[forloop.index0] | img_url: '1500x' }} 1500w,{%- endif -%}
+                            {%- if my_image1.width >= 2200 -%}{{ block_cover_image[forloop.index0] | img_url: '2200x' }} 2200w,{%- endif -%}
+                            {%- if my_image1.width >= 3000 -%}{{ block_cover_image[forloop.index0] | img_url: '3000x' }} 3000w,{%- endif -%}
+                            {{ my_image1 | img_url: 'master' }} {{ block_cover_image[forloop.index0].width }}w"
+                          src="{{ my_image1 | img_url: '1500x' }}"
+                          sizes="(min-width: {{ settings.page_width }}px) {% if blocks.size == 1 %}calc({{ settings.page_width }}px - 100px){% else %}{{ settings.page_width | minus: 100 | times: 0.67 | round }}px{% endif %}, (min-width: 750px){% if blocks.size == 1 %} calc(100vw - 100px){% else %} 500px{% endif %}, calc(100vw - 30px)"
+                          alt="{{ block_description[forloop.index0] | escape }}"
+                          loading="lazy"
+                          width="{{ my_image1.width }}"
+                          height="{{ my_image1.height }}"
+                        >
+                      {%- else -%}
+                        {{ 'collection-2' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+                      {%- endif -%}
+                    </div>
+                  </a>
+                </noscript>
+                <modal-opener class="no-js-hidden" data-modal="#PopupModal-{{ blocks[forloop.index0] }}">
+                  <div class="deferred-media">
+                    <button class="deferred-media__poster full-unstyled-link{% if my_checkbox0 %} collage-card-spacing{% endif %}" type="button" aria-haspopup="dialog" data-media-id="{{ block_video_url_id[forloop.index0] }}">
+                      <div class="media media--transparent ratio"{% if my_image1 != blank %} style="--ratio-percent: {{ 1 | divided_by: block_cover_image[forloop.index0].aspect_ratio | times: 100 }}%"{% else %} style="--ratio-percent: 100%"{% endif %}>
+                        <span class="deferred-media__poster-button motion-reduce">
+                          {%- render 'icon-play' -%}
+                        </span>
+  
+                        {%- if my_image1 != blank -%}
+                          <img
+                            srcset="{%- if my_image1.width >= 550 -%}{{ block_cover_image[forloop.index0] | img_url: '550x' }} 550w,{%- endif -%}
+                              {%- if my_image1.width >= 720 -%}{{ block_cover_image[forloop.index0] | img_url: '720x' }} 720w,{%- endif -%}
+                              {%- if my_image1.width >= 990 -%}{{ block_cover_image[forloop.index0] | img_url: '990x' }} 990w,{%- endif -%}
+                              {%- if my_image1.width >= 1100 -%}{{ block_cover_image[forloop.index0] | img_url: '1100x' }} 1100w,{%- endif -%}
+                              {%- if my_image1.width >= 1500 -%}{{ block_cover_image[forloop.index0] | img_url: '1500x' }} 1500w,{%- endif -%}
+                              {%- if my_image1.width >= 2200 -%}{{ block_cover_image[forloop.index0] | img_url: '2200x' }} 2200w,{%- endif -%}
+                              {%- if my_image1.width >= 3000 -%}{{ block_cover_image[forloop.index0] | img_url: '3000x' }} 3000w,{%- endif -%}
+                              {{ my_image1 | img_url: 'master' }} {{ block_cover_image[forloop.index0].width }}w"
+                            src="{{ my_image1 | img_url: '1500x' }}"
+                            sizes="(min-width: {{ settings.page_width }}px) {% if blocks.size == 1 %}calc({{ settings.page_width }}px - 100px){% else %}{{ settings.page_width | minus: 100 | times: 0.67 | round }}px{% endif %}, (min-width: 750px){% if blocks.size == 1 %} calc(100vw - 100px){% else %} 500px{% endif %}, calc(100vw - 30px)"
+                            alt="{{ block_description[forloop.index0] | escape }}"
+                            loading="lazy"
+                            width="{{ my_image1.width }}"
+                            height="{{ my_image1.height }}"
+                          >
+                        {%- else -%}
+                          {{ 'collection-2' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
+                        {%- endif -%}
+                      </div>
+                    </button>
+                  </div>
+                </modal-opener>
+                <modal-dialog id="PopupModal-{{ blocks[forloop.index0] }}" class="modal-video media-modal color-background-1">
+                  <div class="modal-video__content" role="dialog" aria-label="{{ block_description[forloop.index0] | escape }}" aria-modal="true" tabindex="-1">
+                    <button id="ModalClose-{{ blocks[forloop.index0] }}" type="button" class="modal-video__toggle" aria-label="{{ 'accessibility.close' | t }}">{% render 'icon-close' %}</button>
+                    <div class="modal-video__content-info">
+                      <deferred-media class="modal-video__video template-popup">
+                        <template>
+                          {%- if block_video_url_type[forloop.index0] == 'youtube' -%}
+                            <iframe src="https://www.youtube.com/embed/{{ block_video_url_id[forloop.index0] }}?enablejsapi=1" class="js-youtube" allow="autoplay; encrypted-media" allowfullscreen title="{{ block_description[forloop.index0] | escape }}" ></iframe>
+                          {%- else -%}
+                            <iframe src="https://player.vimeo.com/video/{{ block_video_url_id[forloop.index0] }}" class="js-vimeo" allow="autoplay; encrypted-media" allowfullscreen title="{{ block_description[forloop.index0] | escape }}"></iframe>
+                          {%- endif -%}
+                        </template>
+                      </deferred-media>
+                    </div>
+                  </div>
+                </modal-dialog>
+              </div>
+          {%- endcase -%}
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+</section>

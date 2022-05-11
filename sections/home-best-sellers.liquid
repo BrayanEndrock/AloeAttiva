@@ -1,0 +1,112 @@
+<div class="scroller-container">
+  <ul class="scroller">
+    {% for product in collections[section.settings.collection].products %}
+    <li>
+      <a href="{{ product.url }}" class="Link Link--secondary">
+        {{ product.featured_image | img_url: '120x' | img_tag }}
+        {{ product.title | escape }}
+      </a>
+    </li>
+    {%- endfor -%}
+  </ul>
+</div>
+  
+{% schema %}
+{
+  "name": "Best Sellers Mobile",
+  "class": "best-sellers-mobile",
+  "settings": [{
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+  }],
+  "presets": [{
+      "name": "Best Sellers Mobile",
+      "category": "Aloe"
+  }]
+}
+{% endschema %}
+
+{% style %}
+@media screen and (min-width: 769px) {
+    .best-sellers-mobile {
+        display: none;
+    }
+}
+
+.best-sellers-mobile {
+    padding: 14px 0;
+    background: #fff;
+}
+
+.best-sellers-mobile .scroller-container {
+    display: flex;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.best-sellers-mobile ul {
+    display: grid;
+    overflow: scroll;
+    margin: 0 10px 12px;
+    grid-auto-flow: column;
+    grid-gap: 0 16px;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scrollbar-color: transparent transparent;
+    scrollbar-width: 0;
+    scrollbar-width: none;
+}
+
+.best-sellers-mobile ul::-webkit-scrollbar {
+    display: none;
+}
+
+.best-sellers-mobile ul>* {
+    scroll-snap-align: start;
+}
+
+.best-sellers-mobile ul li {
+    min-width: 120px;
+    line-height: 1;
+    list-style: none;
+    text-align: left;
+}
+
+.best-sellers-mobile ul li a {
+    font-family: var(--typeBasePrimary);
+    font-weight: 500;
+    font-size: 8px;
+    line-height: 1.5;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #6d6d6d;
+    display: block;
+}
+
+.best-sellers-mobile ul li img {
+    object-fit: cover;
+    width: 100%;
+    height: 90px;    
+    margin-bottom: 8px;
+    pointer-events: none;
+} 
+{% endstyle %}
+<script>
+    document.addEventListener('load',function(){
+        const mobileBestSellerLink = document.querySelectorAll('.Link--secondary')
+        mobileBestSellerLink.forEach(function(element) {
+            element.addEventListener('click',function(e){
+                ga('send', {
+                    'hitType': 'event', 
+                    'eventCategory': 'Mobile Best Sellers', 
+                    'eventAction': 'click', 
+                    'eventLabel': e.target.innerText
+                 });  
+            })
+        })
+    })
+</script>

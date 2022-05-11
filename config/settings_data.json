@@ -1,0 +1,100 @@
+{
+  "current": {
+    "colors_accent_1": "#acbfb3",
+    "colors_text": "#2E2A39",
+    "colors_background_1": "#FAF7F2",
+    "colors_background_2": "#acbfb3",
+    "gradient_background_2": "linear-gradient(20deg, rgba(249, 198, 198, 1) 15%, rgba(255, 255, 255, 1) 33%, rgba(172, 191, 179, 1) 46%)",
+    "card_style": "standard",
+    "social_twitter_link": "https:\/\/twitter.com\/aloeattiva",
+    "social_facebook_link": "https:\/\/www.facebook.com\/aloeattivaitalia\/",
+    "social_pinterest_link": "https:\/\/www.pinterest.com\/Aloeattiva\/",
+    "social_instagram_link": "https:\/\/instagram.com\/aloeattiva?utm_source=hoobe&utm_medium=page",
+    "social_tiktok_link": "https:\/\/www.tiktok.com\/@aloeattiva",
+    "social_youtube_link": "https:\/\/www.youtube.com\/channel\/UC8o0M9AvhCo1GCs-7z-Qd2g",
+    "currency_code_enabled": true,
+    "sections": {
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "blocks": {
+          "announcement-bar-0": {
+            "type": "announcement",
+            "settings": {
+              "text": "GET A FREE TOTE WITH ANY BUNDLE USING CODE TOTESAMORE",
+              "color_scheme": "accent-1",
+              "link": "shopify:\/\/products\/life-is-beautiful-tote"
+            }
+          }
+        },
+        "block_order": [
+          "announcement-bar-0"
+        ],
+        "settings": {}
+      },
+      "header": {
+        "type": "header",
+        "settings": {
+          "color_scheme": "background-1",
+          "logo": "shopify:\/\/shop_images\/Aloe_Attiva_Text_Black.png",
+          "logo_width": 170,
+          "logo_position": "top-center",
+          "menu": "main-menu",
+          "show_line_separator": false,
+          "enable_sticky_header": true,
+          "margin_bottom": 24
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "footer-linklist": {
+            "type": "link_list",
+            "settings": {
+              "heading": "Menu",
+              "menu": "footer"
+            }
+          },
+          "footer-text-0": {
+            "type": "text",
+            "settings": {
+              "heading": "Better Skin",
+              "subtext": "<p>Since H2O alone doesn’t benefit your skin, we craft every formula around our patented 4x boosted Aloe Attiva Elixir and not a drop of water.<\/p>"
+            }
+          },
+          "footer-text-1": {
+            "type": "text",
+            "settings": {
+              "heading": "Better World",
+              "subtext": "<p>Did you know that 1 in 9 people lack access to safe water? <\/p><p>We don't formulate with water, we donate it.<\/p><p>Through our partnership with water.org we donate 10 years of safe water access to someone in need with every <a href=\"https:\/\/aloe-attiva-italia.myshopify.com\/power-couple-bundle\/\">Power Couple Bundle purchase.<\/a><\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "footer-linklist",
+          "footer-text-0",
+          "footer-text-1"
+        ],
+        "settings": {
+          "color_scheme": "background-2",
+          "newsletter_enable": true,
+          "newsletter_heading": "Subscribe to our emails and save",
+          "show_social": true,
+          "enable_country_selector": false,
+          "enable_language_selector": false,
+          "payment_enable": false,
+          "margin_top": 0,
+          "padding_top": 0,
+          "padding_bottom": 4
+        }
+      }
+    },
+    "content_for_index": [],
+    "blocks": {
+      "18218067344242134805": {
+        "type": "shopify:\/\/apps\/product-reviews-ugc-with-q-a\/blocks\/app\/34006358-52bd-4ec7-8c78-200fe58b77ba",
+        "disabled": false,
+        "settings": {}
+      }
+    }
+  }
+}

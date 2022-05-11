@@ -1,0 +1,215 @@
+{%- comment -%}SAINFO{version: 3}SAINFO{%- endcomment -%}
+{%- capture CFH -%}{{ content_for_header  }}{%- endcapture -%}
+{%- if CFH contains 'admin_bar_iframe' -%}
+{%- assign admin = true -%}
+{%- elsif CFH contains 'preview_bar_injector-' -%}
+{%- assign admin = true -%}
+{%- endif -%}
+{%- assign sa_prefix = 'sa-'%}
+{%- if admin -%}
+	{%- assign sa_prefix = 'sa-preview-'%}
+{%- endif -%}
+{%- assign delim = "||" -%}
+{%- assign array_delim = "^^" -%}
+{%- assign entity = template | split: '.' | first -%}
+{%- if entity == 'page' -%}
+  {%- assign sa_inc = sa_prefix | append: 'page' | append: page.id -%}
+{%- elsif entity == 'product' -%}
+  {%- assign sa_inc = sa_prefix | append: 'product' | append: product.id -%}
+{%- elsif entity == 'collection' -%}
+  {%- assign sa_inc = sa_prefix | append: 'collection' | append: collection.id -%}
+{%- elsif entity == 'article' -%}
+  {%- assign sa_inc = sa_prefix | append: 'article' | append: article.id -%}
+{%- elsif entity == 'blog' -%}
+  {%- assign sa_inc = sa_prefix | append: 'blog' | append: blog.id -%}
+{%- elsif entity == 'index' -%}
+  {%- assign sa_inc = sa_prefix | append: 'pageindex' -%}
+{%- elsif entity == 'cart' -%}
+  {%- assign sa_inc = sa_prefix | append: 'pagecart' -%}
+{%- elsif entity == 'password' -%}
+  {%- assign sa_inc = sa_prefix | append: 'pagepassword' -%}
+{%- endif%}
+{%- assign sa_inc = sa_inc | append: '.json' -%}
+{%- if global_inc and global_inc != blank -%}
+   {%- assign sa_inc = global_inc -%}
+{%- endif -%}
+
+
+{%- capture _atb -%}{%- include sa_inc -%}{%- endcapture -%}
+{%- if _atb contains 'Liquid error' -%}
+ {%- assign sa_inc = sa_inc | replace: 'sa-preview-', 'sa-'%}
+ {%- capture _atb -%}{%- include sa_inc -%}{%- endcapture -%}
+{%- endif -%}
+
+{%- comment -%} to use add this to config/settings_schema.json {%- endcomment -%}
+{%- comment -%}
+,
+  {
+    "name": "SectionsAnywhere",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "atb_use_meta",
+        "label": "Use Metafields for Sections Anywhere",
+        "info": "Save data to meta",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "atb_use_theme_based_meta",
+        "label": "Use Metafields for Current Theme Only",
+        "info": "With each theme data is different",
+        "default": false
+      }
+    ]
+  }
+{%- endcomment -%}
+{%- if settings.atb_use_meta -%}
+	{%- if settings.atb_use_theme_based_meta -%}
+		{%- assign meta_key = 'theme-' | append: theme.id -%} 
+	{%- else%}	
+		{%- assign meta_key = 'theme' -%} 
+	{%- endif%}	
+	
+	{%- if entity == 'page' -%}
+      {%- assign _atb = page.metafields.sections[meta_key] -%} 
+    {%- elsif entity == 'product' -%}
+      {%- assign _atb = product.metafields.sections[meta_key] -%} 
+    {%- elsif entity == 'collection' -%}
+      {%- assign _atb = collection.metafields.sections[meta_key] -%} 
+    {%- elsif entity == 'article' -%}
+      {%- assign _atb = article.metafields.sections[meta_key] -%} 
+    {%- elsif entity == 'blog' -%}
+      {%- assign _atb = blog.metafields.sections[meta_key] -%} 
+{%- comment -%} These pages don't have meta {%- endcomment -%}
+    {%- elsif entity == 'index' -%}
+      {%- assign sa_inc = sa_prefix | append: 'pageindex' -%}
+    {%- elsif entity == 'cart' -%}
+      {%- assign sa_inc = sa_prefix | append: 'pagecart' -%}
+    {%- elsif entity == 'password' -%}
+      {%- assign sa_inc = sa_prefix | append: 'pagepassword' -%}
+    {%- endif%}	
+{%- endif -%}
+
+
+{%- comment -%} PULL FROM METAFIELDS {%- endcomment -%}
+{%- assign json_string = _atb -%}
+{%- comment -%} CLEANUP {%- endcomment -%}
+{%- assign json_string = json_string | replace: '\"', '&quot;' -%}
+{%- assign json_string = json_string | replace: '\\\\\\}', '' -%}
+{%- assign json_string = json_string | replace: '\{', '' -%}
+{%- assign blocks_string_array = json_string | split: '},{' -%}
+{%- assign section_count = blocks_string_array | size -%}
+{%- for block_string in blocks_string_array -%}
+	{%- comment -%} EACH BLOCK {%- endcomment -%}
+	{%- comment -%} CREATE STRINGS {%- endcomment -%}
+	{%- assign keys_string = '' -%}
+	{%- assign vals_string = '' -%}
+	{%- assign nodes_array = block_string | split: ',"' -%}
+	{%- assign part_of_array = false -%}
+	{%- assign array_string = '' -%}
+	{%- assign array_key = '' -%}
+    {%- assign node_index = 0 -%}
+    {%- assign nodes_length = nodes_array | size -%}
+	{%- for node_string in nodes_array -%}
+		{%- assign node_index = node_index | plus:1 -%}				
+		{%- assign node_array = node_string | split: '":' -%}
+		{%- if part_of_array -%}
+			{%- assign valq = node_array[0]%}
+			{%- assign val =  valq | replace: '"'%}
+			{%- if val contains ']' -%}
+				{%- assign part_of_array = false -%}
+			{%- else -%}
+				{%- assign val =  valq | replace: '"', '' -%}
+            	{%- assign array_string = array_string | append: val | append: array_delim -%}
+			{%- endif -%}
+		{%- endif -%}
+		{%- if part_of_array == false -%}
+			{%- if array_string == '' -%}
+				{%- assign keyq = node_array[0]%}
+				{%- assign valq = node_array[1]%}
+				{%- assign key =  keyq | replace: '"', '' -%}
+				{%- assign val =  valq | replace: '"', '' -%}
+			{%- else -%}
+				{%- assign valq = node_array[0]%}
+				{%- assign val =  valq | replace: '"'%}
+			{%- endif -%}
+			{%- if key contains '[]' -%}
+				{%- assign part_of_array = true -%}
+				{%- assign array_key = key -%}
+				{%- if valq contains ']' -%}
+					{%- assign part_of_array = false -%}
+				{%endif%}
+				{%- for counter in (0..9) -%}
+					{%- assign size_minus_1 = val | size | minus: 1 -%}
+					{%- assign first_char = val | slice: 0, 1 -%}
+					{%- if first_char == '{' or first_char == '[' -%}
+						{%- assign val = val | slice: 1, size_minus_1 -%}
+					{%- else -%}
+						{%- break -%}
+					{%- endif -%}
+				{%- endfor -%}
+				{%- for counter in (0..9) -%}
+					{%- assign size_minus_1 = val | size | minus: 1 -%}
+					{%- assign last_char = val | slice: size_minus_1, 1 -%}
+					{%- if last_char == '}' or last_char == ']' -%}
+						{%- assign val = val | slice: 0, size_minus_1 -%}
+					{%- else -%}
+						{%- break -%}
+					{%- endif -%}
+				{%- endfor -%}
+				{%- assign array_string = array_string | append: val | append: array_delim -%}
+			{%endif%}
+			{%- if part_of_array -%}
+			{%- else -%}
+				{%- if array_string != '' -%}
+					{%- assign key = array_key -%}
+					{%- assign val = array_string -%}
+					{%- assign array_key = '' -%}
+					{%- assign array_string = '' -%}
+				{%endif%}
+				{%- for counter in (0..9) -%}
+					{%- assign size_minus_1 = val | size | minus: 1 -%}
+					{%- assign first_char = val | slice: 0, 1 -%}
+					{%- if first_char == '{' or first_char == '[' -%}
+						{%- assign val = val | slice: 1, size_minus_1 -%}
+					{%- else -%}
+						{%- break -%}
+					{%- endif -%}
+				{%- endfor -%}
+				{%- for counter in (0..9) -%}
+					{%- assign size_minus_1 = val | size | minus: 1 -%}
+					{%- assign last_char = val | slice: size_minus_1, 1 -%}
+					{%- if last_char == '}' or last_char == ']' -%}
+						{%- assign val = val | slice: 0, size_minus_1 -%}
+					{%- else -%}
+						{%- break -%}
+					{%- endif -%}
+				{%- endfor -%}
+				{%- assign key = key | replace: "[{", "" -%}
+				{%- assign keys_string = keys_string | append: key | append: delim -%}
+				{%- assign vals_string = vals_string | append: val | append: delim -%}
+			{%endif%}
+		{%- endif -%}
+	{%- endfor -%}
+	{%- assign keys_array = keys_string | split: delim -%}
+	{%- assign vals_string = vals_string | replace: '&quot;', '"' | strip_newlines -%}
+	{%- assign vals_array = vals_string | split: delim -%}
+	{%- assign index = 0 -%}
+	{%- assign hidden = false -%}
+	{%- for key in keys_array -%}
+		{%- if key == '_zone' -%}
+			{%- assign block_zone = vals_array[index] -%}
+		{%- endif -%}
+		{%- if key == '_template' -%}
+			{%- assign atb_template = vals_array[index] | prepend: 'atb.' -%}
+		{%- endif -%}
+		{%- if key == '_hidden' and vals_array[index] == 'true' -%}
+			{%- assign hidden = true -%}
+		{%- endif -%}
+		{%- assign index = index | plus: 1 -%}
+	{%- endfor -%}
+	{%- if block_zone == zone and hidden == false -%}
+		{%- include atb_template keys: keys_array vals: vals_array -%}
+	{%- endif -%}
+{%- endfor -%}

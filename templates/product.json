@@ -1,0 +1,183 @@
+{
+  "sections": {
+    "zp-product-header-content": {
+      "type": "product-header-content-zipifypages",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "caption": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.metafields.descriptors.subtitle.value }}",
+            "text_style": "subtitle"
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "share": {
+          "type": "share",
+          "disabled": true,
+          "settings": {
+            "share_label": "Share"
+          }
+        },
+        "collapsible-content-0": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "heading": "Ingredients",
+            "icon": "plant",
+            "content": "",
+            "page": ""
+          }
+        },
+        "collapsible-content-1": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "heading": "How to use",
+            "icon": "chat_bubble",
+            "content": "",
+            "page": ""
+          }
+        },
+        "collapsible-content-2": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "heading": "Shipping",
+            "icon": "truck",
+            "content": "<p><em>Shipping Notice: We currently only offer shipping to the USA. International shipping coming soon!<\/em><\/p>",
+            "page": ""
+          }
+        },
+        "collapsible-content-3": {
+          "type": "collapsible_tab",
+          "disabled": true,
+          "settings": {
+            "heading": "Return policy",
+            "icon": "return",
+            "content": "",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "caption",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "description",
+        "share",
+        "collapsible-content-0",
+        "collapsible-content-1",
+        "collapsible-content-2",
+        "collapsible-content-3"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "gallery_layout": "stacked",
+        "media_size": "medium",
+        "mobile_thumbnails": "hide",
+        "hide_variants": false,
+        "enable_video_looping": true,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "main-product-recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "The Aloe Famiglia also bought...",
+        "color_scheme": "background-1",
+        "image_ratio": "adapt",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "newsletter-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "Join the Aloe Famiglia"
+          }
+        },
+        "newsletter-1": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Join our email list for exclusive offers and the latest news. <\/p>"
+          }
+        },
+        "newsletter-2": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "newsletter-0",
+        "newsletter-1",
+        "newsletter-2"
+      ],
+      "settings": {
+        "color_scheme": "background-2",
+        "full_width": true,
+        "padding_top": 68,
+        "padding_bottom": 52
+      }
+    },
+    "zp-product-footer-content": {
+      "type": "product-footer-content-zipifypages",
+      "settings": {}
+    }
+  },
+  "order": [
+    "zp-product-header-content",
+    "main",
+    "main-product-recommendations",
+    "newsletter",
+    "zp-product-footer-content"
+  ]
+}

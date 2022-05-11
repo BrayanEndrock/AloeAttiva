@@ -1,0 +1,591 @@
+{% comment %}
+ATB-SCHEMA{
+  "name": "t:sections.slideshow.name",
+  "tag": "section",
+  "class": "section",
+  "id": "slideshow",
+  "banner": "",
+  "icon": "",
+  "tags": "",
+  "description": "",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "info": "Enter a unique ID with only letters and numbers, no spaces",
+      "default": ""
+    },
+    {
+      "type": "select",
+      "id": "atb_layout",
+      "options": [
+        {
+          "value": "full_bleed",
+          "label": "t:sections.slideshow.settings.layout.options__1.label"
+        },
+        {
+          "value": "grid",
+          "label": "t:sections.slideshow.settings.layout.options__2.label"
+        }
+      ],
+      "default": "full_bleed",
+      "label": "t:sections.slideshow.settings.layout.label",
+      "info": ""
+    },
+    {
+      "type": "select",
+      "id": "atb_slide_height",
+      "options": [
+        {
+          "value": "adapt_image",
+          "label": "t:sections.slideshow.settings.slide_height.options__1.label"
+        },
+        {
+          "value": "small",
+          "label": "t:sections.slideshow.settings.slide_height.options__2.label"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.slideshow.settings.slide_height.options__3.label"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.slideshow.settings.slide_height.options__4.label"
+        }
+      ],
+      "default": "adapt_image",
+      "label": "t:sections.slideshow.settings.slide_height.label",
+      "info": ""
+    },
+    {
+      "type": "select",
+      "id": "atb_slider_visual",
+      "options": [
+        {
+          "value": "dots",
+          "label": "t:sections.slideshow.settings.slider_visual.options__2.label"
+        },
+        {
+          "value": "counter",
+          "label": "t:sections.slideshow.settings.slider_visual.options__1.label"
+        },
+        {
+          "value": "numbers",
+          "label": "t:sections.slideshow.settings.slider_visual.options__3.label"
+        }
+      ],
+      "default": "counter",
+      "label": "t:sections.slideshow.settings.slider_visual.label",
+      "info": ""
+    },
+    {
+      "type": "checkbox",
+      "id": "atb_auto_rotate",
+      "label": "t:sections.slideshow.settings.auto_rotate.label",
+      "default": false,
+      "info": ""
+    },
+    {
+      "type": "range",
+      "id": "atb_change_slides_speed",
+      "min": 3,
+      "max": 9,
+      "step": 2,
+      "unit": "s",
+      "label": "t:sections.slideshow.settings.change_slides_speed.label",
+      "default": 5,
+      "info": ""
+    },
+    {
+      "type": "header",
+      "content": "t:sections.slideshow.settings.mobile.content",
+      "info": ""
+    },
+    {
+      "type": "checkbox",
+      "id": "atb_show_text_below",
+      "label": "t:sections.slideshow.settings.show_text_below.label",
+      "default": true,
+      "info": ""
+    },
+    {
+      "type": "header",
+      "content": "t:sections.slideshow.settings.accessibility.content",
+      "info": ""
+    },
+    {
+      "type": "text",
+      "id": "atb_accessibility_info",
+      "label": "t:sections.slideshow.settings.accessibility.label",
+      "info": "t:sections.slideshow.settings.accessibility.info",
+      "default": "Slideshow about our brand"
+    },
+    {
+      "type": "text",
+      "id": "blocks",
+      "label": "Block ID",
+      "info": "Enter a unique ID with only letters and numbers, no spaces",
+      "default": "",
+      "repeatable": "t:sections.slideshow.blocks.slide.name"
+    },
+    {
+      "type": "image_picker",
+      "id": "block_image",
+      "label": "t:sections.slideshow.blocks.slide.settings.image.label",
+      "repeatable": "t:sections.slideshow.blocks.slide.name",
+      "info": ""
+    },
+    {
+      "type": "text",
+      "id": "block_heading",
+      "default": "Image slide",
+      "label": "t:sections.slideshow.blocks.slide.settings.heading.label",
+      "repeatable": "t:sections.slideshow.blocks.slide.name",
+      "info": ""
+    },
+    {
+      "type": "select",
+      "id": "block_heading_size",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:sections.slideshow.blocks.slide.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.slideshow.blocks.slide.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.slideshow.blocks.slide.settings.heading_size.options__3.label"
+        }
+      ],
+      "default": "medium",
+      "label": "t:sections.slideshow.blocks.slide.settings.heading_size.label",
+      "repeatable": "t:sections.slideshow.blocks.slide.name",
+      "info": ""
+    },
+    {
+      "type": "text",
+      "id": "block_subheading",
+      "default": "Tell your brand's story through images",
+      "label": "t:sections.slideshow.blocks.slide.settings.subheading.label",
+      "repeatable": "t:sections.slideshow.blocks.slide.name",
+      "info": ""
+    },
+    {
+      "type": "text",
+      "id": "block_button_label",
+      "default": "Button label",
+      "label": "t:sections.slideshow.blocks.slide.settings.button_label.label",
+      "info": "t:sections.slideshow.blocks.slide.settings.button_label.info",
+      "repeatable": "t:sections.slideshow.blocks.slide.name"
+    },
+    {
+      "type": "text",
+      "id": "block_link",
+      "label": "t:sections.slideshow.blocks.slide.settings.link.label",
+      "repeatable": "t:sections.slideshow.blocks.slide.name",
+      "info": ""
+    },
+    {
+      "type": "checkbox",
+      "id": "block_button_style_secondary",
+      "label": "t:sections.slideshow.blocks.slide.settings.secondary_style.label",
+      "default": false,
+      "repeatable": "t:sections.slideshow.blocks.slide.name",
+      "info": ""
+    },
+    {
+      "type": "select",
+      "id": "block_box_align",
+      "options": [
+        {
+          "value": "top-left",
+          "label": "t:sections.slideshow.blocks.slide.settings.box_align.options__1.label"
+        },
+        {
+          "value": "top-center",
+          "label": "t:sections.slideshow.blocks.slide.settings.box_align.options__2.label"
+        },
+        {
+          "value": "top-right",
+          "label": "t:sections.slideshow.blocks.slide.settings.box_align.options__3.label"
+        },
+        {
+          "value": "middle-left",
+          "label": "t:sections.slideshow.blocks.slide.settings.box_align.options__4.label"
+        },
+        {
+          "value": "middle-center",
+          "label": "t:sections.slideshow.blocks.slide.settings.box_align.options__5.label"
+        },
+        {
+          "value": "middle-right",
+          "label": "t:sections.slideshow.blocks.slide.settings.box_align.options__6.label"
+        },
+        {
+          "value": "bottom-left",
+          "label": "t:sections.slideshow.blocks.slide.settings.box_align.options__7.label"
+        },
+        {
+          "value": "bottom-center",
+          "label": "t:sections.slideshow.blocks.slide.settings.box_align.options__8.label"
+        },
+        {
+          "value": "bottom-right",
+          "label": "t:sections.slideshow.blocks.slide.settings.box_align.options__9.label"
+        }
+      ],
+      "default": "middle-center",
+      "label": "t:sections.slideshow.blocks.slide.settings.box_align.label",
+      "info": "t:sections.slideshow.blocks.slide.settings.box_align.info",
+      "repeatable": "t:sections.slideshow.blocks.slide.name"
+    },
+    {
+      "type": "checkbox",
+      "id": "block_show_text_box",
+      "label": "t:sections.slideshow.blocks.slide.settings.show_text_box.label",
+      "default": true,
+      "repeatable": "t:sections.slideshow.blocks.slide.name",
+      "info": ""
+    },
+    {
+      "type": "select",
+      "id": "block_text_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.slideshow.blocks.slide.settings.text_alignment.option_1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.slideshow.blocks.slide.settings.text_alignment.option_2.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.slideshow.blocks.slide.settings.text_alignment.option_3.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:sections.slideshow.blocks.slide.settings.text_alignment.label",
+      "repeatable": "t:sections.slideshow.blocks.slide.name",
+      "info": ""
+    },
+    {
+      "type": "range",
+      "id": "block_image_overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "t:sections.slideshow.blocks.slide.settings.image_overlay_opacity.label",
+      "default": 0,
+      "repeatable": "t:sections.slideshow.blocks.slide.name",
+      "info": ""
+    },
+    {
+      "type": "select",
+      "id": "block_color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "t:sections.slideshow.blocks.slide.settings.color_scheme.options__1.label"
+        },
+        {
+          "value": "accent-2",
+          "label": "t:sections.slideshow.blocks.slide.settings.color_scheme.options__2.label"
+        },
+        {
+          "value": "background-1",
+          "label": "t:sections.slideshow.blocks.slide.settings.color_scheme.options__3.label"
+        },
+        {
+          "value": "background-2",
+          "label": "t:sections.slideshow.blocks.slide.settings.color_scheme.options__4.label"
+        },
+        {
+          "value": "inverse",
+          "label": "t:sections.slideshow.blocks.slide.settings.color_scheme.options__5.label"
+        }
+      ],
+      "default": "background-1",
+      "label": "t:sections.slideshow.blocks.slide.settings.color_scheme.label",
+      "info": "t:sections.slideshow.blocks.slide.settings.color_scheme.info",
+      "repeatable": "t:sections.slideshow.blocks.slide.name"
+    },
+    {
+      "type": "select",
+      "id": "block_text_alignment_mobile",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.slideshow.blocks.slide.settings.text_alignment_mobile.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.slideshow.blocks.slide.settings.text_alignment_mobile.options__2.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.slideshow.blocks.slide.settings.text_alignment_mobile.options__3.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:sections.slideshow.blocks.slide.settings.text_alignment_mobile.label",
+      "repeatable": "t:sections.slideshow.blocks.slide.name",
+      "info": ""
+    }
+  ],
+  "warnings": [
+    "repeating checkbox fields may not be properly handled",
+    "repeating range fields may not be properly handled",
+    "repeating image fields may not be properly handled"
+  ]
+}ATB-SCHEMA
+{% endcomment %}
+
+
+{%- include 'atb-render' field:'section_id' -%}
+{%- assign section_id = val -%}
+{%- include 'atb-render' field:'atb_layout' -%}
+{%- assign atb_layout = val -%}
+{%- include 'atb-render' field:'atb_slide_height' -%}
+{%- assign atb_slide_height = val -%}
+{%- include 'atb-render' field:'atb_slider_visual' -%}
+{%- assign atb_slider_visual = val -%}
+{%- include 'atb-render' field:'atb_auto_rotate' -%}
+{%- assign atb_auto_rotate = val -%}
+{%- include 'atb-render' field:'atb_change_slides_speed' -%}
+{%- assign atb_change_slides_speed = val -%}
+{%- include 'atb-render' field:'atb_show_text_below' -%}
+{%- assign atb_show_text_below = val -%}
+{%- include 'atb-render' field:'atb_accessibility_info' -%}
+{%- assign atb_accessibility_info = val -%}
+{%- include 'atb-render' field:'blocks' -%}
+{%- assign blocks = val -%}
+{%- include 'atb-render' field:'block_image' -%}
+{%- assign block_image = val -%}
+{%- include 'atb-render' field:'block_heading' -%}
+{%- assign block_heading = val -%}
+{%- include 'atb-render' field:'block_heading_size' -%}
+{%- assign block_heading_size = val -%}
+{%- include 'atb-render' field:'block_subheading' -%}
+{%- assign block_subheading = val -%}
+{%- include 'atb-render' field:'block_button_label' -%}
+{%- assign block_button_label = val -%}
+{%- include 'atb-render' field:'block_link' -%}
+{%- assign block_link = val -%}
+{%- include 'atb-render' field:'block_button_style_secondary' -%}
+{%- assign block_button_style_secondary = val -%}
+{%- include 'atb-render' field:'block_box_align' -%}
+{%- assign block_box_align = val -%}
+{%- include 'atb-render' field:'block_show_text_box' -%}
+{%- assign block_show_text_box = val -%}
+{%- include 'atb-render' field:'block_text_alignment' -%}
+{%- assign block_text_alignment = val -%}
+{%- include 'atb-render' field:'block_image_overlay_opacity' -%}
+{%- assign block_image_overlay_opacity = val -%}
+{%- include 'atb-render' field:'block_color_scheme' -%}
+{%- assign block_color_scheme = val -%}
+{%- include 'atb-render' field:'block_text_alignment_mobile' -%}
+{%- assign block_text_alignment_mobile = val -%}
+{%- if atb_auto_rotate == blank -%}
+{%- assign atb_auto_rotate = false -%}
+{%- else -%}
+{%- assign atb_auto_rotate = true -%}
+{%- endif -%}
+{%- if atb_show_text_below == blank -%}
+{%- assign atb_show_text_below = false -%}
+{%- else -%}
+{%- assign atb_show_text_below = true -%}
+{%- endif -%}
+{%- assign atb_change_slides_speed = atb_change_slides_speed | plus: 0 -%}
+{%- assign no_image = images['no_image_comparison'] -%}
+
+<section id="shopify-section-{{section_id}}" class="shopify-section section">
+{{ 'section-image-banner.css' | asset_url | stylesheet_tag }}
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'component-slideshow.css' | asset_url | stylesheet_tag }}
+
+
+{%- if atb_slide_height == 'adapt_image' and section.blocks.first.settings.image != blank -%}
+  {%- style -%}
+  @media screen and (max-width: 749px) {
+    #Slider-{{ section_id }}::before,
+    #Slider-{{ section_id }} .media::before,
+    #Slider-{{ section_id }}:not(.banner--mobile-bottom) .banner__content::before {
+      padding-bottom: {{ 1 | divided_by: section.blocks.first.settings.image.aspect_ratio | times: 100 }}%;
+      content: '';
+      display: block;
+    }
+  }
+
+  @media screen and (min-width: 750px) {
+    #Slider-{{ section_id }}::before,
+    #Slider-{{ section_id }} .media::before {
+      padding-bottom: {{ 1 | divided_by: section.blocks.first.settings.image.aspect_ratio | times: 100 }}%;
+      content: '';
+      display: block;
+    }
+  }
+  {%- endstyle -%}
+{%- endif -%}
+
+<slideshow-component class="slider-mobile-gutter{%if atb_layout == 'grid' %} page-width{% endif %}{% if atb_show_text_below %} mobile-text-below{% endif %}" role="region" aria-roledescription="{{ 'sections.slideshow.carousel' | t }}" aria-label="{{ atb_accessibility_info | escape }}">
+  <div class="slideshow banner banner--{{ atb_slide_height }} grid grid--1-col slider slider--everywhere{% if atb_show_text_below %} banner--mobile-bottom{% endif %}{% if section.blocks.first.settings.image == blank %} slideshow--placeholder{% endif %}"
+    id="Slider-{{ section_id }}"
+    aria-live="polite"
+    aria-atomic="true"
+    data-autoplay="{{ atb_auto_rotate }}"
+    data-speed="{{ atb_change_slides_speed }}"
+  >
+    {%- for block0 in blocks -%}
+{%- if block_show_text_box[forloop.index0] == blank -%}
+{%- assign my_checkbox1 = false -%}
+{%- else -%}
+{%- assign my_checkbox1 = true -%}
+{%- endif -%}
+{%- if block_button_style_secondary[forloop.index0] == blank -%}
+{%- assign my_checkbox0 = false -%}
+{%- else -%}
+{%- assign my_checkbox0 = true -%}
+{%- endif -%}
+{%- assign my_range0 = block_image_overlay_opacity[forloop.index0] | plus: 0 -%}
+{%- assign my_image_key0 = block_image[forloop.index0]| split: '/files/' | last -%}
+{%- assign my_image0 = images[my_image_key0] -%}
+      <style>
+        #Slide-{{ section_id }}-{{ forloop.index }} .banner__media::after {
+          opacity: {{ my_range0 | divided_by: 100.0 }};
+        }
+      </style>
+      <div class="slideshow__slide grid__item grid--1-col slider__slide"
+        id="Slide-{{ section_id }}-{{ forloop.index }}"
+        {{ block.shopify_attributes }}
+        role="group"
+        aria-roledescription="{{ 'sections.slideshow.slide' | t }}"
+        aria-label="{{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length}}"
+        tabindex="-1"
+      >
+        <div class="slideshow__media banner__media media{% if my_image0 == blank %} placeholder{% endif %}">
+          {%- if my_image0 != no_image -%}
+            <img
+              srcset="{%- if my_image0.width >= 375 -%}{{ block_image[forloop.index0] | img_url: '375x' }} 375w,{%- endif -%}
+              {%- if my_image0.width >= 550 -%}{{ block_image[forloop.index0] | img_url: '550x' }} 550w,{%- endif -%}
+              {%- if my_image0.width >= 750 -%}{{ block_image[forloop.index0] | img_url: '750x' }} 750w,{%- endif -%}
+              {%- if my_image0.width >= 1100 -%}{{ block_image[forloop.index0] | img_url: '1100x' }} 1100w,{%- endif -%}
+              {%- if my_image0.width >= 1500 -%}{{ block_image[forloop.index0] | img_url: '1500x' }} 1500w,{%- endif -%}
+              {%- if my_image0.width >= 1780 -%}{{ block_image[forloop.index0] | img_url: '1780x' }} 1780w,{%- endif -%}
+              {%- if my_image0.width >= 2000 -%}{{ block_image[forloop.index0] | img_url: '2000x' }} 2000w,{%- endif -%}
+              {%- if my_image0.width >= 3000 -%}{{ block_image[forloop.index0] | img_url: '3000x' }} 3000w,{%- endif -%}
+              {%- if my_image0.width >= 3840 -%}{{ block_image[forloop.index0] | img_url: '3840x' }} 3840w,{%- endif -%}
+              {{ my_image0 | img_url: 'master' }} {{ block_image[forloop.index0].width }}w"
+              sizes="100vw"
+              src="{{ my_image0 | img_url: '1500x' }}"
+              loading="lazy"
+              alt="{{ my_image0.alt | escape }}"
+              width="{{ my_image0.width }}"
+              height="{{ my_image0.width | divided_by: block_image[forloop.index0].aspect_ratio | round }}"
+            >
+          {%- else -%}
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+          {%- endif -%}
+        </div>
+        <div class="slideshow__text-wrapper banner__content banner__content--{{ block_box_align[forloop.index0] }} page-width{% if my_checkbox1 == false %} banner--desktop-transparent{% endif %}">
+          <div class="slideshow__text banner__box content-container content-container--full-width-mobile color-{{ block_color_scheme[forloop.index0] }} slideshow__text--{{ block_text_alignment[forloop.index0] }} slideshow__text-mobile--{{ block_text_alignment_mobile[forloop.index0] }}">
+            {%- if block_heading[forloop.index0] != blank -%}
+              <h2 class="banner__heading{% if block_heading_size[forloop.index0] == 'medium' %} h1{% elsif block_heading_size[forloop.index0] == 'large' %} h0{% endif %}">{{ block_heading[forloop.index0] | escape }}</h2>
+            {%- endif -%}
+            {%- if block_subheading[forloop.index0] != blank -%}
+              <div class="banner__text" {{ block.shopify_attributes }}>
+                <span>{{ block_subheading[forloop.index0] | escape }}</span>
+              </div>
+            {%- endif -%}
+            {%- if block_button_label[forloop.index0] != blank -%}
+              <div class="banner__buttons">
+                <a{% if block_link[forloop.index0] %} href="{{ block_link[forloop.index0] }}"{% else %} role="link" aria-disabled="true"{% endif %} class="button {% if my_checkbox0 %}button--secondary{% else %}button--primary{% endif %}">{{ block_button_label[forloop.index0] | escape }}</a>
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+
+  {%- if blocks.size > 1 -%}
+    <div class="slideshow__controls slider-buttons no-js-hidden">
+      <button type="button" class="slider-button slider-button--prev" name="previous" aria-label="{{ 'sections.slideshow.previous_slideshow' | t }}" aria-controls="Slider-{{ section_id }}">{% render 'icon-caret' %}</button>
+      <div class="slider-counter slider-counter--{{ atb_slider_visual }}{% if atb_slider_visual == 'counter' or atb_slider_visual == 'numbers' %} caption{% endif %}">
+        {%- if atb_slider_visual == 'counter' -%}
+          <span class="slider-counter--current">1</span>
+          <span aria-hidden="true"> / </span>
+          <span class="visually-hidden">{{ 'general.slider.of' | t }}</span>
+          <span class="slider-counter--total">{{ blocks.size }}</span>
+        {%- else-%}
+          <div class="slideshow__control-wrapper">
+            {%- for block0 in blocks -%}
+{%- if block_show_text_box[forloop.index0] == blank -%}
+{%- assign my_checkbox1 = false -%}
+{%- else -%}
+{%- assign my_checkbox1 = true -%}
+{%- endif -%}
+{%- if block_button_style_secondary[forloop.index0] == blank -%}
+{%- assign my_checkbox0 = false -%}
+{%- else -%}
+{%- assign my_checkbox0 = true -%}
+{%- endif -%}
+{%- assign my_range0 = block_image_overlay_opacity[forloop.index0] | plus: 0 -%}
+{%- assign my_image_key0 = block_image[forloop.index0]| split: '/files/' | last -%}
+{%- assign my_image0 = images[my_image_key0] -%}
+              <button class="slider-counter__link slider-counter__link--{{ atb_slider_visual }} link" aria-label="{{ 'sections.slideshow.load_slide' | t }} {{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length}}" aria-controls="Slider-{{ section_id }}">
+                {%- if atb_slider_visual == 'numbers' -%}{{ forloop.index }}{% else %}<span class="dot"></span>{%- endif -%}
+              </button>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+      <button type="button" class="slider-button slider-button--next" name="next" aria-label="{{ 'sections.slideshow.next_slideshow' | t }}" aria-controls="Slider-{{ section_id }}">{% render 'icon-caret' %}</button>
+
+      {%- if atb_auto_rotate -%}
+        <button type="button" class="slideshow__autoplay slider-button no-js-hidden{% if atb_auto_rotate == false %} slideshow__autoplay--paused{% endif %}" aria-label="{{ 'sections.slideshow.pause_slideshow' | t }}">
+          {%- render 'icon-pause' -%}
+          {%- render 'icon-play' -%}
+        </button>
+      {%- endif -%}
+    </div>
+
+    <noscript>
+      <div class="slider-buttons">
+        <div class="slider-counter">
+          {%- for block0 in blocks -%}
+{%- if block_show_text_box[forloop.index0] == blank -%}
+{%- assign my_checkbox1 = false -%}
+{%- else -%}
+{%- assign my_checkbox1 = true -%}
+{%- endif -%}
+{%- if block_button_style_secondary[forloop.index0] == blank -%}
+{%- assign my_checkbox0 = false -%}
+{%- else -%}
+{%- assign my_checkbox0 = true -%}
+{%- endif -%}
+{%- assign my_range0 = block_image_overlay_opacity[forloop.index0] | plus: 0 -%}
+{%- assign my_image_key0 = block_image[forloop.index0]| split: '/files/' | last -%}
+{%- assign my_image0 = images[my_image_key0] -%}
+            <a href="#Slide-{{ section_id }}-{{ forloop.index }}" class="slider-counter__link link" aria-label="{{ 'sections.slideshow.load_slide' | t }} {{ forloop.index }} {{ 'general.slider.of' | t }} {{ forloop.length}}">
+              {{ forloop.index }}
+            </a>
+          {%- endfor -%}
+        </div>
+      </div>
+    </noscript>
+  {%- endif -%}
+
+</slideshow-component>
+
+{%- if request.design_mode -%}
+  <script src="{{ 'theme-editor.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+
+</section>

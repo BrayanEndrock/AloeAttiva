@@ -1,0 +1,51 @@
+{% comment %}
+ATB-SCHEMA{
+  "name": "t:sections.apps.name",
+  "tag": "section",
+  "class": "section",
+  "id": "apps",
+  "banner": "",
+  "icon": "",
+  "tags": "",
+  "description": "",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_id",
+      "label": "Section ID",
+      "info": "Enter a unique ID with only letters and numbers, no spaces",
+      "default": ""
+    },
+    {
+      "type": "checkbox",
+      "id": "atb_include_margins",
+      "default": true,
+      "label": "t:sections.apps.settings.include_margins.label",
+      "info": ""
+    }
+  ],
+  "warnings": []
+}ATB-SCHEMA
+{% endcomment %}
+
+
+{%- include 'atb-render' field:'section_id' -%}
+{%- assign section_id = val -%}
+{%- include 'atb-render' field:'atb_include_margins' -%}
+{%- assign atb_include_margins = val -%}
+{%- if atb_include_margins == blank -%}
+{%- assign atb_include_margins = false -%}
+{%- else -%}
+{%- assign atb_include_margins = true -%}
+{%- endif -%}
+{%- assign no_image = images['no_image_comparison'] -%}
+
+<section id="shopify-section-{{section_id}}" class="shopify-section section">
+<div class="{% if atb_include_margins %}page-width{% endif %}">
+  {%- for block0 in blocks -%}
+    {% render block %}
+  {%- endfor -%}
+</div>
+
+
+</section>
