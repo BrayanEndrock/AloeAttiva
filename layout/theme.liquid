@@ -218,7 +218,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     
   {% include 'ufe-offer' %}</head>
 
-  <body class="gradient">
+  <body class="gradient" id="{% if template == 'index' %}index{% else %}{{ page.handle }}{% endif %}">
     <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W8XSZKM"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>

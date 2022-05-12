@@ -1,0 +1,208 @@
+<div class="about-us-faq-feature--template">
+    <div class="about-us-faq-feature--container">
+        <div class="accordions">
+            {%- for block in section.blocks -%}
+                {% if block.type == "FAQ" %}
+                    <button class="accordion{% if forloop.first == true %} active{% endif %}">
+                        <h3>
+                            <img
+                                src="{{ block.settings.icon | img_url: '24x' }}"
+                                srcset="{{ block.settings.icon | img_url: '24x' }} 1x, {{ block.settings.icon | img_url: '48x', scale: 2 }} 2x"
+                                alt="{{ block.settings.title }} Icon"
+                            >
+                            {{ block.settings.title }}
+                        </h3>
+                        <h5>{{ block.settings.subtitle }}</h5>             
+                    </button>
+                    <div class="panel{% if forloop.first == true %} active{% endif %}">
+                        {{ block.settings.content }}
+                    </div>
+                {% endif %}        
+            {%- endfor -%}
+        </div>
+    </div>
+</div>
+
+<script>
+    var acc = document.getElementsByClassName("accordion");         
+    var i;
+    
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        panel.classList.toggle("active");
+      });
+    }
+</script>
+
+{% schema %}
+    {
+        "name": "FAQ About Us",
+        "class": "about-us-faq-feature",
+        "settings": [
+        ],
+        "blocks": [
+            {
+                "type": "FAQ",
+                "name": "Accordion",      
+                "settings": [
+                    {
+                        "type": "image_picker",
+                        "id": "icon",
+                        "label": "Icon"
+                    },
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Title"
+                    },
+                    {
+                        "type": "text",
+                        "id": "subtitle",
+                        "label": "Subitle"
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "content",
+                        "label": "Content"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}
+
+{% stylesheet 'scss' %}
+    #about-us {
+        #MainContent {
+            background-color: #fff;
+        }
+    }
+    .about-us-faq-feature {
+        background-color: #fff;
+        .about-us-faq-feature--template {
+            .about-us-faq-feature--container {
+                padding: 84px 0 80px;
+                @media screen and (max-width: 768px) {
+                    padding: 34px 20px 40px;
+                }  
+                .accordions {          
+                    max-width: 1008px;  
+                    margin: 0 auto;
+                    padding: 0;     
+                    @media screen and (max-width: 790px) {
+                        max-width: 990px;  
+                        padding: 0;                    
+                    }           
+                    .accordion {
+                        background-color: transparent;                  
+                        padding: 24px 60px 24px 0px;                  
+                        width: 100%;
+                        text-align: left;
+                        border-bottom: none;
+                        border-left: none;
+                        border-right: none;
+                        border-top: solid 1px #EDF1E8;  
+                        position: relative; 
+                        @media screen and (max-width: 768px) {
+                            padding: 15px 20px 15px 0px;               
+                        }
+                        h3 {  
+                            color: #2E2A39; 
+                            font-size: 24px;                               
+                            font-style: normal;
+                            font-weight: 700;
+                            letter-spacing: 0.03em;
+                            line-height: 32px;
+                            margin: 0;
+                            padding: 0; 
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            justify-content: flex-start;
+                            img {
+                                margin-right: 10px;
+                            }   
+                            @media screen and (max-width: 768px) {
+                                font-size: 19px; 
+                                img {
+                                    margin-right: 5px;
+                                } 
+                            }  
+                        }
+                        h5 {
+                            color: #2E2A39; 
+                            font-size: 16px;                               
+                            font-style: normal;
+                            font-weight: 700;
+                            letter-spacing: 0.03em;
+                            line-height: 24px;
+                            margin: 0;
+                            padding: 0;
+                            width: fit-content;
+                            margin-left: 35px;
+                            @media screen and (max-width: 768px) {
+                                font-size: 14px;
+                                margin-left: 29px;
+                            }
+                        }
+                        &:focus {
+                            outline: none;
+                        }
+                        &:first-of-type {
+                            border: none;               
+                        }
+                        &:last-of-type {
+                            border-bottom: none;       
+                            &.active {                     
+                                border-bottom: none;         
+                            }
+                        }
+                        &:before {
+                            content: url('https://cdn.shopify.com/s/files/1/0468/3730/1414/files/arrow-down-icon.svg?v=1652302632');
+                            position: absolute;
+                            right: 0;
+                            top: 27px;
+                        }
+                        &.active {
+                            &:before {
+                                content: url('https://cdn.shopify.com/s/files/1/0468/3730/1414/files/arrow-up-icon.svg?v=1652302632');                  
+                            }             
+                        }
+                    }
+                    .panel { 
+                        display: none;
+                        width: 100%;                        
+                        padding: 0 10px 24px 35px;
+                        @media screen and (max-width: 768px) {
+                            padding-left: 29px;
+                        }
+                        &.active {
+                            display: block;         
+                            p {
+                                color: #2E2A39;
+                                font-size: 16px;
+                                font-style: normal;
+                                font-weight: 400;
+                                letter-spacing: 0.03em;
+                                line-height: 28px;
+                                max-width: 696px;
+                                margin: 0;
+                                @media screen and (max-width: 768px) {
+                                    font-size: 14px;
+                                }  
+                            }    
+                        }
+                        &:last-child {
+                            border-bottom: none;                          
+                        }
+                        strong, a {
+                            color: #2E2A39;
+                        }
+                    }
+                } 
+            }
+        }
+    }
+{% endstylesheet %}
