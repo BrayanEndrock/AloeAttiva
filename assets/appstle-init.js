@@ -17,7 +17,7 @@
       };
 
 
-      appstleLoadScript("https://cdn.shopify.com/s/files/1/0468/3730/1414/t/15/assets/appstle-subscription.js?v=1651531358");
+      appstleLoadScript("https://cdn.shopify.com/s/files/1/0468/3730/1414/t/15/assets/appstle-subscription.js?v=1652394110");
 
       window.RS = Window.RS || {};
       RS.Config = {
@@ -73,12 +73,12 @@
         "selectedDiscountFormat" : "SAVE {{selectedDiscountPercentage}}",
         "manageSubscriptionBtnFormat" : "<a href='apps\/subscriptions' class='appstle_manageSubBtn' ><button class='btn' style='padding: 2px 20px'>Manage Subscription<\/button><a><br><br>",
         "manageSubscriptionUrl" : "apps\/subscriptions",
-        "appstlePlanId": -1,
+        "appstlePlanId": 3,
         "showCheckoutSubscriptionBtn": true,
         "disableLoadingJquery": false,
         "widgetEnabledOnSoldVariant": "false",
         "switchRadioButtonWidget": false,
-        "appstlePlanName": "FREE",
+        "appstlePlanName": "BUSINESS",
         "formMappingAttributeName": "",
         "formMappingAttributeSelector": "",
         "quickViewModalPollingSelector": "",
