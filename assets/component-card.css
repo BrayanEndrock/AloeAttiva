@@ -98,6 +98,27 @@
 .card__information {
   grid-row-start: 2;
   padding: 1.3rem 1rem;
+  height: 208px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#product-card--reusable-beauty-rounds .card__information,
+#product-card--aloe-beauty-bundle .card__information, 
+#product-card--aloe-attiva-gift-card .card__information {
+  height: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .card__information {
+    height: 243px;
+  }
+  #product-card--reusable-beauty-rounds .card__information,
+  #product-card--aloe-beauty-bundle .card__information, 
+  #product-card--aloe-attiva-gift-card .card__information {
+    height: 148px;  
+  }
 }
 
 @media screen and (min-width: 750px) {
@@ -285,7 +306,7 @@
 .card-information
   > *:not(.visually-hidden:first-child)
   + *:not(.rating) {
-  margin-top: 0.7rem;
+  margin: 0 auto 1.2rem;
 }
 
 .card-information .caption {

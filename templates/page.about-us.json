@@ -2,10 +2,108 @@
   "sections": {
     "hero": {
       "type": "about-us-hero",
+      "settings": {
+        "hero": "shopify:\/\/shop_images\/about-us-desktop-hero.png"
+      }
+    },
+    "faq": {
+      "type": "about-us-faq",
+      "blocks": {
+        "37d080ac-f439-4223-8568-a555a06b113b": {
+          "type": "FAQ",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/heart-icon.png",
+            "title": "Say Aloe to Waterless Skincare",
+            "subtitle": "We believe your skin deserves better.",
+            "content": "<p>Did you know that most skincare products contain 80-95% water? Aloe Attiva is different. Instead of water, every formula we make uses our proprietary Aloe Attiva Elixir, a super-concentrated, 4x boosted, multi-benefit extract that provides extraordinary benefits for your skin. <strong>Welcome to a waterless alternative.<\/strong><\/p>"
+          }
+        },
+        "725c3f19-7d95-48ba-9772-760d68351932": {
+          "type": "FAQ",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/watch-icon.png",
+            "title": "Say Aloe to 72-Hour Hydration",
+            "subtitle": "Clinically proven results with clean ingredients.",
+            "content": "<p><strong>Lorem Ipsum<\/strong>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<\/p>"
+          }
+        },
+        "2b23f94f-c51d-46d0-9b95-ade7ff0a56d1": {
+          "type": "FAQ",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/stars-icon.png",
+            "title": "Say Aloe to Glow",
+            "subtitle": "A power-packed serum for youthful, bright skin.",
+            "content": "<p><strong>Lorem Ipsum<\/strong>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<\/p>"
+          }
+        },
+        "ba64eda6-8928-4be6-be86-2c585d4ba1b1": {
+          "type": "FAQ",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/plant-icon.png",
+            "title": "Why Waterless?",
+            "subtitle": "We skip plain water to leave room for the good stuff.",
+            "content": "<p><strong>Lorem Ipsum<\/strong>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<\/p>"
+          }
+        },
+        "4c6cbeba-300b-40dc-a629-4613e739cab0": {
+          "type": "FAQ",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/star-icon.png",
+            "title": "What makes our Aloe extraordinary?",
+            "subtitle": "Our unique Aloe Attiva Elixir is 4x more effective than regular aloe.",
+            "content": "<p><strong>Lorem Ipsum<\/strong>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<\/p>"
+          }
+        },
+        "142bb00b-aa20-4b8b-8e0a-86915a1f5edc": {
+          "type": "FAQ",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/bulb-icon.png",
+            "title": "Say Aloe to our Founder",
+            "subtitle": "Marco Vernazza’s passion for natural beauty began over 25 years ago.",
+            "content": "<p><strong>Lorem Ipsum<\/strong>is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<\/p>"
+          }
+        }
+      },
+      "block_order": [
+        "37d080ac-f439-4223-8568-a555a06b113b",
+        "725c3f19-7d95-48ba-9772-760d68351932",
+        "2b23f94f-c51d-46d0-9b95-ade7ff0a56d1",
+        "ba64eda6-8928-4be6-be86-2c585d4ba1b1",
+        "4c6cbeba-300b-40dc-a629-4613e739cab0",
+        "142bb00b-aa20-4b8b-8e0a-86915a1f5edc"
+      ],
       "settings": {}
+    },
+    "banner-breaker": {
+      "type": "about-us-banner-breaker",
+      "settings": {
+        "quote": "<p>“La gente pensa che l’aloe sia qualcosa di ordinario, ma io dico che la mia Aloe è straordinaria.”<\/p>",
+        "subquote": "“People think aloe is ordinary, but I tell them no, my Aloe is extraordinary.”",
+        "founder": "Marco Vernazza, Founder"
+      }
+    },
+    "collection": {
+      "type": "about-us-collection",
+      "settings": {
+        "title": "Say Aloe to Our Proven Performers",
+        "collection": "about-us-collection",
+        "products_to_show": 4,
+        "color_scheme": "background-1",
+        "show_view_all": true,
+        "swipe_on_mobile": true,
+        "image_ratio": "adapt",
+        "show_secondary_image": false,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 0,
+        "padding_bottom": 72
+      }
     }
   },
   "order": [
-    "hero"
+    "hero",
+    "faq",
+    "banner-breaker",
+    "collection"
   ]
 }

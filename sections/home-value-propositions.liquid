@@ -1,0 +1,203 @@
+<div class="value-props-marquee small--hide">
+  <div class="value-props-marquee__container">
+    {% for i in (1..24) %}
+      {% for block in section.blocks %}
+        <div class="value-props-marquee__item">
+          {% assign image_width = block.settings.icon.width | divided_by: 1 | append: 'x' %}
+          <img
+            src="{{ block.settings.icon | img_url: image_width }}"
+            srcset="{{block.settings.icon | img_url: image_width }} 1x, {{block.settings.icon | img_url: image_width, scale: 2}} 2x" 
+            alt="{{ block.settings.proposition | escape }}" 
+          />
+          {{ block.settings.proposition }}
+        </div>
+      {% endfor %}
+    {% endfor %}
+  </div>
+</div>
+<div class="bundle-callout__marquee medium-up--hide">
+  <div class="icon-marquee">
+    <div class="icon-marquee__marquee" data-icon-marquee>
+      <div class="icon-marquee__marquee-inner">
+        {% for i in (1..12) %}
+          {% for block in section.blocks %}
+            <div class="icon-marquee__icon" data-icon>
+              {% assign image_width = block.settings.icon.width | divided_by: 2 | append: 'x' %}
+              <img
+                src="{{ block.settings.icon | img_url: image_width }}"
+                srcset="{{block.settings.icon | img_url: image_width}} 1x, {{block.settings.icon | img_url: image_width, scale: 2}} 2x" 
+                alt="{{block.settings.proposition | escape }}" 
+              />
+              {{ block.settings.proposition }}
+            </div>
+          {% endfor %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+  
+{% schema %}
+  {
+    "name": "Value Proposition",
+    "class": "value-proposition",
+    "settings": [
+      {
+        "type": "color",
+        "id": "background",
+        "label": "Background Color",
+        "default": "#C5E7DA"
+      },
+      {
+        "type": "color",
+        "id": "font_color",
+        "label": "Font Color",
+        "default": "#42446C"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "proposition",
+        "name": "Proposition",
+        "settings": [      
+          {
+            "type": "image_picker",
+            "id": "icon",
+            "label": "Icon"
+          },
+          {
+            "type": "text",
+            "id": "proposition",
+            "label": "Proposition"
+          }
+        ]
+      }
+    ],
+    "presets":[
+      {
+        "name":"Value Props",
+        "category": "Home"
+      }
+    ]
+  }
+{% endschema %}
+
+{% style %}
+  .value-proposition {
+    padding: 16px 0;
+    background-color: {{ section.settings.background }};
+    margin-bottom: 36px;
+  }
+  .value-props-marquee {
+    padding: 24px 0;
+    display: flex;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    min-width: 100%;
+    overflow-x: hidden;
+  }
+  .value-props-marquee__container {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    animation: value-props-marquee 900s linear infinite;   
+  }
+  .value-props-marquee__container:hover {
+    animation-play-state: paused;
+  }   
+  .value-props-marquee__item {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 27px;
+    color: {{ section.settings.font_color }};
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    align-content: center;
+    margin-right: 37px;
+  }
+  .value-props-marquee__item img {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 14px;
+  }
+  @keyframes value-props-marquee {
+    0% {
+      -webkit-transform: translateX(0);
+      transform: translate(0);
+    }
+    100% {
+      -webkit-transform: translateX(-100%);
+      transform: translate(-100%);
+    }
+  }
+  @keyframes icon-marquee {
+    0% {
+      transform: translateY(-50%) translateX(0);
+    }
+    100% {
+      transform: translateY(-50%) translateX(-50%);
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .small--hide {   
+      display: none !important;
+    }
+    .bundle-callout__marquee {
+      position: relative;
+      width: 100%;   
+    }
+    .icon-marquee {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 48px;
+    }
+    .icon-marquee__marquee {
+      position: relative;
+      width: auto;
+      min-width: 150%;
+      height: 48px;
+    }
+    .icon-marquee__marquee.paused .icon-marquee__marquee-inner {
+      animation-play-state: paused;
+    }
+    .icon-marquee__marquee-inner {
+      position: absolute;
+      top: 50%;
+      display: flex;
+      overflow: hidden;
+      width: -webkit-max-content;
+      width: -moz-max-content;
+      width: max-content;
+      height: 48px;
+      align-items: center;
+      -webkit-animation: icon-marquee 250s linear infinite;
+      animation: icon-marquee 250s linear infinite;
+      transform: translateY(-50%);
+    }
+    .icon-marquee__icon {
+      display: inline-flex;
+      width: -webkit-max-content;
+      width: -moz-max-content;
+      width: max-content;
+      align-items: center;
+      justify-content: flex-start;
+      padding-right: 32px;
+      font-size: 16px;
+      line-height: normal;
+      color: {{section.settings.font_color}};
+    }
+    .icon-marquee__icon img {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 8px;
+    }
+  }
+  @media screen and (min-width: 769px) {
+    .medium-up--hide {
+      display: none !important;
+    }
+  }
+{% endstyle %}

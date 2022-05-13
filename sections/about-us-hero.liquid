@@ -1,12 +1,56 @@
+<div class="about-us-hero-feature--template">
+  <div class="about-us-hero-feature--container">
+    <h1>{{ page.title }}</h1>
+  </div>
+</div>
+
+<style>  
+  .about-us-hero-feature--template {
+    background-image: url({{ section.settings.hero | img_url: 'master' }});     
+    background-size: cover;                         
+    background-repeat: no-repeat;            
+    height: 320px;              
+  } 
+  @media screen and (max-width: 768px) {
+    .about-us-hero-feature--template {
+      background-position: center; 
+      height: 106px;              
+    }
+  }
+</style>
+
 {% schema %}
   {
-    "name": "Section name",
-    "settings": []
+    "name": "Hero About Us",
+    "class": "about-us-hero-feature",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "hero",
+        "label": "Hero"
+      },
+      {
+        "type": "image_picker",
+        "id": "mobile-hero",
+        "label": "Mobile Hero"
+      }
+    ]
   }
 {% endschema %}
 
-{% stylesheet %}
+{% stylesheet 'scss' %}
+  .about-us-hero-feature {
+    .about-us-hero-feature--template {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      .about-us-hero-feature--container {
+        h1 {
+          color: #FFFFFF;
+          margin: 0 auto;
+          text-align: center;
+        }
+      }
+    }
+  }
 {% endstylesheet %}
-
-{% javascript %}
-{% endjavascript %}
