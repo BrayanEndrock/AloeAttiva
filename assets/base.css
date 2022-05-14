@@ -2779,3 +2779,8 @@ details-disclosure > details {
     }
   }
 }
+
+/* Home Instagram Feed */
+.eapps-instagram-feed-title-container .eui-widget-title.es-widget-title.eapps-instagram-feed-title {
+  display: none !important;
+}
