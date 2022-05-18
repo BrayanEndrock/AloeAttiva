@@ -28,7 +28,7 @@
           "settings": {
             "button_label_1": "Shop Now",
             "button_link_1": "shopify:\/\/collections\/all",
-            "button_style_secondary_1": false,
+            "button_style_secondary_1": true,
             "button_label_2": "",
             "button_link_2": "shopify:\/\/pages\/about",
             "button_style_secondary_2": false
@@ -48,9 +48,9 @@
         "desktop_content_position": "middle-center",
         "show_text_box": false,
         "desktop_content_alignment": "center",
-        "color_scheme": "background-1",
+        "color_scheme": "accent-2",
         "mobile_content_alignment": "center",
-        "stack_images_on_mobile": true,
+        "stack_images_on_mobile": false,
         "show_text_below": false
       }
     },
@@ -68,7 +68,7 @@
           "type": "text",
           "settings": {
             "text": "<p><strong>Clinically Proven to be                      four times<\/strong><em><strong> (4x) more effective<\/strong><\/em><strong> than commercial grade Aloe!<\/strong><\/p>",
-            "text_style": "body"
+            "text_style": "subtitle"
           }
         },
         "16517799386d57162a-2": {

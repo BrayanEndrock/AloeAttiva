@@ -20,9 +20,9 @@
           "announcement-bar-0": {
             "type": "announcement",
             "settings": {
-              "text": "SHOW MOM ALL THE AMORE THIS MOTHER'S DAY",
+              "text": "GET A FREE TOTE WITH ANY BUNDLE PURCHASE USING CODE TOTESAMORE",
               "color_scheme": "accent-1",
-              "link": "shopify:\/\/products\/all-the-amore-skincare-set"
+              "link": "shopify:\/\/products\/life-is-beautiful-tote"
             }
           }
         },
@@ -83,7 +83,7 @@
           "enable_language_selector": false,
           "payment_enable": false,
           "margin_top": 0,
-          "padding_top": 0,
+          "padding_top": 28,
           "padding_bottom": 4
         }
       }
