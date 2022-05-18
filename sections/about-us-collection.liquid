@@ -203,6 +203,10 @@
 
 {% stylesheet 'scss' %}
     .about-us-collection {
+        padding-top: 56px;
+        @media screen and (max-width: 768px) {
+            padding-top: 24px;
+        }
         .about-us-collection--template {
             h2.title {
                 color: #2E2A39;
@@ -214,8 +218,9 @@
                 margin: 0 auto;
                 text-align: center;
                 @media screen and (max-width: 768px) {
-                    font-size: 34px;
-                    line-height: 37px;
+                    max-width: 269px;
+                    font-size: 39px;
+                    line-height: 48px;
                 }
             }
             .card__information {
