@@ -13,8 +13,10 @@
   } 
   @media screen and (max-width: 768px) {
     .about-us-hero-feature--template {
+      background-image: url({{ section.settings.mobile-hero | img_url: 'master' }});     
+      background-size: cover;
       background-position: center; 
-      height: 106px;              
+      height: 275px;              
     }
   }
 </style>
@@ -49,6 +51,11 @@
           color: #FFFFFF;
           margin: 0 auto;
           text-align: center;
+          @media screen and (max-width: 768px) {
+            font-size: 40px;
+            line-height: 48px;
+            max-width: 207px;
+          }
         }
       }
     }
