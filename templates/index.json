@@ -6,6 +6,97 @@
         "collection": "best-sellers"
       }
     },
+    "1652916037ca6beaff": {
+      "type": "home-value-propositions",
+      "blocks": {
+        "9ba53218-dd09-46d1-bf29-699ed434912b": {
+          "type": "proposition",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/gluten-free_4a897389-4c64-4e4d-a836-09a1a8d258d6.png",
+            "proposition": "Gluten-Free"
+          }
+        },
+        "7eade7fb-f358-4d79-b854-e480f0dcad5b": {
+          "type": "proposition",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/paraben-free_4cd87047-e6e9-495b-9aff-1d59dbfd80b5.png",
+            "proposition": "Paraben-Free"
+          }
+        },
+        "b5d6370c-5f8e-410a-8692-28015bc88ce0": {
+          "type": "proposition",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/cruelty-free.png",
+            "proposition": "Cruelty-Free"
+          }
+        },
+        "a5b1b17d-bd82-403b-8776-e8d213b38f7a": {
+          "type": "proposition",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/made-in-italy.png",
+            "proposition": "Made in Italy"
+          }
+        },
+        "a3b7ba7d-6ff3-4e75-b740-9d41ed934d9f": {
+          "type": "proposition",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/hyaluronic.png",
+            "proposition": "7 Types of<br> Hyaluronic Acid"
+          }
+        },
+        "3a3e86fc-8733-49df-a087-659a82404623": {
+          "type": "proposition",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/formulations.png",
+            "proposition": "Waterless<br> Formulations"
+          }
+        },
+        "cf691112-4b46-4a80-8ccb-b180f6f3b86d": {
+          "type": "proposition",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/aloe.png",
+            "proposition": "Aloe Based<br> Forumlas"
+          }
+        },
+        "8f64fb14-178a-4553-9ff4-3268a00ba7e9": {
+          "type": "proposition",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/leaf.png",
+            "proposition": "Natural Anti-<br>Inflammatory "
+          }
+        },
+        "03867b46-dd9e-4cda-8cdd-c825c5d7b720": {
+          "type": "proposition",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/vitamin.png",
+            "proposition": "Natural<br> Multi-Vitamin"
+          }
+        },
+        "457aabd3-1eb4-4fc2-a10b-d4161e76027a": {
+          "type": "proposition",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/Frame.png",
+            "proposition": "Antioxidant<br> Protection"
+          }
+        }
+      },
+      "block_order": [
+        "9ba53218-dd09-46d1-bf29-699ed434912b",
+        "7eade7fb-f358-4d79-b854-e480f0dcad5b",
+        "b5d6370c-5f8e-410a-8692-28015bc88ce0",
+        "a5b1b17d-bd82-403b-8776-e8d213b38f7a",
+        "a3b7ba7d-6ff3-4e75-b740-9d41ed934d9f",
+        "3a3e86fc-8733-49df-a087-659a82404623",
+        "cf691112-4b46-4a80-8ccb-b180f6f3b86d",
+        "8f64fb14-178a-4553-9ff4-3268a00ba7e9",
+        "03867b46-dd9e-4cda-8cdd-c825c5d7b720",
+        "457aabd3-1eb4-4fc2-a10b-d4161e76027a"
+      ],
+      "settings": {
+        "background": "#ffffff",
+        "font_color": "#83aaa6"
+      }
+    },
     "16445184171eba2d12": {
       "type": "image-banner",
       "blocks": {
@@ -464,6 +555,7 @@
   },
   "order": [
     "16508896397afca36a",
+    "1652916037ca6beaff",
     "16445184171eba2d12",
     "16517799384a3081e4",
     "featured-collection",
