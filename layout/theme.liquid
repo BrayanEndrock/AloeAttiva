@@ -28,6 +28,10 @@
     {% endif %}
 
     {% render 'meta-tags' %}
+    
+     <!-- Google Optimize -->
+    <script src="https://www.googleoptimize.com/optimize.js?id=OPT-K9KK4B3"></script>
+	<!-- END: Google Optimize -->
 
     
 <!-- Google Tag Manager -->
@@ -232,7 +236,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <main id="MainContent" class="content-for-layout focus-none" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
-
+    {% include 'widget-quiz-opt-in' %}
     {% section 'footer' %}
 
     <ul hidden>
