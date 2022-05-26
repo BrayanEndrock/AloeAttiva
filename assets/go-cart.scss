@@ -149,6 +149,7 @@
   border-top: 1px solid #C6C6C1;
   padding: 8px 0;
   margin-top: 10px;
+  margin-bottom: 12px;
 }
 .go-cart-drawer__gamification .go-cart-drawer__gamification--wrapper {
   text-align: center;
@@ -172,7 +173,6 @@
   flex-direction: row;
   align-items: baseline;
   justify-content: space-between;
-  margin-bottom: 34px;
 }
 .go-cart-drawer__header .go-cart-drawer__title > h3 {
   color: #46434D;
@@ -198,7 +198,7 @@
   align-items: baseline;
   justify-content: space-between;
   border-bottom: 1px solid #C6C6C1;
-  padding-bottom: 18px;
+  padding-bottom: 10px;
 }
 .go-cart-drawer__subtitles span {
   font-style: normal;
@@ -452,9 +452,6 @@
   visibility: hidden;
 }
 @media screen and (max-width: 768px) {
-  .go-cart-drawer__header .go-cart-drawer__title {
-    margin-bottom: 15px;
-  }
   .go-cart-item__info {
     max-width: 193px;
     padding: 0px 10px 0px 10px;
