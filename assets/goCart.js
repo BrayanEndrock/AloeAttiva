@@ -1233,14 +1233,14 @@
                     if( subtotalCart < 1) {
                       document.getElementById('freeShippingPromo').classList.remove('hide');
                       document.getElementById('freeShippingReached').classList.add('hide');
-                      goal = 6000;
+                      goal = 5000;
                       document.querySelector('.goal').innerHTML = formatMoney(goal, this.moneyFormat);
-                    } else if ( subtotalCart >= 1 && subtotalCart < 6000) {
+                    } else if ( subtotalCart >= 1 && subtotalCart < 5000) {
                       document.getElementById('freeShippingPromo').classList.remove('hide');
                       document.getElementById('freeShippingReached').classList.add('hide');
-                      goal = 6000 - subtotalCart;
+                      goal = 5000 - subtotalCart;
                       document.querySelector('.goal').innerHTML = formatMoney(goal, this.moneyFormat);
-                    } else if(subtotalCart >= 6000) {
+                    } else if(subtotalCart >= 5000) {
                       document.getElementById('freeShippingPromo').classList.add('hide');
                       document.getElementById('freeShippingReached').classList.remove('hide');
                     }
@@ -1351,7 +1351,7 @@
                 this.clearCartDrawer(),
                 (this.cartDrawerContent.innerHTML = '<div class="go-cart__empty">'.concat(this.labelCartIsEmpty, "</div>")),
                 this.cartDrawerSubTotal.parentNode.classList.add("is-invisible"),
-                document.querySelector('.goal').innerHTML = formatMoney(6000, this.moneyFormat),
+                document.querySelector('.goal').innerHTML = formatMoney(5000, this.moneyFormat),
                 document.querySelector('.cart-count-bubble').classList.add("is-invisible"),
                 document.querySelector('.go-cart-drawer__order-instructions').classList.add("is-invisible");
               },
