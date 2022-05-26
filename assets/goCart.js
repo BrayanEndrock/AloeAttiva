@@ -1351,6 +1351,8 @@
                 this.clearCartDrawer(),
                 (this.cartDrawerContent.innerHTML = '<div class="go-cart__empty">'.concat(this.labelCartIsEmpty, "</div>")),
                 this.cartDrawerSubTotal.parentNode.classList.add("is-invisible"),
+                document.getElementById('freeShippingPromo').classList.remove('hide'),
+                document.getElementById('freeShippingReached').classList.add('hide'),
                 document.querySelector('.goal').innerHTML = formatMoney(5000, this.moneyFormat),
                 document.querySelector('.cart-count-bubble').classList.add("is-invisible"),
                 document.querySelector('.go-cart-drawer__order-instructions').classList.add("is-invisible");
