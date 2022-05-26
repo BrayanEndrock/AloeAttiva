@@ -1,0 +1,52 @@
+<!--cart button-->
+<div class="go-cart__trigger js-go-cart-trigger">
+    <a class="header__icon header__icon--cart link focus-inset" id="cart-icon-bubble">
+        {%- liquid
+          if cart == empty
+            render 'icon-cart-empty'
+          else
+            render 'icon-cart'
+          endif
+        -%}
+        <div class="cart-count-bubble">
+          <span class="js-go-cart-counter">{{- cart.item_count -}}</span>
+        </div>
+    </a>
+    <!--go cart mini cart-->
+    <div class="go-cart__mini-cart js-go-cart-mini-cart">
+
+        <div class="go-cart-mini-cart">
+
+            <!--go cart mini cart content-->
+            <div class="go-cart-mini-cart__content js-go-cart-mini-cart-content">
+            </div>
+            <!--end go cart mini cart content-->
+
+            <!--go cart mini cart subtotal-->
+            <div class="go-cart-mini-cart__subtotal">
+                <span>Subtotal: </span>
+                <span class="go-cart-mini-cart__subtotal-price js-go-cart-mini-cart-subtotal"></span>
+            </div>
+            <!--end go cart mini cart subtotal-->
+
+            <!--go cart mini cart buttons-->
+            <div class="go-cart-mini-cart__footer js-go-cart-mini-cart-footer">
+
+                <a href="/checkout/" class="go-cart__button">
+                    Proceed to checkout
+                </a>
+
+                <a href="/cart/" class="go-cart__button">
+                    View cart
+                </a>
+
+            </div>
+            <!--end go cart mini cart buttons-->
+
+        </div>
+
+    </div>
+    <!--end go cart mini cart-->
+
+</div>
+<!--end cart button-->
