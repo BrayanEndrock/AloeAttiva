@@ -279,9 +279,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   {% render 'page-footer.zipifypages', renderctx: 'thm', ocuapp: oneclickupsellapp %}
   {%- section 'go-cart' -%}
   {{ 'goCart.js' | asset_url | script_tag }}
-  <script>
-    var goCart = new GoCart();
+  <script type="text/javascript">
+    var goCart = new GoCart();   
   </script>
-
 </body>
 </html>

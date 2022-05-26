@@ -1,4 +1,5 @@
 <!--go cart modal fail-->
+{%- comment -%}
 <div class="go-cart__modal go-cart__modal--fail js-go-cart-modal-fail">
     <div class="go-cart-modal">
         <!--go cart modal close-->
@@ -13,6 +14,7 @@
         <!--end go cart modal content-->
     </div>
 </div>
+{%- endcomment -%}
 <!--end go cart modal fail-->
 
 <!--go cart modal-->
@@ -47,29 +49,67 @@
     <div class="go-cart-drawer">
         <!--go cart drawer close-->
         <div class="go-cart-drawer__header">
-            <h3>{{ section.settings.title }}</h3>
-            <div class="go-cart-drawer__close js-go-cart-drawer-close">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-                    <path d="M15.89 14.696l-4.734-4.734 4.717-4.717c.4-.4.37-1.085-.03-1.485s-1.085-.43-1.485-.03L9.641 8.447 4.97 3.776c-.4-.4-1.085-.37-1.485.03s-.43 1.085-.03 1.485l4.671 4.671-4.688 4.688c-.4.4-.37 1.085.03 1.485s1.085.43 1.485.03l4.688-4.687 4.734 4.734c.4.4 1.085.37 1.485-.03s.43-1.085.03-1.485z"></path>
-                </svg>
+            <div class="go-cart-drawer__close--wrapper">
+                <div class="go-cart-drawer__close js-go-cart-drawer-close">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                        <path d="M15.89 14.696l-4.734-4.734 4.717-4.717c.4-.4.37-1.085-.03-1.485s-1.085-.43-1.485-.03L9.641 8.447 4.97 3.776c-.4-.4-1.085-.37-1.485.03s-.43 1.085-.03 1.485l4.671 4.671-4.688 4.688c-.4.4-.37 1.085.03 1.485s1.085.43 1.485.03l4.688-4.687 4.734 4.734c.4.4 1.085.37 1.485-.03s.43-1.085.03-1.485z"></path>
+                    </svg>
+                </div>
+            </div>
+            <div class="go-cart-drawer__gamification">
+                <div class="go-cart-drawer__gamification--wrapper">
+                    <div class="gamification-container" id="freeShippingPromo">
+                        You're <span class="goal"></span> away from <span>Free Shipping</span> 
+                    </div>
+                    <div class="gamification-container hide" id="freeShippingReached">
+                        You qualify for <span>Free Shipping</span> 
+                    </div>
+                </div>
+            </div>
+            <div class="go-cart-drawer__title">
+                <h3>{{ section.settings.title }}</h3>
+                <a href="{{ section.settings.link }}">{{ section.settings.label }}</a>
+            </div>
+            <div class="go-cart-drawer__subtitles">
+                <span>Product</span>
+                <span>Total</span>
             </div>
         </div>
         <!--end go cart drawer close-->
+
         <!--go cart drawer content-->
         <div class="go-cart-drawer__content js-go-cart-drawer-content"></div>
         <!--end go cart drawer content-->
+
+        <div class="go-cart-drawer__order-instructions">
+            <label for="Cart-note">{{ 'sections.cart.note' | t }}</label>
+            <textarea class="text-area field__input" name="note" form="cart" id="Cart-note" placeholder="{{ 'sections.cart.note' | t }}">{{ cart.note }}</textarea>
+        </div>
+
         <!--go cart drawer subtotal-->
         <div class="go-cart-drawer__subtotal">
             <div class="subtotal--wrapper">
-                <span>Estimated Total:</span>
+                <span class="sutotal-label">Subtotal</span>
                 <span class="go-cart-drawer__subtotal-price js-go-cart-drawer-subtotal"></span>
             </div>
         </div>
         <!--end go cart drawer subtotal-->
+
         <!--go cart drawer buttons-->
         <div class="go-cart-drawer__footer js-go-cart-drawer-footer">
+            <div class="tax-note">
+                {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
+                  {{ 'sections.cart.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}
+                {%- elsif cart.taxes_included -%}
+                  {{ 'sections.cart.taxes_included_but_shipping_at_checkout' | t }}
+                {%- elsif shop.shipping_policy.body != blank -%}
+                  {{ 'sections.cart.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url }}
+                {%- else -%}
+                  {{ 'sections.cart.taxes_and_shipping_at_checkout' | t }}
+                {%- endif -%}
+            </div>
             <a href="/checkout/" class="go-cart__button">
-                Go to checkout
+                Check out
             </a>
             {%- comment -%}
                 <a href="/cart/" class="go-cart__button">View cart</a>
@@ -91,13 +131,18 @@
                 "type": "text",
                 "id": "title",
                 "label": "Title",
-                "default": "Your Cart"
+                "default": "Your cart"
             },
             {
                 "type": "text",
-                "id": "message",
-                "label": "Message",
-                "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+                "id": "label",
+                "label": "CTA Label",
+                "default": "Continue shopping"
+            },
+            {
+                "type": "url",
+                "id": "link",
+                "label": "Link"
             }
         ]
     }

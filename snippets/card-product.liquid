@@ -145,21 +145,21 @@
             {%- form 'product', card_product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
               <input type="hidden" id="Quantity-{{ card_product.id }}" value="1" min="1" aria-label="quantity" pattern="[0-9]*" name="quantity">
               <input type="hidden" name="id" value="{{ card_product.selected_or_first_available_variant.id }}">
-              <div class="product-form__buttons">
+              <div class="product-form__buttons product-form__buttons--plp">
                 <button
                   type="submit"
                   name="add"
                   id = "submit-{{ product_form_id }}"
-                  class="product-form__submit button button--full-width button--primary"
+                  class="product-form__submit js-go-cart-add-to-cart button button--full-width button--primary"
                 {% if card_product.selected_or_first_available_variant.available == false %}disabled{% endif %}
                 >
-                    <span>
+                    
                       {%- if card_product.selected_or_first_available_variant.available -%}
                         {{ 'products.product.add_to_cart' | t }}
                       {%- else -%}
                         {{ 'products.product.sold_out' | t }}
                       {%- endif -%}
-                    </span>
+                    
                     <div class="loading-overlay__spinner hidden">
                       <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
                         <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
@@ -232,3 +232,11 @@
     </div>
   </div>
 {%- endif -%}
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.product-form__buttons--plp .js-go-cart-add-to-cart').click(function() {
+      goCart.fetchCart();
+    });
+  });
+</script>

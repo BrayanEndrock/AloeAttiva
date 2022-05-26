@@ -1144,7 +1144,14 @@
                         .concat(t.url, '" class="go-cart-item__title">')
                         .concat(
                           t.product_title,
-                          '</a>\n                    <div class="go-cart-item__variant">'
+                          '</a>\n'
+                        )
+                        .concat(
+                          '<div class="go-cart-item__price-item">'
+                        )
+                        .concat(
+                          formatMoney(t.line_price, e.moneyFormat),
+                          '</div>\n    <div class="go-cart-item__variant">'
                         )
                         .concat(
                           a,
@@ -1163,7 +1170,7 @@
                           '</div>\n            <a class="go-cart-item__remove '
                         )
                         .concat(e.removeFromCartNoDot, '">')
-                        .concat(e.labelRemove, "</a>\n        </div>\n      ");
+                        .concat("<svg width='14' height='15' viewBox='0 0 14 15' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M3.49999 3.5V12.5C3.49999 13 4 13.5 4.99999 13.5C6.59999 13.5 9.33333 13.5 10.5 13.5C11 13.5 11.5 13 11.5 12.5C11.5 11.3 11.5 6 11.5 3.5M1 3.5H13.5M6.5 11V6M8.5 11V6M5.5 3C5.5 2.33333 5.9 1 7.5 1C9.1 1 9.5 2.33333 9.5 3' stroke='#747474'/></svg></a>\n        </div>\n      ");
                     e.cartDrawerContent.innerHTML += o;
                   }),
                   (this.cartDrawerSubTotal.innerHTML = formatMoney(
@@ -1220,6 +1227,23 @@
                             );
                       });
                     });
+                    document.querySelector('.cart-count-bubble').classList.remove("is-invisible");
+                    var subtotalCart = t.total_price;
+                    var goal = 0;
+                    if( subtotalCart < 1) {
+                      document.getElementById('freeShippingPromo').classList.remove('hide');
+                      document.getElementById('freeShippingReached').classList.add('hide');
+                      goal = 6000;
+                      document.querySelector('.goal').innerHTML = formatMoney(goal, this.moneyFormat);
+                    } else if ( subtotalCart >= 1 && subtotalCart < 6000) {
+                      document.getElementById('freeShippingPromo').classList.remove('hide');
+                      document.getElementById('freeShippingReached').classList.add('hide');
+                      goal = 6000 - subtotalCart;
+                      document.querySelector('.goal').innerHTML = formatMoney(goal, this.moneyFormat);
+                    } else if(subtotalCart >= 6000) {
+                      document.getElementById('freeShippingPromo').classList.add('hide');
+                      document.getElementById('freeShippingReached').classList.remove('hide');
+                    }
               },
             },
             {
@@ -1324,15 +1348,12 @@
             {
               key: "renderBlankCartDrawer",
               value: function () {
-                this.cartDrawerSubTotal.parentNode.classList.add(
-                  "is-invisible"
-                ),
-                  this.clearCartDrawer(),
-                  (this.cartDrawerContent.innerHTML =
-                    '<div class="go-cart__empty">'.concat(
-                      this.labelCartIsEmpty,
-                      "</div>"
-                    ));
+                this.clearCartDrawer(),
+                (this.cartDrawerContent.innerHTML = '<div class="go-cart__empty">'.concat(this.labelCartIsEmpty, "</div>")),
+                this.cartDrawerSubTotal.parentNode.classList.add("is-invisible"),
+                document.querySelector('.goal').innerHTML = formatMoney(6000, this.moneyFormat),
+                document.querySelector('.cart-count-bubble').classList.add("is-invisible"),
+                document.querySelector('.go-cart-drawer__order-instructions').classList.add("is-invisible");
               },
             },
             {
