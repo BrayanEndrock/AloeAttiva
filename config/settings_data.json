@@ -6,6 +6,9 @@
     "colors_background_2": "#acbfb3",
     "gradient_background_2": "linear-gradient(20deg, rgba(249, 198, 198, 1) 15%, rgba(255, 255, 255, 1) 33%, rgba(172, 191, 179, 1) 46%)",
     "card_style": "standard",
+    "badge_position": "top left",
+    "badge_corner_radius": 8,
+    "sale_badge_color_scheme": "accent-2",
     "social_twitter_link": "https:\/\/twitter.com\/aloeattiva",
     "social_facebook_link": "https:\/\/www.facebook.com\/aloeattivaitalia\/",
     "social_pinterest_link": "https:\/\/www.pinterest.com\/Aloeattiva\/",
@@ -20,16 +23,17 @@
           "announcement-bar-0": {
             "type": "announcement",
             "settings": {
-              "text": "GET A FREE TOTE WITH ANY BUNDLE PURCHASE USING CODE TOTESAMORE",
+              "text": "SUMMER SALE STARTS NOW! SAVE 30% OFF ALL BUNDLES",
               "color_scheme": "accent-1",
-              "link": "shopify:\/\/products\/life-is-beautiful-tote"
+              "link": "shopify:\/\/collections\/bundles"
             }
           }
         },
         "block_order": [
           "announcement-bar-0"
         ],
-        "settings": {}
+        "settings": {
+        }
       },
       "header": {
         "type": "header",
@@ -96,12 +100,15 @@
         }
       }
     },
-    "content_for_index": [],
+    "content_for_index": [
+
+    ],
     "blocks": {
       "18218067344242134805": {
         "type": "shopify:\/\/apps\/product-reviews-ugc-with-q-a\/blocks\/app\/34006358-52bd-4ec7-8c78-200fe58b77ba",
         "disabled": false,
-        "settings": {}
+        "settings": {
+        }
       }
     }
   }
