@@ -1227,7 +1227,8 @@
                             );
                       });
                     });
-                    document.querySelector('.cart-count-bubble').classList.remove("is-invisible");
+                    document.querySelector('.cart-count-bubble').classList.remove("is-invisible"),
+                    document.querySelector('.go-cart-drawer__order-instructions').classList.remove("is-invisible");
                     var subtotalCart = t.total_price;
                     var goal = 0;
                     if( subtotalCart < 1) {
