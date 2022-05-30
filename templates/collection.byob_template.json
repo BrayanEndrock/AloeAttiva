@@ -1,0 +1,71 @@
+{
+  "sections": {
+    "byob-collection-product-grid": {
+      "type": "byob-collection-product-grid",
+      "blocks": {
+        "3b1c4b99-e740-4bb7-8860-f31165e3476b": {
+          "type": "tier",
+          "settings": {
+            "tier": "$5 OFF",
+            "spend": 50,
+            "get": 5,
+            "target_discount": "",
+            "custom_message": ""
+          }
+        },
+        "3668c0b8-eb86-414b-9747-4c931b4d8a52": {
+          "type": "tier",
+          "settings": {
+            "tier": "$10 OFF",
+            "spend": 80,
+            "get": 10,
+            "target_discount": "",
+            "custom_message": ""
+          }
+        },
+        "19c63d21-f9b1-4a99-9300-6394e8c6b924": {
+          "type": "tier",
+          "settings": {
+            "tier": "$15 OFF",
+            "spend": 120,
+            "get": 15,
+            "target_discount": "",
+            "custom_message": ""
+          }
+        },
+        "6a609ed0-67fe-461e-90a0-02bb113f9bb4": {
+          "type": "tier",
+          "settings": {
+            "tier": "$24 OFF",
+            "spend": 170,
+            "get": 25,
+            "target_discount": "",
+            "custom_message": ""
+          }
+        }
+      },
+      "block_order": [
+        "3b1c4b99-e740-4bb7-8860-f31165e3476b",
+        "3668c0b8-eb86-414b-9747-4c931b4d8a52",
+        "19c63d21-f9b1-4a99-9300-6394e8c6b924",
+        "6a609ed0-67fe-461e-90a0-02bb113f9bb4"
+      ],
+      "settings": {
+        "products_per_page": 24,
+        "image_ratio": "adapt",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "enable_filtering": false,
+        "enable_sorting": false,
+        "collapse_on_larger_devices": false,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_tier_message": "Spend $##SPEND## and get $##GET## OFF"
+      }
+    }
+  },
+  "order": [
+    "byob-collection-product-grid"
+  ]
+}

@@ -942,7 +942,7 @@
                           t.closeCartOverlay();
                       });
                     }),
-                  this.cartModalFailClose.addEventListener(
+                    this.cartModalFailClose && this.cartModalFailClose.addEventListener(
                     "click",
                     function () {
                       t.closeFailModal(),

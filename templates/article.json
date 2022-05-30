@@ -11,15 +11,18 @@
         },
         "title": {
           "type": "title",
-          "settings": {}
+          "settings": {
+          }
         },
         "share": {
           "type": "share",
-          "settings": {}
+          "settings": {
+          }
         },
         "content": {
           "type": "content",
-          "settings": {}
+          "settings": {
+          }
         }
       },
       "block_order": [
@@ -28,14 +31,16 @@
         "share",
         "content"
       ],
-      "settings": {}
+      "settings": {
+      }
     },
     "newsletter": {
       "type": "newsletter",
       "blocks": {
         "newsletter-0": {
           "type": "heading",
-          "settings": {}
+          "settings": {
+          }
         },
         "newsletter-1": {
           "type": "paragraph",
@@ -45,7 +50,8 @@
         },
         "newsletter-2": {
           "type": "email_form",
-          "settings": {}
+          "settings": {
+          }
         }
       },
       "block_order": [

@@ -14,6 +14,18 @@
     {% render 'card-product', show_vendor: section.settings.show_vendor %}
 {% endcomment %}
 
+{%- liquid
+  assign variant_card = card_product.first_available_variant
+  assign featured_media_aspect_ratio = card_product.featured_media.aspect_ratio
+
+  if card_product.featured_media.aspect_ratio == nil
+    assign featured_media_aspect_ratio = 1
+  endif
+
+  assign cart_count_product = cartCountProduct
+  assign cart_count_product_subs = 0
+-%}
+
 {{ 'component-rating.css' | asset_url | stylesheet_tag }}
 
 {%- if card_product and card_product != empty -%}
@@ -28,16 +40,33 @@
       assign ratio = 1
     endif
   -%}
-  <div class="card-wrapper underline-links-hover">
+  <div class="card-wrapper underline-links-hover{% if cart_count_product > 0 or cart_count_product_subs > 0 %} showBtnDelete{% endif %}{% if byobSubs %} product--subs{% endif %}"
+    data-id="{{card_product.selected_or_first_available_variant.id}}" 
+    data-handle="{{card_product.handle}}" 
+    data-product-image="{%- if card_product.featured_media.width >= 165 -%}{{ card_product.featured_media | img_url: '165x' }} 165w,{%- endif -%}
+    {%- if card_product.featured_media.width >= 360 -%}{{ card_product.featured_media | img_url: '360x' }} 360w,{%- endif -%}
+    {%- if card_product.featured_media.width >= 533 -%}{{ card_product.featured_media | img_url: '533x' }} 533w,{%- endif -%}
+    {%- if card_product.featured_media.width >= 720 -%}{{ card_product.featured_media | img_url: '720x' }} 720w,{%- endif -%}
+    {%- if card_product.featured_media.width >= 940 -%}{{ card_product.featured_media | img_url: '940x' }} 940w,{%- endif -%}
+    {%- if card_product.featured_media.width >= 1066 -%}{{ card_product.featured_media | img_url: '1066x' }} 1066w{%- endif -%}" 
+    data-product-image30="{{ card_product.featured_media | img_url: '533x' }}" 
+    data-product-image-width="{{ card_product.featured_media.width }}" 
+    data-product-image-height="{{ card_product.featured_media.height }}" 
+    data-product-title="{{ card_product.title }}" 
+    data-product-price="{{ card_product.price | money }}" 
+    data-product-image-alt="{{ card_product.title }}">
     <div class="card
       card--{{ settings.card_style }}
       {% if card_product.featured_media %} card--media{% else %} card--text{% endif %}
       {% if settings.card_style == 'card' %} color-{{ settings.card_color_scheme }}{% endif %}
       {% if extend_height %} card--extend-height{% endif %}
-      {% if card_product.featured_media == nil and settings.card_style == 'card' %} ratio{% endif %}"
+      {% if card_product.featured_media == nil and settings.card_style == 'card' %} ratio{% endif %}
+      {% if cart_count_product > 0 or cart_count_product_subs > 0 %} showBtnDelete{% endif %}{% if byobSubs %} product--subs{% endif %}"
       style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
       id="product-card--{{ card_product.handle }}"
+      data-id="{{card_product.id}}" data-variant-id="{{variant_card.id}}" data-handle="{{card_product.handle}}" 
     >
+      <input name="updates[{{ variant_card.id }}]" type="hidden" data-count-onetime="{{ cart_count_product }}" data-count-subscription="{{ cart_count_product_subs }}" data-id="{{variant_card.id}}"  data-product-selling-plan-id="{{productSellingPlanId}}" data-name="{{ product_card_product.title }}" data-price="{{ product_card_product.price }}" value="{{ cart_count_product }}" class="product_byob_quantity" />
       <div class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }}{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}" style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;">
         {%- if card_product.featured_media -%}
           <div class="card__media">
@@ -142,44 +171,55 @@
 
             <product-form-{{ card_product.id }} class="">
               {%- assign product_form_id = 'product-form-' | append: card_product.id -%}
-            {%- form 'product', card_product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
-              <input type="hidden" id="Quantity-{{ card_product.id }}" value="1" min="1" aria-label="quantity" pattern="[0-9]*" name="quantity">
-              <input type="hidden" name="id" value="{{ card_product.selected_or_first_available_variant.id }}">
-              <div class="product-form__buttons product-form__buttons--plp">
-                <button
-                  type="submit"
-                  name="add"
-                  id = "submit-{{ product_form_id }}"
-                  class="product-form__submit js-go-cart-add-to-cart button button--full-width button--primary"
-                {% if card_product.selected_or_first_available_variant.available == false %}disabled{% endif %}
-                >
-                    
-                      {%- if card_product.selected_or_first_available_variant.available -%}
-                        {{ 'products.product.add_to_cart' | t }}
-                      {%- else -%}
-                        {{ 'products.product.sold_out' | t }}
-                      {%- endif -%}
-                    
-                    <div class="loading-overlay__spinner hidden">
-                      <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
-                        <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
-                      </svg>
-                    </div>
-                </button>
-              </div>
-            {%- endform -%}
-
-          </product-form-{{ card_product.id }}>
-          <div class="product-form__error-message-wrapper" id="product-form__error-message-wrapper-{{ card_product.id }}" role="alert" hidden>
-            <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-error" viewBox="0 0 13 13">
-              <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
-              <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/>
-              <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/>
-              <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7">
-            </svg>
-            <span class="product-form__error-message" id="product-form__error-message-{{ card_product.id }}"></span>
-          </div>          
+              {%- form 'product', card_product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+                <input type="hidden" id="Quantity-{{ card_product.id }}" value="1" min="1" aria-label="quantity" pattern="[0-9]*" name="quantity">
+                <input type="hidden" name="id" value="{{ card_product.selected_or_first_available_variant.id }}">
+                <div class="product-form__buttons product-form__buttons--plp">
+                  <button
+                    type="submit"
+                    name="add"
+                    id = "submit-{{ product_form_id }}"
+                    class="product-form__submit js-go-cart-add-to-cart button button--full-width button--primary"
+                  {% if card_product.selected_or_first_available_variant.available == false %}disabled{% endif %}
+                  >
+                      
+                        {%- if card_product.selected_or_first_available_variant.available -%}
+                          {{ 'products.product.add_to_cart' | t }}
+                        {%- else -%}
+                          {{ 'products.product.sold_out' | t }}
+                        {%- endif -%}
+                      
+                      <div class="loading-overlay__spinner hidden">
+                        <svg aria-hidden="true" focusable="false" role="presentation" class="spinner" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                          <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+                        </svg>
+                      </div>
+                  </button>
+                </div>
+              {%- endform -%}
+            </product-form-{{ card_product.id }}>
+            <div class="product-form__error-message-wrapper" id="product-form__error-message-wrapper-{{ card_product.id }}" role="alert" hidden>
+              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-error" viewBox="0 0 13 13">
+                <circle cx="6.5" cy="6.50049" r="5.5" stroke="white" stroke-width="2"/>
+                <circle cx="6.5" cy="6.5" r="5.5" fill="#EB001B" stroke="#EB001B" stroke-width="0.7"/>
+                <path d="M5.87413 3.52832L5.97439 7.57216H7.02713L7.12739 3.52832H5.87413ZM6.50076 9.66091C6.88091 9.66091 7.18169 9.37267 7.18169 9.00504C7.18169 8.63742 6.88091 8.34917 6.50076 8.34917C6.12061 8.34917 5.81982 8.63742 5.81982 9.00504C5.81982 9.37267 6.12061 9.66091 6.50076 9.66091Z" fill="white"/>
+                <path d="M5.87413 3.17832H5.51535L5.52424 3.537L5.6245 7.58083L5.63296 7.92216H5.97439H7.02713H7.36856L7.37702 7.58083L7.47728 3.537L7.48617 3.17832H7.12739H5.87413ZM6.50076 10.0109C7.06121 10.0109 7.5317 9.57872 7.5317 9.00504C7.5317 8.43137 7.06121 7.99918 6.50076 7.99918C5.94031 7.99918 5.46982 8.43137 5.46982 9.00504C5.46982 9.57872 5.94031 10.0109 6.50076 10.0109Z" fill="white" stroke="#EB001B" stroke-width="0.7">
+              </svg>
+              <span class="product-form__error-message" id="product-form__error-message-{{ card_product.id }}"></span>
+            </div>          
             {% render 'plp-product-form', product_id: card_product.id %}
+
+
+            <div class="addtocart-btn_wrapper">
+              {% comment %}
+              <button type="button" class="btn addtocart-btn" data-id="{{variant_card.id}}" data-product-count="{{ cart_count_product }}" data-product-selling-plan-id="{{productSellingPlanId}}" data-text="Add{% if cart_count_product > 0 %} 1 more{% endif %}">Add{% if cart_count_product > 0 %} 1 more{% endif %}</button>
+              {% endcomment %}
+              <button type="button" class="btn addtocart-btn{% if is_full == true or variant_card == nil %} disabled{% endif %}"{% if is_full == true or variant_card == nil %} disabled{% endif %} data-id="{{variant_card.id}}" data-product-count="{{ cart_count_product }}" data-product-selling-plan-id="{{productSellingPlanId}}" data-text="Add{% if cart_count_product > 0 %} 1 more{% endif %}">{% if variant_card == nil %}Sold Out{% else %}{% if is_full == true %}Box is Full{% else %}Add{% if cart_count_product > 0 %} 1 more{% endif %}{% endif %}{% endif %}</button>
+            </div>
+    
+            <div class="removetocart-btn_wrapper" style="display: none;">
+              <button type="button" class="btn removetocart-btn" data-id="{{variant_card.id}}" data-product-count="{{ cart_count_product }}" data-product-selling-plan-id="{{productSellingPlanId}}" data-text="Remove">Remove</button>
+            </div>
           </div>
         </div>
         <div class="card__badge {{ settings.badge_position }}">
