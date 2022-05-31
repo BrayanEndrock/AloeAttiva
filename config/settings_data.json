@@ -23,7 +23,7 @@
           "announcement-bar-0": {
             "type": "announcement",
             "settings": {
-              "text": "SUMMER SALE STARTS NOW! SAVE 30% OFF ALL BUNDLES",
+              "text": "LAST CHANCE TO SAVE 30% OFF ALL BUNDLES! SALE ENDS TODAY",
               "color_scheme": "accent-1",
               "link": "shopify:\/\/collections\/bundles"
             }
@@ -32,8 +32,7 @@
         "block_order": [
           "announcement-bar-0"
         ],
-        "settings": {
-        }
+        "settings": {}
       },
       "header": {
         "type": "header",
@@ -100,15 +99,12 @@
         }
       }
     },
-    "content_for_index": [
-
-    ],
+    "content_for_index": [],
     "blocks": {
       "18218067344242134805": {
         "type": "shopify:\/\/apps\/product-reviews-ugc-with-q-a\/blocks\/app\/34006358-52bd-4ec7-8c78-200fe58b77ba",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
       }
     }
   }
