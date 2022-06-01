@@ -110,6 +110,7 @@
           </div>
         {%- endif -%}
         <div class="card__content">
+          {% comment %}
           <div class="card__information">
             <h3 class="card__heading">
               <a href="{{ card_product.url | default: '#' }}" class="full-unstyled-link">
@@ -124,14 +125,154 @@
               <span class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}">{{ 'products.product.on_sale' | t }}</span>
             {%- endif -%}
           </div>
+          {% endcomment %}
+
+          <button
+            type="button"
+            class="btn blue-fill-btn showmore-btn byobBtn"
+            data-product-id="{{product.id}}"
+            data-product-available="{{ productAvailable }}"
+            data-onetime-id="{{product.selected_or_first_available_variant.id}}"
+            data-subscription-id="{{productVariant_id}}"
+            data-rc-subscription-id="{{ productSubscription_id }}"
+            data-id="{{product.handle}}"
+            data-title="{%- comment -%}{{ product.title }}{%- endcomment -%}
+                        {%- assign product_title = product.title | split: '-' -%}
+                        {{- product_title | first -}}"
+            data-subtitle="{% if product.metafields.global.product_subtitle %}<p>{{ product.metafields.global.product_subtitle }}</p>{% else %}null{% endif %}"
+            data-description="{% if product.description != blank %}{{ product.description | escape_once }}{% else %}{{ product.metafields.global.description_byok | escape_once }}{% endif %}"
+            data-image="{{product.featured_image.src | img_url: 'grande' | default: ''}}"
+            data-images='<div class="product-single__photo product-single__photo--{{ section.settings.image_size }} js-product-slider" data-slider-id="1">
+                        {% for image in product.images %}
+                          <div class="product-single__photo__item" data-variant-id="{% for variant in image.variants %}{{ variant.id }}{% endfor %}" data-slide-id="{{ forloop.index0 }}">
+                          
+                            {%- if forloop.index <= 2 and product.metafields.global.new_image1 != blank or product.metafields.global.new_image2 != blank %}
+                            <div class="ab-test-a">
+                            {% endif %}
+                              <a href="{{ image.src | img_url: '2048x2048' }}" class="product-single__photo-zoom js-product-zoom js-no-transition">
+                                {%- assign img_url = image.src | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                                <img class="product-single__photo__img lazyload js"
+                                src="{{ image.src | img_url: '300x' }}" 
+                                data-src="{{ img_url }}"
+                                data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                                data-sizes="auto"
+                                data-ratio="{{ image.aspect_ratio }}"
+                                alt="{{ image.alt | escape }}">
+                                <noscript>
+                                  <img class="product-single__photo__img"
+                                  src="{{ image.src | img_url: '900x' }}"
+                                  alt="{{ image.alt | escape }}">
+                                </noscript>
+                              </a>
+                            {% if forloop.index <= 2 and product.metafields.global.new_image1 != blank or product.metafields.global.new_image2 != blank %}
+                              {%- if forloop.index == 1 %}
+                                {%- assign new_img = product.metafields.global.new_image1.value -%}
+                              {%- else -%}
+                                {%- assign new_img = product.metafields.global.new_image2.value -%}
+                              {%- endif -%}
+                              {% if new_img != blank %}
+                            </div>
+                            <div class="ab-test-b">
+                              <a href="{{ new_img.src | img_url: '2048x2048' }}" class="product-single__photo-zoom js-product-zoom js-no-transition">
+                                {%- assign img_url = new_img.src | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                                <img class="product-single__photo__img lazyload js"
+                                      src="{{ new_img.src | img_url: '300x' }}" 
+                                      data-src="{{ img_url }}"
+                                      data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                                      data-sizes="auto"
+                                      data-ratio="{{ new_img.aspect_ratio }}"
+                                      alt="{{ image.alt | escape }}">
+                                <noscript>
+                                  <img class="product-single__photo__img"
+                                        src="{{ new_img.src | img_url: '900x' }}"
+                                        alt="{{ image.alt | escape }}">
+                                </noscript>
+                              </a>
+                            </div>
+                              {% endif %}
+                            {% endif %}
+
+                          </div>
+                        {% endfor %}
+                        </div>
+                        {% if product.images.size > 1 %}
+                          <div class="product-single__photo-thumbs js-product-single-thumbs">
+                          {% for image in product.images %}
+                            <div>Product image {{ forloop.index }}
+                              {%- if forloop.index <= 2 and product.metafields.global.new_image1 != blank or product.metafields.global.new_image2 != blank %}
+                              <div class="ab-test-a">
+                              {% endif %}
+                              <img src="{{ image.src | img_url: '24x24', crop: 'center' }}" data-src="{{ image.src | img_url: '92x92', crop: 'center' }}" alt="{{ image.alt | escape }}" class="product-single__photos-thumbs__img lazyload">
+                              {% if forloop.index <= 2 and product.metafields.global.new_image1 != blank or product.metafields.global.new_image2 != blank %}
+                                {%- if forloop.index == 1 %}
+                                  {%- assign new_img = product.metafields.global.new_image1.value -%}
+                                {%- else -%}
+                                  {%- assign new_img = product.metafields.global.new_image2.value -%}
+                                {%- endif -%}
+                                {% if new_img != blank %}
+                              </div>
+                              <div class="ab-test-b">
+                                <img src="{{ new_img.src | img_url: '24x24', crop: 'center' }}" data-src="{{ new_img.src | img_url: '92x92', crop: 'center' }}" alt="{{ image.alt | escape }}" class="product-single__photos-thumbs__img lazyload">
+                              </div>
+                                {% endif %}
+                              {% endif %}
+                            </div>
+                          {% endfor %}
+                          </div>
+                        {% endif %}'
+            data-nutrition-facts='{% if product.metafields.global.nutrition_facts %}<img src="{{ product.metafields.global.nutrition_facts }}" width="" height="" style="" alt="">{% else %}null{% endif %}'
+            data-shogun-main="{% if product.template_suffix != 'new' %}{{ product.metafields.shogun.main | escape_once }}{% else %}null{% endif %}"
+            data-yotpo='<div class="yotpo bottomLine" data-product-id="{{ product_yotpo.id }}" data-url="{{ shop.url }}{{ product_yotpo.url }}"></div>'
+            data-price='<span class="product__price h5">
+                          <span class="product__price-price"><span class="money">{{ product.selected_or_first_available_variant.price | money }}</span></span>
+                          {% if productVariant_price %}
+                            <span class="product__price-price product__price-price--subs"><span class="money">{{ productVariant_price | times: 100 | money }}</span></span>
+                          {% endif %}
+                        </span>'
+            data-yotpo-main-widget='{%- if product.metafields.global.reviews_remplace_handle -%}
+                          {%- assign product_yotpo = all_products[product.metafields.global.reviews_remplace_handle] -%}
+                        {%- else -%}
+                          {%- assign product_yotpo = product -%}
+                        {%- endif -%}
+                        {%- assign variant_yotpo = product_yotpo.selected_or_first_available_variant -%}
+                        <div class="yotpo yotpo-main-widget" 
+                            data-product-id="{{ product_yotpo.id }}" 
+                            data-name="{{ product_yotpo.title | escape }}" 
+                            data-url="{{ shop.url }}{{ product_yotpo.url }}" 
+                            data-image-url="{{ product_yotpo.featured_image | product_img_url: 'large' |replace: '?', '%3F' | replace: '&amp;','%26'}}" 
+                            data-description="{{ product_yotpo.description | escape }}" 
+                            data-price="{{ variant_yotpo.price | money_without_currency }}" 
+                            data-currency="{{ shop.currency }}">
+                          {%- assign yotpo_offload_content = shop.metafields.yotpo.yotpo_offload_content %}
+                          {%- assign time_now = 'now' | date: '%s' %}
+                          {%- assign yotpo_live_time = shop.metafields.yotpo.yotpo_live | date: '%s' %}
+                          {%- assign diff_seconds_from_live = time_now | minus: yotpo_live_time %}
+                          {%- assign yotpo_main_widget_last_updated = product_yotpo.metafields.yotpo.main_widget_update_time | date: '%s' %}
+                          {%- assign diff_seconds_from_last_main_widget_update = time_now | minus: yotpo_main_widget_last_updated %}
+                          {%- if yotpo_live_time and diff_seconds_from_live < 86400 or yotpo_main_widget_last_updated and diff_seconds_from_last_main_widget_update < 86400 -%}
+                            {%- assign yotpo_main_widget_obsolete = false %}
+                          {%- else %}
+                            {%- assign yotpo_main_widget_obsolete = true %}
+                          {%- endif %}
+                          {%- if yotpo_offload_content == 'yes' and yotpo_main_widget_obsolete != true -%}
+                            {%- for field in product_yotpo.metafields.yotpo_reviews -%}
+                              {{ field | last }}
+                            {%- endfor -%}
+                          {%- endif %}
+                        </div>'
+            >Show More</button>
+
+            <button type="button" class="btn addtocart-btn{% if variant_card == nil %} disabled{% endif %}"{% if variant_card == nil %} disabled{% endif %} data-id="{{variant_card.id}}" data-product-count="{{ cart_count_product }}" data-product-selling-plan-id="{{productSellingPlanId}}">{% if variant_card == nil %}Sold Out{% else %}Add to Cart{% endif %}</button>
+    
+            <button type="button" class="btn removetocart-btn" style="display:none;" data-id="{{variant_card.id}}" data-product-count="{{ cart_count_product }}" data-product-selling-plan-id="{{productSellingPlanId}}" data-text="Remove">Remove</button>  
         </div>
       </div>
       <div class="card__content">
         <div class="card__information">
           <h3 class="card__heading{% if card_product.featured_media or settings.card_style == 'standard' %} h5{% endif %}">
-            <a href="{{ card_product.url | default: '#' }}" class="full-unstyled-link">
+            {% comment %}<a href="{{ card_product.url | default: '#' }}" class="full-unstyled-link">{% endcomment %}
               {{ card_product.title | escape }}
-            </a>
+            {% comment %}</a>{% endcomment %}
           </h3>
 
           <div data-hulkapps-reviews data-hulkapps-reviews-product-id="{{ card_product.id }}"></div>
@@ -168,7 +309,7 @@
             {% render 'price', product: card_product, price_class: '' %}
 
 
-
+            {% comment %}
             <product-form-{{ card_product.id }} class="">
               {%- assign product_form_id = 'product-form-' | append: card_product.id -%}
               {%- form 'product', card_product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
@@ -208,18 +349,7 @@
               <span class="product-form__error-message" id="product-form__error-message-{{ card_product.id }}"></span>
             </div>          
             {% render 'plp-product-form', product_id: card_product.id %}
-
-
-            <div class="addtocart-btn_wrapper">
-              {% comment %}
-              <button type="button" class="btn addtocart-btn" data-id="{{variant_card.id}}" data-product-count="{{ cart_count_product }}" data-product-selling-plan-id="{{productSellingPlanId}}" data-text="Add{% if cart_count_product > 0 %} 1 more{% endif %}">Add{% if cart_count_product > 0 %} 1 more{% endif %}</button>
-              {% endcomment %}
-              <button type="button" class="btn addtocart-btn{% if is_full == true or variant_card == nil %} disabled{% endif %}"{% if is_full == true or variant_card == nil %} disabled{% endif %} data-id="{{variant_card.id}}" data-product-count="{{ cart_count_product }}" data-product-selling-plan-id="{{productSellingPlanId}}" data-text="Add{% if cart_count_product > 0 %} 1 more{% endif %}">{% if variant_card == nil %}Sold Out{% else %}{% if is_full == true %}Box is Full{% else %}Add{% if cart_count_product > 0 %} 1 more{% endif %}{% endif %}{% endif %}</button>
-            </div>
-    
-            <div class="removetocart-btn_wrapper" style="display: none;">
-              <button type="button" class="btn removetocart-btn" data-id="{{variant_card.id}}" data-product-count="{{ cart_count_product }}" data-product-selling-plan-id="{{productSellingPlanId}}" data-text="Remove">Remove</button>
-            </div>
+            {% endcomment %}
           </div>
         </div>
         <div class="card__badge {{ settings.badge_position }}">

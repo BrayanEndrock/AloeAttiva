@@ -171,34 +171,38 @@
                                 capture byobCartProducts
                                     assign dataId = line_item.product.selected_or_first_available_variant.id
                                     assign dataHandle = line_item.product.handle
+                                    assign dataImage = line_item.product.featured_media
+                                    if line_item.product.metafields.global.image_byob
+                                        assign dataImage = line_item.product.metafields.global.image_byob.value
+                                    endif
                                     capture dataProductImage = line_item.product.handle
-                                        if line_item.product.featured_media.width >= 165
-                                            echo line_item.product.featured_media | img_url: '165x' | append: ' 165w,'
+                                        if dataImage.width >= 165
+                                            echo dataImage | img_url: '165x' | append: ' 165w,'
                                         endif
-                                        if line_item.product.featured_media.width >= 360
-                                            echo line_item.product.featured_media | img_url: '360x' | append: '360w,'
+                                        if dataImage.width >= 360
+                                            echo dataImage | img_url: '360x' | append: '360w,'
                                         endif
-                                        if line_item.product.featured_media.width >= 533
-                                            echo line_item.product.featured_media | img_url: '533x' | append: '533w,'
+                                        if dataImage.width >= 533
+                                            echo dataImage | img_url: '533x' | append: '533w,'
                                         endif
-                                        if line_item.product.featured_media.width >= 720
-                                            echo line_item.product.featured_media | img_url: '720x' | append: '720w,'
+                                        if dataImage.width >= 720
+                                            echo dataImage | img_url: '720x' | append: '720w,'
                                         endif
-                                        if line_item.product.featured_media.width >= 940
-                                            echo line_item.product.featured_media | img_url: '940x' | append: '940w,'
+                                        if dataImage.width >= 940
+                                            echo dataImage | img_url: '940x' | append: '940w,'
                                         endif
-                                        if line_item.product.featured_media.width >= 1066
-                                            echo line_item.product.featured_media | img_url: '1066x' | append: '1066w'
+                                        if dataImage.width >= 1066
+                                            echo dataImage | img_url: '1066x' | append: '1066w'
                                         endif
                                     endcapture
-                                    assign dataProductImage30 = line_item.product.featured_media | img_url: '533x'
-                                    assign dataProductImageWidth = line_item.product.featured_media.width
-                                    assign dataProductImageHeight = line_item.product.featured_media.height
+                                    assign dataProductImage30 = dataImage | img_url: '533x'
+                                    assign dataProductImageWidth = dataImage.width
+                                    assign dataProductImageHeight = dataImage.height
                                     assign dataProductTitle = line_item.product.title
                                     assign dataProductPrice = line_item.product.price | money
                                     assign dataSize = settings.page_width | minus: 130 | divided_by: 4
                                     echo byobCartProducts
-                                    echo '<div class="cart_byob_item" data-product-id="' | append: dataId  | append: '" data-qty="1">'
+                                    echo '<li class="cart_byob_item" data-product-id="' | append: dataId  | append: '" data-qty="1">'
                                     echo '  <div class="cart_byob_img">'
                                     echo '    <img'
                                     echo '        srcset="' | append: dataProductImage  | append: '"'
@@ -210,19 +214,25 @@
                                     echo '        width="' | append: dataProductImageWidth  | append: '"'
                                     echo '        height="' | append: dataProductImageHeight  | append: '"'
                                     echo '        >'
-                                    echo '  </div>'
-                                    echo '  <div class="cart_byob_data">'
-                                    echo '    <div class="cart_byob_data-left">'
-                                    echo '        <p class="cart_byob_title">' | append: dataProductTitle  | append: '</p>'
-                                    echo '        <p class="cart_byob_price">' | append: dataProductPrice  | append: '</p>'
-                                    echo '    </div>'
                                     echo '    <div class="m-remove" data-id="' | append: dataId  | append: '">'
-                                    echo '        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">'
-                                    echo '            <path d="M24 9.4L22.6 8L16 14.6L9.4 8L8 9.4L14.6 16L8 22.6L9.4 24L16 17.4L22.6 24L24 22.6L17.4 16L24 9.4Z" fill="#A1A1A1"/>'
+                                    echo '        <svg width="7" height="6" viewBox="0 0 7 6" fill="none" xmlns="http://www.w3.org/2000/svg">'
+                                    echo '            <path d="M5.96947 0.083252L3.6403 2.41242L1.31113 0.083252L0.723633 0.670752L3.0528 2.99992L0.723633 5.32909L1.31113 5.91659L3.6403 3.58742L5.96947 5.91659L6.55697 5.32909L4.2278 2.99992L6.55697 0.670752L5.96947 0.083252Z" fill="#313131"/>'
                                     echo '        </svg>'
                                     echo '    </div>'
                                     echo '  </div>'
-                                    echo '</div>'
+                                    echo '  <div class="cart_byob_data">'
+                                    echo '    <!--<div class="cart_byob_data-left">'
+                                    echo '        <p class="cart_byob_title">' | append: dataProductTitle  | append: '</p>'
+                                    echo '        <p class="cart_byob_price">' | append: dataProductPrice  | append: '</p>'
+                                    echo '    </div>-->'
+                                    echo '    <div class="cart_byob_data__quantity">'
+                                    echo '        <span class="cart_byob_data__quantity-label">Quantity: </span>'
+                                    echo '        <span class="cart_byob_data__quantity-button js-cart_byob_data__quantity-minus">-</span>'
+                                    echo '        <input class="cart_byob_data__quantity-number js-cart_byob_data__quantity" type="number" value="' | append: line_item.quantity | append: '" disabled="">'
+                                    echo '        <span class="cart_byob_data__quantity-button js-cart_byob_data__quantity-plus">+</span>'
+                                    echo '    </div>'
+                                    echo '  </div>'
+                                    echo '</li>'
                                 endcapture
 
                                 assign byobCartProductsCount = byobCartProductsCount | plus: 1
@@ -343,15 +353,22 @@
                             <div class="">{{ collection.description }}</div>
                             {{ '<ul>' | append: byobTiersMessage | append: '</ul>' }}
                         </div>
-                        <div>
-                            <ul>{{ byobTiers }}</ul>
-                            <ul>{{ byobCartProducts }}</ul>
+                        <div class="products_contain_byob">
+                            <ul class="byob-tiers">{{ byobTiers }}</ul>
+                            <ul class="byob-products">{{ byobCartProducts }}</ul>
+                            <div class="products_contain_byob-value">Items Added : <b>{{ byobCartTotalPriceCollection | times: 100 | money_without_trailing_zeros }}</b></div>
                         </div>
-                        <div>
+                        <div class="options_contain_byob">
                             <div class="subtotal_cart_byob_wrapper">
-                                <div class="subtotal_cart_byob_label">Subtotal:</div>
-                                <div class="subtotal_cart_byob_value{% if byobCartTotalPriceCollectionShow != byobCartTotalPriceCollection %} sale{% endif %%}">{{ byobCartTotalPriceCollection | times: 100 | money_without_trailing_zeros }}</div>
-                                <div class="subtotal_cart_byob_value">{{ byobCartTotalPriceCollectionShow | times: 100 | money_without_trailing_zeros }}</div>
+                                <div class="subtotal_cart_byob-label">Subtotal</div>
+                                {% assign price_split = byobCartTotalPriceCollection | times: 100 | money | split: "." %}
+                                {% assign integral = price_split[0] %}
+                                {% assign fractional = price_split[1] | default: "00" %}
+                                <div class="subtotal_cart_byob-value{% if byobCartTotalPriceCollectionShow != byobCartTotalPriceCollection %} show{% endif %%}">{{ integral | append: '.' | append: fractional }}</div>
+                                {% assign price_split = byobCartTotalPriceCollectionShow | times: 100 | money | split: "." %}
+                                {% assign integral = price_split[0] %}
+                                {% assign fractional = price_split[1] | default: "00" %}
+                                <div class="subtotal_cart_byob-value-discount">{{ integral | append: '.' | append: fractional }}</div>
                             </div>
                             <button id="btn_add_box" class="btn_add_box{% if byobCartTotalPriceCollectionQ == 0 %} disabled{% endif %}"{% if byobCartTotalPriceCollectionQ == 0 %} disabled{% endif %}>Add Box To Cart</button>
                             <button id="btn_clear_box" class="btn_clear_box{% if byobCartTotalPriceCollectionQ == 0 %} disabled{% endif %}"{% if byobCartTotalPriceCollectionQ == 0 %} disabled{% endif %}{% if byobCartTotalPriceCollectionQ == 0 %} style="display: none;"{% endif %}>Clear Cart</button>
@@ -378,6 +395,7 @@
         {%- endpaginate -%}
     </div>
 </div>
+{% comment %}
 <script>
     // When the user scrolls the page, execute myFunction
     window.onscroll = function() { byobSticky() };
@@ -437,9 +455,10 @@
     }
     ready(() => { 
         /* Do things after DOM has fully loaded */ 
-        //byobSticky();
+        byobSticky();
     });
 </script>
+{% endcomment %}
 <script>
     function deepFreeze(object) {
         // Retrieve the property names defined on object
