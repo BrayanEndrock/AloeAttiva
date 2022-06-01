@@ -1,0 +1,90 @@
+<div class="sticky_add-to-cart_wrapper">
+    <div class="container-atc">
+        <div class="image__wrapper">
+            <img
+                src="{{ product.featured_image | img_url: '75x75' }}"
+                srcset="{{ product.featured_image | img_url: '75x75' }} 1x, {{ product.featured_image | img_url: '150x150', scale: 2 }} 2x"
+                alt="{{ product.featured_image.alt }}"
+            />
+        </div>
+        <div class="title__wrapper">
+            <h3>{{ product.title }}</h3>
+            {%- render 'price', product: product, use_variant: true -%}
+        </div>
+        <div class="button-atc__wrapper">
+            <button class="add-to-cart-trigger" onclick="addToCartTrigger()">Add To Cart</button>
+        </div>
+    </div>
+</div>
+
+<style>
+    @media screen and (min-width: 769px) {
+        .sticky_add-to-cart_wrapper { 
+            display: none;
+        }
+    }
+    .sticky_add-to-cart_wrapper { 
+        background-color: #fff; 
+        bottom: 0;        
+        border: 1px solid #fff;      
+        box-sizing: border-box;
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.04);
+        max-width: 100%;  
+        padding: 11px 16px 2px;           
+        position: fixed;             
+        width: 100%;
+        z-index: 10;
+    }
+    .sticky_add-to-cart_wrapper .container-atc {
+        align-items: flex-start;
+        display: flex;
+        justify-content: space-between;               
+    }
+    .container-atc .image__wrapper img {
+        border-radius: 12px;
+        height: 75px;
+        width: 75px;
+    }
+    .container-atc .title__wrapper h3 {
+        font-size: 14px;
+        line-height: 20px;
+        margin: 0;
+        max-width: 121px;
+        padding: 0;
+    }
+    .container-atc .title__wrapper .price {
+        color: #46444C;
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        line-height: 20px;
+    }
+    .container-atc .button-atc__wrapper {
+        padding-top: 18px;
+    }
+    .container-atc .button-atc__wrapper .add-to-cart-trigger {
+        background-color: #A0B7AB;
+        border: solid 1px #A0B7AB;
+        border-radius: 7px;
+        color: #F9F6F1;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        line-height: 20px;
+        padding: 10px 15px;
+    }
+    .container-atc .button-atc__wrapper .add-to-cart-trigger:hover {
+        background-color: #F9F6F1;
+        border: solid 1px #A0B7AB;
+        color: #A0B7AB;
+        transition-duration: .5s;
+    }
+</style>
+
+<script type="text/javascript">
+    let addToCartButton = document.querySelector('button.product-form__submit');            
+    function addToCartTrigger() {   
+        addToCartButton.click();   
+    } 
+</script>
