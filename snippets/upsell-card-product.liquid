@@ -84,7 +84,7 @@
                                     type="submit"
                                     name="add"
                                     id = "submit-{{ product_form_id }}"
-                                    class="product-form__submit js-go-cart-add-to-cart button button--full-width button--primary"
+                                    class="product-form__submit js-go-cart-add-to-cart button button--full-width button--primary upsell--add-to-cart"
                                     {% if card_product.selected_or_first_available_variant.available == false %}disabled{% endif %}
                                 >
                                     {%- if card_product.selected_or_first_available_variant.available -%}
