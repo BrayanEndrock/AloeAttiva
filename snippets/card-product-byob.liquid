@@ -66,7 +66,7 @@
       id="product-card--{{ card_product.handle }}"
       data-id="{{card_product.id}}" data-variant-id="{{variant_card.id}}" data-handle="{{card_product.handle}}" 
     >
-      <input name="updates[{{ variant_card.id }}]" type="hidden" data-count-onetime="{{ cart_count_product }}" data-count-subscription="{{ cart_count_product_subs }}" data-id="{{variant_card.id}}"  data-product-selling-plan-id="{{productSellingPlanId}}" data-name="{{ product_card_product.title }}" data-price="{{ product_card_product.price }}" value="{{ cart_count_product }}" class="product_byob_quantity" />
+      <input name="updates[{{ variant_card.id }}]" type="hidden" data-count-onetime="{{ cart_count_product }}" data-count-subscription="{{ cart_count_product_subs }}" data-id="{{variant_card.id}}"  data-product-selling-plan-id="{{productSellingPlanId}}" data-name="{{ card_product.title }}" data-price="{{ variant_card.price }}" value="{{ cart_count_product }}" class="product_byob_quantity" />
       <div class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }}{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}" style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;">
         {%- if card_product.featured_media -%}
           <div class="card__media">
@@ -262,9 +262,9 @@
                         </div>'
             >Show More</button>
 
-            <button type="button" class="btn addtocart-btn{% if variant_card == nil %} disabled{% endif %}"{% if variant_card == nil %} disabled{% endif %} data-id="{{variant_card.id}}" data-product-count="{{ cart_count_product }}" data-product-selling-plan-id="{{productSellingPlanId}}">{% if variant_card == nil %}Sold Out{% else %}Add to Cart{% endif %}</button>
+            <button type="button" class="btn addtocart-btn{% if variant_card == nil %} disabled{% endif %}"{% if variant_card == nil %} disabled{% endif %} data-id="{{variant_card.id}}" data-product-count="{{ cart_count_product }}" data-product-selling-plan-id="{{productSellingPlanId}}">{% if variant_card == nil %}Sold Out{% else %}{% if cart_count_product == 0 %}Add to Cart{% else %}Add 1 More{% endif %}{% endif %}</button>
     
-            <button type="button" class="btn removetocart-btn" style="display:none;" data-id="{{variant_card.id}}" data-product-count="{{ cart_count_product }}" data-product-selling-plan-id="{{productSellingPlanId}}" data-text="Remove">Remove</button>  
+            <button type="button" class="btn removetocart-btn" style="display:nonee;" data-id="{{variant_card.id}}" data-product-count="{{ cart_count_product }}" data-product-selling-plan-id="{{productSellingPlanId}}" data-text="Remove">Remove</button>  
         </div>
       </div>
       <div class="card__content">

@@ -190,11 +190,42 @@ function byokScriptsEvents() {
     };
 
 
+    Shopify.byob.dRUpdateSubtotal = function () {
+        console.log('Shopify.itemsToAddPrice',Shopify.itemsToAddPrice);
+        let itemsToAddPrice = Shopify.itemsToAddPrice,
+            get = 0;
+        if (byobConfig.discounts.one.spend != false) {
+            if (byobConfig.discounts.one.spend <= itemsToAddPrice) {
+                get = byobConfig.discounts.one.get;
+                if (byobConfig.discounts.two.spend != false) {
+                    if (byobConfig.discounts.two.spend <= itemsToAddPrice) {
+                        get = byobConfig.discounts.two.get;
+                        if (byobConfig.discounts.three.spend != false) {
+                            if (byobConfig.discounts.three.spend <= itemsToAddPrice) {
+                                get = byobConfig.discounts.three.get;
+                                if (byobConfig.discounts.four.spend != false) {
+                                    if (byobConfig.discounts.four.spend <= itemsToAddPrice) {
+                                        get = byobConfig.discounts.four.get;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        Shopify.itemsToAddPriceShow = Shopify.itemsToAddPrice - get;
+        console.log('Shopify.itemsToAddPriceShow',Shopify.itemsToAddPriceShow);
+        document.querySelectorAll('.products_contain_byob-value b').forEach(subitem => { subitem.innerHTML = byoFormatMoney(Shopify.itemsToAddPrice * 100, '${{amount_no_decimals}}') });
+        document.querySelectorAll('.subtotal_cart_byob-value').forEach(subitem => { subitem.innerHTML = byoFormatMoney(Shopify.itemsToAddPrice * 100, '${{amount}}') });
+        document.querySelectorAll('.subtotal_cart_byob-value-discount').forEach(subitem => { subitem.innerHTML = byoFormatMoney(Shopify.itemsToAddPriceShow * 100, '${{amount}}') });
+    };
     Shopify.byob.dRShowAddToCart = function (option) {
+        Shopify.byob.dRUpdateSubtotal();
         var productSelectors = document.querySelectorAll('.product-grid .card-wrapper');
         for (var i = 0, len = productSelectors.length | 0; i < len; i = i + 1 | 0) {
             if (option == true) {
-                productSelectors[i].classList.remove("product--dont-add");
+                /*productSelectors[i].classList.remove("product--dont-add");
                 productSelectors[i].querySelectorAll('.addtocart-btn').forEach(addtocartBtn => {
                     if (addtocartBtn.getAttribute('data-id') != "") {
                         addtocartBtn.classList.remove('disabled');
@@ -203,8 +234,8 @@ function byokScriptsEvents() {
                             addtocartBtn.innerHTML = addtocartBtn.dataset.text;
                         }
                     }
-                });
-                document.querySelectorAll('.subtotal_cart_byob_wrapper').forEach(item => {
+                });*/
+                document.querySelectorAll('.subtotal_cart_byob-wrapper').forEach(item => {
                     item.style.display = 'none';
                 });
                 document.querySelectorAll('.btn_add_box').forEach(btnAddBox => {
@@ -217,7 +248,7 @@ function byokScriptsEvents() {
                     btnClearBox.style.display = 'none';
                 });
             } else {
-                productSelectors[i].classList.add("product--dont-add");
+                /*productSelectors[i].classList.add("product--dont-add");
                 productSelectors[i].querySelectorAll('.addtocart-btn').forEach(addtocartBtn => {
                     if (addtocartBtn.getAttribute('data-id') != "") {
                         addtocartBtn.classList.add('disabled');
@@ -227,10 +258,11 @@ function byokScriptsEvents() {
                             addtocartBtn.innerHTML = "Box is Full";
                         }
                     }
-                });
+                });*/
                 document.querySelectorAll('.subtotal_cart_byob_wrapper').forEach(item => {
-                    item.style.display = 'inline-flex';
-                    item.querySelectorAll('.subtotal_cart_byob_value').forEach(subitem => { subitem.innerHTML = byoFormatMoney(byobConfig.packValue * 100, '${{amount_no_decimals}}') });
+                    //item.style.display = 'inline-flex';
+                    //item.querySelectorAll('.subtotal_cart_byob-value').forEach(subitem => { subitem.innerHTML = byoFormatMoney(byobConfig.packValue * 100, '${{amount_no_decimals}}') });
+                    //item.querySelectorAll('.subtotal_cart_byob-value-discount').forEach(subitem => { subitem.innerHTML = byoFormatMoney(byobConfig.packValue * 100, '${{amount_no_decimals}}') });
                 });
                 document.querySelectorAll('.btn_add_box').forEach(btnAddBox => {
                     btnAddBox.classList.remove('disabled');
@@ -244,74 +276,74 @@ function byokScriptsEvents() {
             }
             //console.log('option',option,productSelectors[i].classList);
         }
-        if (option == true) {
+        /*if (option == true) {
             document.querySelector('body').classList.remove("product--dont-add");
         } else {
             document.querySelector('body').classList.add("product--dont-add");
-        }
+        }*/
     }
     Shopify.byob.dRAddSelectProduct = function (variant_id, quantity, price) {
         //console.log('Shopify.byob.dRAddSelectProduct');
-        const parent = document.querySelector('.contain_cart_byob .cart_byob');
+        const parent = document.querySelector('.products_contain_byob .byob-products');
         //console.log('parent',parent,'data-id=' + variant_id,document.querySelector('[data-id="' + variant_id + '"]'));
         if (parent != null && document.querySelector('[data-id="' + variant_id + '"]') != null) {
-            parent.classList.remove('meals-0');
+            //parent.classList.remove('meals-0');
             let target = document.querySelector('[data-id="' + variant_id + '"]');
             let targetParent = target.closest('.card-wrapper');
-            //console.log('variant_id', variant_id, 'length', parent.querySelectorAll('[data-product-id="' + variant_id + '"]').length, 'quantity', quantity, 'targetParent', targetParent);
-            if (parent.querySelectorAll('[data-product-id="' + variant_id + '"]').length != quantity) {
-                if (parent.querySelectorAll('[data-product-id="' + variant_id + '"]').length > quantity) {
-                    if (quantity == 0) {
-                        parent.querySelectorAll('[data-product-id="' + variant_id + '"]')[0].remove();
-                    } else {
-                        for (let i = quantity - 1; i < parent.querySelectorAll('[data-product-id="' + variant_id + '"]').length; i++) {
-                            let item = parent.querySelectorAll('[data-product-id="' + variant_id + '"]')[i];
-                            //console.log('variant_id', variant_id, 'i', i, 'item', item);
-                            item.remove();
-                        }
-                    }
-                } else {
-                    item = document.createElement("div");
-                    parent.appendChild(item);
-                    item.classList.add("cart_byob_item");
-                    item.dataset.productId = variant_id;
-                    item.dataset.qty = 1;
-                    item.dataset.unitPrice = price;
-                    item.innerHTML = `
-                        <div class="cart_byob_img">
-                            <img
-                                srcset="${targetParent.dataset.productImage}"
-                                src="${targetParent.dataset.productImage30}"
-                                sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
-                                alt="${targetParent.dataset.productImageAlt}"
-                                loading="lazy"
-                                class="motion-reduce"
-                                width="${targetParent.dataset.productImageWidth}"
-                                height="${targetParent.dataset.productImageHeight}"
-                                >
+            console.log('variant_id', variant_id, 'length', parent.querySelectorAll('[data-product-id="' + variant_id + '"]').length, 'quantity', quantity, 'targetParent', targetParent);
+            if (parent.querySelectorAll('[data-product-id="' + variant_id + '"]').length == 0 && quantity != 0) {
+                item = document.createElement("li");
+                parent.appendChild(item);
+                item.classList.add("cart_byob_item");
+                item.dataset.productId = variant_id;
+                item.dataset.qty = quantity;
+                item.dataset.unitPrice = price;
+                item.innerHTML = `
+                    <div class="cart_byob_img">
+                        <img
+                            srcset="${targetParent.dataset.productImage}"
+                            src="${targetParent.dataset.productImage30}"
+                            sizes="(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"
+                            alt="${targetParent.dataset.productImageAlt}"
+                            loading="lazy"
+                            class="motion-reduce"
+                            width="${targetParent.dataset.productImageWidth}"
+                            height="${targetParent.dataset.productImageHeight}"
+                            >
+                        <div class="m-remove" data-id="${targetParent.dataset.id}">
+                            <svg width="7" height="6" viewBox="0 0 7 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.96947 0.083252L3.6403 2.41242L1.31113 0.083252L0.723633 0.670752L3.0528 2.99992L0.723633 5.32909L1.31113 5.91659L3.6403 3.58742L5.96947 5.91659L6.55697 5.32909L4.2278 2.99992L6.55697 0.670752L5.96947 0.083252Z" fill="#313131"/>
+                            </svg>
                         </div>
-                        <div class="cart_byob_data">
-                            <div class="cart_byob_data-left">
-                                <p class="cart_byob_title">${targetParent.dataset.productTitle}</p>
-                                <p class="cart_byob_price">${targetParent.dataset.productPrice}</p>
-                            </div>
-                            <div class="m-remove" data-id="${targetParent.dataset.id}">
-                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M24 9.4L22.6 8L16 14.6L9.4 8L8 9.4L14.6 16L8 22.6L9.4 24L16 17.4L22.6 24L24 22.6L17.4 16L24 9.4Z" fill="#A1A1A1"/>
-                                </svg>
-                            </div>
+                    </div>
+                    <div class="cart_byob_data">
+                        <!-- <div class="cart_byob_data-left">
+                            <p class="cart_byob_title">${targetParent.dataset.productTitle}</p>
+                            <p class="cart_byob_price">${targetParent.dataset.productPrice}</p>
+                        </div> -->
+                        <div class="cart_byob_data__quantity">
+                            <span class="cart_byob_data__quantity-label">Quantity: </span>
+                            <span class="cart_byob_data__quantity-button js-cart_byob_data__quantity-minus">-</span>
+                            <input class="cart_byob_data__quantity-number js-cart_byob_data__quantity" type="number" value="${quantity}" disabled="">
+                            <span class="cart_byob_data__quantity-button js-cart_byob_data__quantity-plus">+</span>
                         </div>
-                    `;
-                }
+                    </div>
+                `;
+            } else if (parent.querySelectorAll('[data-product-id="' + variant_id + '"]').length != 0 && quantity == 0) {
+                parent.querySelectorAll('[data-product-id="' + variant_id + '"]')[0].remove();
+            } else {
+                parent.querySelectorAll('[data-product-id="' + variant_id + '"] [type="number"]').forEach(item => {
+                    item.value = quantity;
+                });
             }
         }
         //console.log('Shopify.itemsToAddCount',Shopify.itemsToAddCount,'byobConfig.maxProductsToAdd',byobConfig.maxProductsToAdd,'Shopify.itemsToAddCount >= byobConfig.maxProductsToAdd',Shopify.itemsToAddCount >= byobConfig.maxProductsToAdd);
-        if (Shopify.itemsToAddCount >= byobConfig.maxProductsToAdd) {
+        if (Shopify.itemsToAddCount >= 1) {
             Shopify.byob.dRShowAddToCart(false);
-            parent.classList.add('full');
+            parent.classList.add('show');
         } else {
             Shopify.byob.dRShowAddToCart(true);
-            parent.classList.remove('full');
+            parent.classList.remove('show');
         }
     }
     Shopify.byob.dRClearSelectProduct = function () {
@@ -498,7 +530,7 @@ function byokScriptsEvents() {
             isPopup = false;
         }
         var idProduct = target.dataset.id;
-        var wrapperProduct = document.querySelector('#byo-collection-product-grid .card-wrapper[data-id="' + idProduct + '"]');
+        var wrapperProduct = document.querySelector('#product-grid .card-wrapper[data-id="' + idProduct + '"]');
         var addCartProduct = wrapperProduct.querySelector('.addtocart-btn[data-id="' + idProduct + '"]');
         //var deleteCartProduct = wrapperProduct.querySelector('.removetocart-btn[data-id="'+idProduct+'"]');
         var inputCountProduct = wrapperProduct.querySelector('input[name="updates[' + idProduct + ']"]');
@@ -516,7 +548,9 @@ function byokScriptsEvents() {
         } else {
             Shopify.itemsToAddProducts[idProduct].qty = Shopify.itemsToAddProducts[idProduct].qty + 1;
         }
-        Shopify.itemsToAddPrice = Shopify.itemsToAddPrice + itemsToAddCountPrice;
+        //console.log('itemsToAddCountPrice',itemsToAddCountPrice/100,'Shopify.itemsToAddPrice',Shopify.itemsToAddPrice);
+        Shopify.itemsToAddPrice = Shopify.itemsToAddPrice + (itemsToAddCountPrice / 100);
+        //console.log('Shopify.itemsToAddPrice',Shopify.itemsToAddPrice);
 
         countProduct = countProduct + 1;
         Shopify.itemsToAddCount = Shopify.itemsToAddCount + 1;
@@ -527,7 +561,7 @@ function byokScriptsEvents() {
         cartCountProduct.classList.remove("hidden");
         cartCountProduct.style.display = 'block';*/
 
-        //console.log('countProduct', countProduct);
+        console.log('countProduct', countProduct);
         if (countProduct > 0) {
             addCartProduct.innerText = 'Add 1 more';
             addCartProduct.classList.add('more');
@@ -566,7 +600,7 @@ function byokScriptsEvents() {
                 document.querySelectorAll(".build-your-kit--is-loading").forEach(box => { box.style.display = "none" });
                 //console.log('target', e.target.closest(".removetocart-btn"));
                 var idProduct = e.target.closest(".removetocart-btn").dataset.id;
-                var wrapperProduct = document.querySelector('#byo-collection-product-grid .card-wrapper[data-id="' + idProduct + '"]');
+                var wrapperProduct = document.querySelector('#product-grid .card-wrapper[data-id="' + idProduct + '"]');
                 var addCartProduct = wrapperProduct.querySelector('.addtocart-btn[data-id="' + idProduct + '"]');
                 //var deleteCartProduct = wrapperProduct.querySelector('.removetocart-btn[data-id="'+idProduct+'"]');
                 var inputCountProduct = wrapperProduct.querySelector('input[name="updates[' + idProduct + ']"]');
@@ -581,7 +615,7 @@ function byokScriptsEvents() {
                     countProduct = countProduct - 1;
                     Shopify.itemsToAddCount = Shopify.itemsToAddCount - 1;
                     //Shopify.itemsToAddCountOne = Shopify.itemsToAddCountOne - 1;
-                    //var cartCountProduct = '#byo-collection-product-grid .card--product[data-variant-id="'+idProduct+'"] .cart-count-product-one';
+                    //var cartCountProduct = '#product-grid .card--product[data-variant-id="'+idProduct+'"] .cart-count-product-one';
                     inputCountProduct.dataset.countOnetime = countProduct;
                     /*$(cartCountProduct).text('+' + countProduct);
                     $(cartCountProduct).removeClass("hidden");
@@ -592,7 +626,7 @@ function byokScriptsEvents() {
                         $(cartCountProduct).removeClass("hidden");
                         $(cartCountProduct).show();
                     }*/
-                    Shopify.itemsToAddPrice = Shopify.itemsToAddPrice - itemsToAddCountPrice;
+                    Shopify.itemsToAddPrice = Shopify.itemsToAddPrice - (itemsToAddCountPrice / 100);
                 }
                 if (Shopify.itemsToAddProducts[idProduct] != undefined) {
                     if ((countProduct == 0) && (countProductSubs == 0)) {
@@ -602,12 +636,12 @@ function byokScriptsEvents() {
                     }
                     //Shopify.byob.dRUpdateProgressBar();
                 }
-                //console.log('countProduct', countProduct);
+                console.log('countProduct', countProduct);
                 if (countProduct > 0) {
                     addCartProduct.innerText = 'Add 1 more';
                     addCartProduct.classList.add('more');
                 } else {
-                    addCartProduct.innerText = 'Add';
+                    addCartProduct.innerText = 'Add to Cart';
                     addCartProduct.classList.remove('more');
                 }
                 if (Shopify.itemsToAddCount > 0) {
@@ -666,9 +700,9 @@ function byokScriptsEvents() {
         }
         if (e.target.closest(".m-remove")) {
             let dataId = e.target.closest(".m-remove").getAttribute('data-id');
-            //console.log('removetocart-btn', document.querySelector('#byo-collection-product-grid .card-wrapper .removetocart-btn[data-id="' + dataId + '"]'));
-            if (document.querySelector('#byo-collection-product-grid .card-wrapper .removetocart-btn[data-id="' + dataId + '"]') != null) {
-                document.querySelector('#byo-collection-product-grid .card-wrapper .removetocart-btn[data-id="' + dataId + '"]').click();
+            //console.log('removetocart-btn', document.querySelector('#product-grid .card-wrapper .removetocart-btn[data-id="' + dataId + '"]'));
+            if (document.querySelector('#product-grid .card-wrapper .removetocart-btn[data-id="' + dataId + '"]') != null) {
+                document.querySelector('#product-grid .card-wrapper .removetocart-btn[data-id="' + dataId + '"]').click();
             }
         }
         if (e.target.closest("#close_byob") || e.target.closest("#overlay_byob")) {

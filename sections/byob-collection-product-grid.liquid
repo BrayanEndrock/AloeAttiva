@@ -150,16 +150,13 @@
                     assign byobCartTotalPriceCollectionQ = 0
                     assign byobCartTotalPriceCollectionShow = 0
 
-                    assign cartCountProducts = 0
-                    assign byobCartProductsCount = 0
                     assign byobProducts = ''
+                    assign byobItemProductCount = 0
                     for product in collection.products
                         assign lazy_load = false
                         if forloop.index > 2
                             assign lazy_load = true
                         endif
-                        assign cartCountProduct = 0
-                        assign byobItemProductCount = 0
 
                         for line_item in cart.items
                             if line_item.product.available and line_item.variant_id == product.first_available_variant.id
@@ -177,25 +174,25 @@
                                     endif
                                     capture dataProductImage = line_item.product.handle
                                         if dataImage.width >= 165
-                                            echo dataImage | img_url: '165x' | append: ' 165w,'
+                                            echo dataImage | image_url: '165x' | append: ' 165w,'
                                         endif
                                         if dataImage.width >= 360
-                                            echo dataImage | img_url: '360x' | append: '360w,'
+                                            echo dataImage | image_url: '360x' | append: '360w,'
                                         endif
                                         if dataImage.width >= 533
-                                            echo dataImage | img_url: '533x' | append: '533w,'
+                                            echo dataImage | image_url: '533x' | append: '533w,'
                                         endif
                                         if dataImage.width >= 720
-                                            echo dataImage | img_url: '720x' | append: '720w,'
+                                            echo dataImage | image_url: '720x' | append: '720w,'
                                         endif
                                         if dataImage.width >= 940
-                                            echo dataImage | img_url: '940x' | append: '940w,'
+                                            echo dataImage | image_url: '940x' | append: '940w,'
                                         endif
                                         if dataImage.width >= 1066
-                                            echo dataImage | img_url: '1066x' | append: '1066w'
+                                            echo dataImage | image_url: '1066x' | append: '1066w'
                                         endif
                                     endcapture
-                                    assign dataProductImage30 = dataImage | img_url: '533x'
+                                    assign dataProductImage30 = dataImage | image_url: width: 533
                                     assign dataProductImageWidth = dataImage.width
                                     assign dataProductImageHeight = dataImage.height
                                     assign dataProductTitle = line_item.product.title
@@ -235,8 +232,8 @@
                                     echo '</li>'
                                 endcapture
 
-                                assign byobCartProductsCount = byobCartProductsCount | plus: 1
-                                assign byobItemProductCount = byobItemProductCount | plus: 1
+                                assign byobCartProductsCount = byobCartProductsCount | plus: line_item.quantity
+                                assign byobItemProductCount = byobItemProductCount | plus: line_item.quantity
 
                                 if byobCartProductsId != ''
                                     assign byobCartProductsId = byobCartProductsId | append: ','
@@ -477,34 +474,27 @@
         return Object.freeze(object);
     }
     byobConfig = {
-        maxProductsToAdd: {{ byobMaxProductsToAdd }},
-        packValue: {{ byobPackValue | json }},
-        targetDiscount: {{ byobTargetDiscount | json }},
+        customTierMessage: {{ byobCustomTierMessage | json }},
         discounts: {
             one: {
-                discount: {{ byobProductDiscount1 | json }},
-                qty: {{ byobProductQty1 | json }},
-                productList: "{% for productList in byobProductList1 -%}{{- productList.first_available_variant.id -}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}"
+                spend: {{ byobTier1Spend | default: false | json }},
+                get: {{ byobTier1Get | default: false | json }},
+                discount: {{ byobTier1TargetDiscound | default: false | json }}
             },
             two: {
-                discount: {{ byobProductDiscount2 | json }},
-                qty: {{ byobProductQty2 | json }},
-                productList: "{% for productList in byobProductList2 -%}{{- productList.first_available_variant.id -}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}"
+                spend: {{ byobTier2Spend | default: false | json }},
+                get: {{ byobTier2Get | default: false | json }},
+                discount: {{ byobTier2TargetDiscound | default: false | json }}
             },
             three: {
-                discount: {{ byobProductDiscount3 | json }},
-                qty: {{ byobProductQty3 | json }},
-                productList: "{% for productList in byobProductList3 -%}{{- productList.first_available_variant.id -}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}"
+                spend: {{ byobTier3Spend | default: false | json }},
+                get: {{ byobTier3Get | default: false | json }},
+                discount: {{ byobTier3TargetDiscound | default: false | json }}
             },
             four: {
-                discount: {{ byobProductDiscount4 | json }},
-                qty: {{ byobProductQty4 | json }},
-                productList: "{% for productList in byobProductList4 -%}{{- productList.first_available_variant.id -}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}"
-            },
-            five: {
-                discount: {{ byobProductDiscount5 | json }},
-                qty: {{ byobProductQty5 | json }},
-                productList: "{% for productList in byobProductList5 -%}{{- productList.first_available_variant.id -}}{%- unless forloop.last -%},{%- endunless -%}{%- endfor -%}"
+                spend: {{ byobTier4Spend | default: false | json }},
+                get: {{ byobTier4Get | default: false | json }},
+                discount: {{ byobTier4TargetDiscound | default: false | json }}
             }
         }
     };
