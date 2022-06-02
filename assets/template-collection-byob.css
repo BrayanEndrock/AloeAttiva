@@ -85,6 +85,7 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
     gap: 12px;
     margin: 0;
 }
@@ -120,6 +121,8 @@ h1 {
     align-items: center;
     border: 1px solid #000000;
     width: 100%;
+    max-width: 72px;
+    margin: 5px auto 0;
 }
 .cart_byob_data__quantity-label {
     display: none !important;   

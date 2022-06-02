@@ -39,19 +39,23 @@
     if ratio == 0 or ratio == nil
       assign ratio = 1
     endif
+    assign dataImage = card_product
+    if card_product.metafields.global.image_byob
+      assign dataImage = card_product.metafields.global.image_byob.value
+    endif
   -%}
   <div class="card-wrapper underline-links-hover{% if cart_count_product > 0 or cart_count_product_subs > 0 %} showBtnDelete{% endif %}{% if byobSubs %} product--subs{% endif %}"
     data-id="{{card_product.selected_or_first_available_variant.id}}" 
     data-handle="{{card_product.handle}}" 
-    data-product-image="{%- if card_product.featured_media.width >= 165 -%}{{ card_product.featured_media | img_url: '165x' }} 165w,{%- endif -%}
-    {%- if card_product.featured_media.width >= 360 -%}{{ card_product.featured_media | img_url: '360x' }} 360w,{%- endif -%}
-    {%- if card_product.featured_media.width >= 533 -%}{{ card_product.featured_media | img_url: '533x' }} 533w,{%- endif -%}
-    {%- if card_product.featured_media.width >= 720 -%}{{ card_product.featured_media | img_url: '720x' }} 720w,{%- endif -%}
-    {%- if card_product.featured_media.width >= 940 -%}{{ card_product.featured_media | img_url: '940x' }} 940w,{%- endif -%}
-    {%- if card_product.featured_media.width >= 1066 -%}{{ card_product.featured_media | img_url: '1066x' }} 1066w{%- endif -%}" 
-    data-product-image30="{{ card_product.featured_media | img_url: '533x' }}" 
-    data-product-image-width="{{ card_product.featured_media.width }}" 
-    data-product-image-height="{{ card_product.featured_media.height }}" 
+    data-product-image="{%- if dataImage.width >= 165 -%}{{ dataImage | img_url: '165x' }} 165w,{%- endif -%}
+    {%- if dataImage.width >= 360 -%}{{ dataImage | img_url: '360x' }} 360w,{%- endif -%}
+    {%- if dataImage.width >= 533 -%}{{ dataImage | img_url: '533x' }} 533w,{%- endif -%}
+    {%- if dataImage.width >= 720 -%}{{ dataImage | img_url: '720x' }} 720w,{%- endif -%}
+    {%- if dataImage.width >= 940 -%}{{ dataImage | img_url: '940x' }} 940w,{%- endif -%}
+    {%- if dataImage.width >= 1066 -%}{{ dataImage | img_url: '1066x' }} 1066w{%- endif -%}" 
+    data-product-image30="{{ dataImage | img_url: '533x' }}" 
+    data-product-image-width="{{ dataImage.width }}" 
+    data-product-image-height="{{ dataImage.height }}" 
     data-product-title="{{ card_product.title }}" 
     data-product-price="{{ card_product.price | money }}" 
     data-product-image-alt="{{ card_product.title }}">
@@ -66,7 +70,7 @@
       id="product-card--{{ card_product.handle }}"
       data-id="{{card_product.id}}" data-variant-id="{{variant_card.id}}" data-handle="{{card_product.handle}}" 
     >
-      <input name="updates[{{ variant_card.id }}]" type="hidden" data-count-onetime="{{ cart_count_product }}" data-count-subscription="{{ cart_count_product_subs }}" data-id="{{variant_card.id}}"  data-product-selling-plan-id="{{productSellingPlanId}}" data-name="{{ card_product.title }}" data-price="{{ variant_card.price }}" value="{{ cart_count_product }}" class="product_byob_quantity" />
+      <input name="updates[{{variant_card.id}}]" type="hidden" data-count-onetime="{{ cart_count_product }}" data-count-subscription="{{ cart_count_product_subs }}" data-id="{{card_product.variants.first.id}}{% comment %}{{variant_card.id}}{% endcomment%}"  data-product-selling-plan-id="{{productSellingPlanId}}" data-name="{{ card_product.title }}" data-price="{{ variant_card.price }}" value="{{ cart_count_product }}" class="product_byob_quantity" />
       <div class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }}{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}" style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;">
         {%- if card_product.featured_media -%}
           <div class="card__media">
@@ -264,7 +268,7 @@
 
             <button type="button" class="btn addtocart-btn{% if variant_card == nil %} disabled{% endif %}"{% if variant_card == nil %} disabled{% endif %} data-id="{{variant_card.id}}" data-product-count="{{ cart_count_product }}" data-product-selling-plan-id="{{productSellingPlanId}}">{% if variant_card == nil %}Sold Out{% else %}{% if cart_count_product == 0 %}Add to Cart{% else %}Add 1 More{% endif %}{% endif %}</button>
     
-            <button type="button" class="btn removetocart-btn" style="display:nonee;" data-id="{{variant_card.id}}" data-product-count="{{ cart_count_product }}" data-product-selling-plan-id="{{productSellingPlanId}}" data-text="Remove">Remove</button>  
+            <button type="button" class="btn removetocart-btn" style="display:none;" data-id="{{variant_card.id}}" data-product-count="{{ cart_count_product }}" data-product-selling-plan-id="{{productSellingPlanId}}" data-text="Remove">Remove</button>  
         </div>
       </div>
       <div class="card__content">

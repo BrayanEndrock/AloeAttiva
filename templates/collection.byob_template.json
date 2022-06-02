@@ -9,7 +9,7 @@
             "tier": "$5 OFF",
             "spend": 50,
             "get": 5,
-            "target_discount": "",
+            "target_discount": "BUNDLERTY050",
             "custom_message": ""
           }
         },
@@ -19,7 +19,7 @@
             "tier": "$10 OFF",
             "spend": 80,
             "get": 10,
-            "target_discount": "",
+            "target_discount": "BUNDLEKW1080",
             "custom_message": ""
           }
         },
@@ -29,17 +29,17 @@
             "tier": "$15 OFF",
             "spend": 120,
             "get": 15,
-            "target_discount": "",
+            "target_discount": "BUNDLEDCV120",
             "custom_message": ""
           }
         },
         "6a609ed0-67fe-461e-90a0-02bb113f9bb4": {
           "type": "tier",
           "settings": {
-            "tier": "$24 OFF",
+            "tier": "$25 OFF",
             "spend": 170,
             "get": 25,
-            "target_discount": "",
+            "target_discount": "BUNDLEBWD170",
             "custom_message": ""
           }
         }

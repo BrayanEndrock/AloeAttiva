@@ -148,7 +148,7 @@ function byokScriptsEvents() {
                         Object.getOwnPropertyNames(cartItem.properties).forEach(key => {
                             let value = Object.getOwnPropertyDescriptor(cartItem.properties, key);
                             //console.log(key,value.value);
-                            if (key == 'Product from' && (value.value == 'BYOB 3 page' || value.value == 'BYOB 5 page')) {
+                            if (key == 'Product from' && value.value == 'BYOB page') {
                                 item_qty = 0;
                             }
                         });
@@ -190,22 +190,30 @@ function byokScriptsEvents() {
     };
 
 
-    Shopify.byob.dRUpdateSubtotal = function () {
+    Shopify.byob.dRGetAndSetTierActive = function () {
         console.log('Shopify.itemsToAddPrice',Shopify.itemsToAddPrice);
-        let itemsToAddPrice = Shopify.itemsToAddPrice,
-            get = 0;
+        let tier = null;
         if (byobConfig.discounts.one.spend != false) {
-            if (byobConfig.discounts.one.spend <= itemsToAddPrice) {
-                get = byobConfig.discounts.one.get;
+            document.querySelectorAll('.byob-tiers li').forEach(subitem => { subitem.classList.remove('active'); });
+            if (byobConfig.discounts.one.spend <= Shopify.itemsToAddPrice) {
+                tier = byobConfig.discounts.one;
+                document.querySelectorAll('.byob-tiers li').forEach(subitem => { subitem.classList.remove('active'); });
+                document.querySelectorAll('.byob-tiers .tier-1').forEach(subitem => { subitem.classList.add('active'); });
                 if (byobConfig.discounts.two.spend != false) {
-                    if (byobConfig.discounts.two.spend <= itemsToAddPrice) {
-                        get = byobConfig.discounts.two.get;
+                    if (byobConfig.discounts.two.spend <= Shopify.itemsToAddPrice) {
+                        tier = byobConfig.discounts.two;
+                        document.querySelectorAll('.byob-tiers li').forEach(subitem => { subitem.classList.remove('active'); });
+                        document.querySelectorAll('.byob-tiers .tier-2').forEach(subitem => { subitem.classList.add('active'); });
                         if (byobConfig.discounts.three.spend != false) {
-                            if (byobConfig.discounts.three.spend <= itemsToAddPrice) {
-                                get = byobConfig.discounts.three.get;
+                            if (byobConfig.discounts.three.spend <= Shopify.itemsToAddPrice) {
+                                tier = byobConfig.discounts.three;
+                                document.querySelectorAll('.byob-tiers li').forEach(subitem => { subitem.classList.remove('active'); });
+                                document.querySelectorAll('.byob-tiers .tier-3').forEach(subitem => { subitem.classList.add('active'); });
                                 if (byobConfig.discounts.four.spend != false) {
-                                    if (byobConfig.discounts.four.spend <= itemsToAddPrice) {
-                                        get = byobConfig.discounts.four.get;
+                                    if (byobConfig.discounts.four.spend <= Shopify.itemsToAddPrice) {
+                                        tier = byobConfig.discounts.four;
+                                        document.querySelectorAll('.byob-tiers li').forEach(subitem => { subitem.classList.remove('active'); });
+                                        document.querySelectorAll('.byob-tiers .tier-4').forEach(subitem => { subitem.classList.add('active'); });
                                     }
                                 }
                             }
@@ -214,8 +222,20 @@ function byokScriptsEvents() {
                 }
             }
         }
+        console.log('tier',tier);
+        return tier;
+    };
+    Shopify.byob.dRUpdateSubtotal = function () {
+        let tier = Shopify.byob.dRGetAndSetTierActive(),
+            get = 0;
+        if (tier != null) { get = tier.get };
         Shopify.itemsToAddPriceShow = Shopify.itemsToAddPrice - get;
-        console.log('Shopify.itemsToAddPriceShow',Shopify.itemsToAddPriceShow);
+        //console.log('Shopify.itemsToAddPriceShow',Shopify.itemsToAddPriceShow);
+        if (get == 0) {
+            document.querySelectorAll('.subtotal_cart_byob-value').forEach(item => { item.style.display = 'none'; });
+        } else {
+            document.querySelectorAll('.subtotal_cart_byob-value').forEach(item => { item.style.display = 'inline-block'; });
+        }
         document.querySelectorAll('.products_contain_byob-value b').forEach(subitem => { subitem.innerHTML = byoFormatMoney(Shopify.itemsToAddPrice * 100, '${{amount_no_decimals}}') });
         document.querySelectorAll('.subtotal_cart_byob-value').forEach(subitem => { subitem.innerHTML = byoFormatMoney(Shopify.itemsToAddPrice * 100, '${{amount}}') });
         document.querySelectorAll('.subtotal_cart_byob-value-discount').forEach(subitem => { subitem.innerHTML = byoFormatMoney(Shopify.itemsToAddPriceShow * 100, '${{amount}}') });
@@ -225,19 +245,7 @@ function byokScriptsEvents() {
         var productSelectors = document.querySelectorAll('.product-grid .card-wrapper');
         for (var i = 0, len = productSelectors.length | 0; i < len; i = i + 1 | 0) {
             if (option == true) {
-                /*productSelectors[i].classList.remove("product--dont-add");
-                productSelectors[i].querySelectorAll('.addtocart-btn').forEach(addtocartBtn => {
-                    if (addtocartBtn.getAttribute('data-id') != "") {
-                        addtocartBtn.classList.remove('disabled');
-                        addtocartBtn.disabled = false;
-                        if (addtocartBtn.innerHTML == 'Box is Full') {
-                            addtocartBtn.innerHTML = addtocartBtn.dataset.text;
-                        }
-                    }
-                });*/
-                document.querySelectorAll('.subtotal_cart_byob-wrapper').forEach(item => {
-                    item.style.display = 'none';
-                });
+                document.querySelectorAll('.products_contain_byob-value').forEach(item => { item.style.display = 'none'; });
                 document.querySelectorAll('.btn_add_box').forEach(btnAddBox => {
                     btnAddBox.classList.add('disabled');
                     btnAddBox.disabled = true;
@@ -248,22 +256,7 @@ function byokScriptsEvents() {
                     btnClearBox.style.display = 'none';
                 });
             } else {
-                /*productSelectors[i].classList.add("product--dont-add");
-                productSelectors[i].querySelectorAll('.addtocart-btn').forEach(addtocartBtn => {
-                    if (addtocartBtn.getAttribute('data-id') != "") {
-                        addtocartBtn.classList.add('disabled');
-                        addtocartBtn.disabled = true;
-                        if (addtocartBtn.innerHTML != "Box is Full") {
-                            addtocartBtn.dataset.text = addtocartBtn.innerHTML;
-                            addtocartBtn.innerHTML = "Box is Full";
-                        }
-                    }
-                });*/
-                document.querySelectorAll('.subtotal_cart_byob_wrapper').forEach(item => {
-                    //item.style.display = 'inline-flex';
-                    //item.querySelectorAll('.subtotal_cart_byob-value').forEach(subitem => { subitem.innerHTML = byoFormatMoney(byobConfig.packValue * 100, '${{amount_no_decimals}}') });
-                    //item.querySelectorAll('.subtotal_cart_byob-value-discount').forEach(subitem => { subitem.innerHTML = byoFormatMoney(byobConfig.packValue * 100, '${{amount_no_decimals}}') });
-                });
+                document.querySelectorAll('.products_contain_byob-value').forEach(item => { item.style.display = 'block'; });
                 document.querySelectorAll('.btn_add_box').forEach(btnAddBox => {
                     btnAddBox.classList.remove('disabled');
                     btnAddBox.disabled = false;
@@ -271,16 +264,10 @@ function byokScriptsEvents() {
                 document.querySelectorAll('.btn_clear_box').forEach(btnClearBox => {
                     btnClearBox.classList.remove('disabled');
                     btnClearBox.disabled = false;
-                    btnClearBox.style.display = 'block';
+                    btnClearBox.style.display = 'inline-block';
                 });
             }
-            //console.log('option',option,productSelectors[i].classList);
         }
-        /*if (option == true) {
-            document.querySelector('body').classList.remove("product--dont-add");
-        } else {
-            document.querySelector('body').classList.add("product--dont-add");
-        }*/
     }
     Shopify.byob.dRAddSelectProduct = function (variant_id, quantity, price) {
         //console.log('Shopify.byob.dRAddSelectProduct');
@@ -290,7 +277,7 @@ function byokScriptsEvents() {
             //parent.classList.remove('meals-0');
             let target = document.querySelector('[data-id="' + variant_id + '"]');
             let targetParent = target.closest('.card-wrapper');
-            console.log('variant_id', variant_id, 'length', parent.querySelectorAll('[data-product-id="' + variant_id + '"]').length, 'quantity', quantity, 'targetParent', targetParent);
+            //console.log('variant_id', variant_id, 'length', parent.querySelectorAll('[data-product-id="' + variant_id + '"]').length, 'quantity', quantity, 'targetParent', targetParent);
             if (parent.querySelectorAll('[data-product-id="' + variant_id + '"]').length == 0 && quantity != 0) {
                 item = document.createElement("li");
                 parent.appendChild(item);
@@ -340,20 +327,16 @@ function byokScriptsEvents() {
         //console.log('Shopify.itemsToAddCount',Shopify.itemsToAddCount,'byobConfig.maxProductsToAdd',byobConfig.maxProductsToAdd,'Shopify.itemsToAddCount >= byobConfig.maxProductsToAdd',Shopify.itemsToAddCount >= byobConfig.maxProductsToAdd);
         if (Shopify.itemsToAddCount >= 1) {
             Shopify.byob.dRShowAddToCart(false);
-            parent.classList.add('show');
         } else {
             Shopify.byob.dRShowAddToCart(true);
-            parent.classList.remove('show');
         }
     }
     Shopify.byob.dRClearSelectProduct = function () {
         //console.log('Shopify.byob.dRAddSelectProduct');
-        let parent = document.querySelector('.contain_cart_byob .cart_byob');
+        let parent = document.querySelector('.products_contain_byob .byob-products');
         parent.innerHTML = '';
-        parent.classList.remove('full');
         var productSelectors = document.querySelectorAll('.product-grid .card-wrapper');
         for (var i = 0, len = productSelectors.length | 0; i < len; i = i + 1 | 0) {
-            productSelectors[i].classList.remove("product--dont-add");
             productSelectors[i].querySelectorAll('.product_byob_quantity').forEach(item => {
                 item.setAttribute('data-count-onetime','0');
                 item.setAttribute('data-count-subscription','0');
@@ -363,13 +346,17 @@ function byokScriptsEvents() {
                 if (addtocartBtn.getAttribute('data-id') != "") {
                     addtocartBtn.classList.remove('disabled','more');
                     addtocartBtn.disabled = false;
-                    addtocartBtn.innerHTML = "Add";
+                    addtocartBtn.innerHTML = "Add to Cart";
                 }
             });
         }
+        Shopify.itemsToAdd = [];
+        Shopify.itemsToAddProducts = new Object();
         Shopify.itemsToAddCount = 0;
+        Shopify.itemsToAddPrice = 0;
         Shopify.byob.dRShowAddToCart(true);
         Shopify.codeDiscountApply = "";
+        Shopify.byob.dRUpdateSubtotal();
     }
 
     Shopify.byob.dRClearTheCart = function () {
@@ -383,7 +370,7 @@ function byokScriptsEvents() {
                 if (cartItem.properties !== null && Object.keys(cartItem.properties).length !== 0) {
                     $.each(cartItem.properties, function (key, value) {
                         //console.log(key,value);
-                        if (key == 'Product from' && (value == 'BYOB 3 page' || value == 'BYOB 5 page')) {
+                        if (key == 'Product from' && value == 'BYOB page') {
                             item_qty = 0;
                         }
                     });
@@ -411,77 +398,23 @@ function byokScriptsEvents() {
                 success: function (data) {
                     console.log('dRClearTheCart-update',data);
                     console.log('clear BYOB');
+                    var goCart = new GoCart(); goCart.fetchAndOpenCart();
                     document.querySelectorAll(".cart_byob-loading").forEach(item => { item.style.display = 'none'; });
-                    ajaxCart.loatWithOut();
+                    document.querySelector(".js-go-cart-trigger") && document.querySelector(".js-go-cart-trigger").click();
                     Shopify.byob.dRClearSelectProduct();
                 }
             });
         });
     };
 
-    Shopify.byob.dRUpdateCodeDiscountApply = function (id, quantity, foundProducts) {
-        foundProducts.all += quantity;
-        //console.log('byobConfig.discounts.one.productList',byobConfig.discounts.one.productList,'id',id,'byobConfig.discounts.one.productList.includes(id)',byobConfig.discounts.one.productList.includes(id));
-        if (byobConfig.discounts.one.productList.includes(id) == true) {
-            foundProducts.one += quantity;
-        }
-        //console.log('byobConfig.discounts.two.productList',byobConfig.discounts.two.productList,'id',id,'byobConfig.discounts.two.productList.includes(id)',byobConfig.discounts.two.productList.includes(id));
-        if (byobConfig.discounts.two.productList.includes(id) == true) {
-            foundProducts.two += quantity;
-        }
-        //console.log('byobConfig.discounts.three.productList',byobConfig.discounts.three.productList,'id',id,'byobConfig.discounts.three.productList.includes(id)',byobConfig.discounts.three.productList.includes(id));
-        if (byobConfig.discounts.three.productList.includes(id) == true) {
-            foundProducts.three += quantity;
-        }
-        //console.log('byobConfig.discounts.four.productList',byobConfig.discounts.four.productList,'id',id,'byobConfig.discounts.four.productList.includes(id)',byobConfig.discounts.four.productList.includes(id));
-        if (byobConfig.discounts.four.productList.includes(id) == true) {
-            foundProducts.four += quantity;
-        }
-        //console.log('byobConfig.discounts.five.productList',byobConfig.discounts.five.productList,'id',id,'byobConfig.discounts.five.productList.includes(id)',byobConfig.discounts.five.productList.includes(id));
-        if (byobConfig.discounts.five.productList.includes(id) == true) {
-            foundProducts.five += quantity;
-        }
-        if (foundProducts.all >= byobConfig.maxProductsToAdd) {
-            //console.log('byobConfig.targetDiscount',byobConfig.targetDiscount);
-            if (byobConfig.targetDiscount != '') {
-                Shopify.codeDiscountApply = byobConfig.targetDiscount;
-            }
-            //console.log('byobConfig.discounts.one.discount',byobConfig.discounts.one.discount,'byobConfig.discounts.one.qty',byobConfig.discounts.one.qty,'foundProducts.one',foundProducts.one);
-            if (byobConfig.discounts.one.discount != '' && byobConfig.discounts.one.qty == foundProducts.one) {
-                Shopify.codeDiscountApply = byobConfig.discounts.one.discount;
-            }
-            //console.log('byobConfig.discounts.two.discount',byobConfig.discounts.two.discount,'byobConfig.discounts.two.qty',byobConfig.discounts.two.qty,'foundProducts.two',foundProducts.two);
-            if (byobConfig.discounts.two.discount != '' && byobConfig.discounts.two.qty == foundProducts.two) {
-                Shopify.codeDiscountApply = byobConfig.discounts.two.discount;
-            }
-            //console.log('byobConfig.discounts.three.discount',byobConfig.discounts.three.discount,'byobConfig.discounts.three.qty',byobConfig.discounts.three.qty,'foundProducts.three',foundProducts.three);
-            if (byobConfig.discounts.three.discount != '' && byobConfig.discounts.three.qty == foundProducts.three) {
-                Shopify.codeDiscountApply = byobConfig.discounts.three.discount;
-            }
-            //console.log('byobConfig.discounts.four.discount',byobConfig.discounts.four.discount,'byobConfig.discounts.four.qty',byobConfig.discounts.four.qty,'foundProducts.four',foundProducts.four);
-            if (byobConfig.discounts.four.discount != '' && byobConfig.discounts.four.qty == foundProducts.four) {
-                Shopify.codeDiscountApply = byobConfig.discounts.four.discount;
-            }
-            //console.log('byobConfig.discounts.five.discount',byobConfig.discounts.five.discount,'byobConfig.discounts.five.qty',byobConfig.discounts.five.qty,'foundProducts.five',foundProducts.five);
-            if (byobConfig.discounts.five.discount != '' && byobConfig.discounts.five.qty == foundProducts.five) {
-                Shopify.codeDiscountApply = byobConfig.discounts.five.discount;
-            }
-        }
-        //console.log('foundProducts.all',foundProducts.all,'byobConfig.maxProductsToAdd',byobConfig.maxProductsToAdd,'foundProducts.all >= byobConfig.maxProductsToAdd',foundProducts.all >= byobConfig.maxProductsToAdd)
-        //console.log('Shopify.codeDiscountApply',Shopify.codeDiscountApply);
-        return foundProducts;
+    Shopify.byob.dRUpdateCodeDiscountApply = function () {
+        let tier = Shopify.byob.dRGetAndSetTierActive();
+        Shopify.codeDiscountApply = '';
+        if (tier != null) { Shopify.codeDiscountApply = tier.discount };
     };
     Shopify.byob.dROneTimeCart = function () {
         let items = new Object(),
-            quantityItems = 0,
-            foundProducts = {
-                all: 0,
-                one: 0,
-                two: 0,
-                three: 0,
-                four: 0,
-                five: 0
-            };
+            quantityItems = 0;
         document.querySelectorAll(".product_byob_quantity").forEach(item => {
             var quantityOne = parseInt(item.getAttribute('data-count-onetime'));
             if (quantityOne) {
@@ -493,7 +426,7 @@ function byokScriptsEvents() {
                     id = item.getAttribute('data-id');
                     quantity = quantityOne;
                     properties = {};
-                    properties["Product from"] = 'BYOB ' + byobConfig.maxProductsToAdd + ' page';
+                    properties["Product from"] = 'BYOB page';
                     items[id] = {
                         id: id,
                         name: name,
@@ -502,10 +435,12 @@ function byokScriptsEvents() {
                         type: 'One-time'
                     };
                     quantityItems += quantity;
-                    foundProducts = Shopify.byob.dRUpdateCodeDiscountApply(id, quantity, foundProducts);
+                    //foundProducts = Shopify.byob.dRUpdateCodeDiscountApply(id, quantity, foundProducts);
                 }
             }
         });
+        Shopify.byob.dRUpdateCodeDiscountApply();
+        console.log('items',items);
         if (Object.keys(items).length > 0) {
             var attributes = {};
             attributes['BYOB'] = 'Yes';
@@ -561,7 +496,7 @@ function byokScriptsEvents() {
         cartCountProduct.classList.remove("hidden");
         cartCountProduct.style.display = 'block';*/
 
-        console.log('countProduct', countProduct);
+        //console.log('countProduct', countProduct);
         if (countProduct > 0) {
             addCartProduct.innerText = 'Add 1 more';
             addCartProduct.classList.add('more');
@@ -592,6 +527,13 @@ function byokScriptsEvents() {
                     isPopup = false;
                 }
                 addToCartBtn(e.target.closest(".addtocart-btn"), this, isPopup);
+            }
+        }
+        if (e.target.closest(".js-cart_byob_data__quantity-plus")) {
+            let dataId = e.target.closest(".cart_byob_item").getAttribute('data-product-id');
+            //console.log('removetocart-btn', document.querySelector('#product-grid .card-wrapper .removetocart-btn[data-id="' + dataId + '"]'));
+            if (document.querySelector('#product-grid .card-wrapper .addtocart-btn[data-id="' + dataId + '"]') != null) {
+                document.querySelector('#product-grid .card-wrapper .addtocart-btn[data-id="' + dataId + '"]').click();
             }
         }
         if (e.target.closest(".removetocart-btn")) {
@@ -636,7 +578,7 @@ function byokScriptsEvents() {
                     }
                     //Shopify.byob.dRUpdateProgressBar();
                 }
-                console.log('countProduct', countProduct);
+                //console.log('countProduct', countProduct);
                 if (countProduct > 0) {
                     addCartProduct.innerText = 'Add 1 more';
                     addCartProduct.classList.add('more');
@@ -698,13 +640,14 @@ function byokScriptsEvents() {
                 Shopify.byob.dRAddItemstoTheCart();
             }*/
         }
-        if (e.target.closest(".m-remove")) {
-            let dataId = e.target.closest(".m-remove").getAttribute('data-id');
+        if (e.target.closest(".m-remove") || e.target.closest(".js-cart_byob_data__quantity-minus")) {
+            let dataId = e.target.closest(".cart_byob_item").getAttribute('data-product-id');
             //console.log('removetocart-btn', document.querySelector('#product-grid .card-wrapper .removetocart-btn[data-id="' + dataId + '"]'));
             if (document.querySelector('#product-grid .card-wrapper .removetocart-btn[data-id="' + dataId + '"]') != null) {
                 document.querySelector('#product-grid .card-wrapper .removetocart-btn[data-id="' + dataId + '"]').click();
             }
         }
+        /*
         if (e.target.closest("#close_byob") || e.target.closest("#overlay_byob")) {
             document.querySelectorAll(".contain_cart_byob").forEach(item => {
                 item.classList.add('close_byob_contain');
@@ -719,6 +662,7 @@ function byokScriptsEvents() {
             });
             document.querySelectorAll("#overlay_byob").forEach(item => { item.style.display = "block" });
         }
+        */
     });
 }
 
