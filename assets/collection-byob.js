@@ -179,7 +179,7 @@ function byokScriptsEvents() {
             });
         } else {
             let urlCart = '/checkout';
-            console.log(Shopify.codeDiscountApply);
+            //console.log(Shopify.codeDiscountApply);
             if (Shopify.codeDiscountApply != null && Shopify.codeDiscountApply != '') {
                 //console.log(document.cookie);
                 //Shopify.applyDiscount(Shopify.codeDiscountApply, true);
@@ -191,7 +191,7 @@ function byokScriptsEvents() {
 
 
     Shopify.byob.dRGetAndSetTierActive = function () {
-        console.log('Shopify.itemsToAddPrice',Shopify.itemsToAddPrice);
+        //console.log('Shopify.itemsToAddPrice',Shopify.itemsToAddPrice);
         let tier = null;
         if (byobConfig.discounts.one.spend != false) {
             document.querySelectorAll('.byob-tiers li').forEach(subitem => { subitem.classList.remove('active'); });
@@ -222,7 +222,7 @@ function byokScriptsEvents() {
                 }
             }
         }
-        console.log('tier',tier);
+        //console.log('tier',tier);
         return tier;
     };
     Shopify.byob.dRUpdateSubtotal = function () {
@@ -440,7 +440,7 @@ function byokScriptsEvents() {
             }
         });
         Shopify.byob.dRUpdateCodeDiscountApply();
-        console.log('items',items);
+        //console.log('items',items);
         if (Object.keys(items).length > 0) {
             var attributes = {};
             attributes['BYOB'] = 'Yes';
@@ -466,15 +466,10 @@ function byokScriptsEvents() {
         }
         var idProduct = target.dataset.id;
         var wrapperProduct = document.querySelector('#product-grid .card-wrapper[data-id="' + idProduct + '"]');
-        var addCartProduct = wrapperProduct.querySelector('.addtocart-btn[data-id="' + idProduct + '"]');
-        //var deleteCartProduct = wrapperProduct.querySelector('.removetocart-btn[data-id="'+idProduct+'"]');
+        var addCartProduct = document.querySelectorAll('.addtocart-btn[data-id="' + idProduct + '"]');
         var inputCountProduct = wrapperProduct.querySelector('input[name="updates[' + idProduct + ']"]');
         var countProduct = parseInt(inputCountProduct.dataset.countOnetime);
-        //var countProductSubs = parseInt(inputCountProduct.dataset.countSubscription);
-        //var itemsToAddCountLast = Shopify.itemsToAddCount;
-        //var itemsToAddCountSubsLast = Shopify.itemsToAddCountSubs;
         var itemsToAddCountPrice = parseInt(inputCountProduct.dataset.price);
-        //var itemsToAddPriceLast = Shopify.itemsToAddPrice;
         if (Shopify.itemsToAddProducts[idProduct] == undefined) {
             Shopify.itemsToAddProducts[idProduct] = {
                 price: itemsToAddCountPrice,
@@ -489,20 +484,19 @@ function byokScriptsEvents() {
 
         countProduct = countProduct + 1;
         Shopify.itemsToAddCount = Shopify.itemsToAddCount + 1;
-        //Shopify.itemsToAddCountOne = Shopify.itemsToAddCountOne + 1;
-        //var cartCountProduct = wrapperProduct.querySelector('.cart-count-product-one');
         inputCountProduct.dataset.countOnetime = countProduct;
-        /*cartCountProduct.innerText = '+' + countProduct;
-        cartCountProduct.classList.remove("hidden");
-        cartCountProduct.style.display = 'block';*/
 
         //console.log('countProduct', countProduct);
         if (countProduct > 0) {
-            addCartProduct.innerText = 'Add 1 more';
-            addCartProduct.classList.add('more');
+            addCartProduct.forEach(item => {
+                item.innerText = 'Add 1 more';
+                item.classList.add('more');
+            });
         } else {
-            addCartProduct.innerText = 'Add';
-            addCartProduct.classList.remove('more');
+            addCartProduct.forEach(item => {
+                item.innerText = 'Add to Cart';
+                item.classList.remove('more');
+            });
         }
         if (Shopify.itemsToAddCount > 0) {
             document.querySelectorAll(".btn_show_byob").forEach(item => { item.classList.add('active') });
@@ -510,24 +504,20 @@ function byokScriptsEvents() {
             document.querySelectorAll(".btn_show_byob").forEach(item => { item.classList.remove('active') });
         }
 
-        /*if (isPopup == true) {
-            $.magnificPopup.close();
+        if (isPopup == true) {
+            _this.target.closest(".addtocart-btn").closest("modal-dialog").querySelector(".product-popup-modal__toggle").click();
         }
-        if (itemsToAddCountLast <= 0 && Shopify.itemsToAddCount > 0) {
-            $('.cart__checkout').removeClass('disabled').attr('disabled', false);
-        }*/
         Shopify.byob.dRAddSelectProduct(idProduct, countProduct, itemsToAddCountPrice, false);
         //console.log('Shopify.itemsToAddProducts',Shopify.itemsToAddProducts);
     };
 
-    document.addEventListener("click", (e, isPopup) => {
+    document.addEventListener("click", (e) => {
         if (e.target.closest(".addtocart-btn")) {
-            if (e.target.closest(".addtocart-btn").closest(".card-wrapper")) {
-                if (isPopup === undefined) {
-                    isPopup = false;
-                }
-                addToCartBtn(e.target.closest(".addtocart-btn"), this, isPopup);
+            let isPopup = false;
+            if (e.target.closest(".addtocart-btn").closest("modal-dialog")) {
+                isPopup = true;
             }
+            addToCartBtn(e.target.closest(".addtocart-btn"), e, isPopup);
         }
         if (e.target.closest(".js-cart_byob_data__quantity-plus")) {
             let dataId = e.target.closest(".cart_byob_item").getAttribute('data-product-id');
@@ -543,31 +533,16 @@ function byokScriptsEvents() {
                 //console.log('target', e.target.closest(".removetocart-btn"));
                 var idProduct = e.target.closest(".removetocart-btn").dataset.id;
                 var wrapperProduct = document.querySelector('#product-grid .card-wrapper[data-id="' + idProduct + '"]');
-                var addCartProduct = wrapperProduct.querySelector('.addtocart-btn[data-id="' + idProduct + '"]');
-                //var deleteCartProduct = wrapperProduct.querySelector('.removetocart-btn[data-id="'+idProduct+'"]');
+                var addCartProduct = document.querySelectorAll('.addtocart-btn[data-id="' + idProduct + '"]');
                 var inputCountProduct = wrapperProduct.querySelector('input[name="updates[' + idProduct + ']"]');
                 var countProduct = parseInt(inputCountProduct.dataset.countOnetime);
                 var countProductSubs = parseInt(inputCountProduct.dataset.countSubscription);
-                //var itemsToAddCountLast = Shopify.itemsToAddCount;
-                //var itemsToAddCountSubsLast = Shopify.itemsToAddCountSubs;
                 var itemsToAddCountPrice = parseInt(inputCountProduct.dataset.price);
-                //var itemsToAddPriceLast = Shopify.itemsToAddPrice;
         
                 if (countProduct > 0) {
                     countProduct = countProduct - 1;
                     Shopify.itemsToAddCount = Shopify.itemsToAddCount - 1;
-                    //Shopify.itemsToAddCountOne = Shopify.itemsToAddCountOne - 1;
-                    //var cartCountProduct = '#product-grid .card--product[data-variant-id="'+idProduct+'"] .cart-count-product-one';
                     inputCountProduct.dataset.countOnetime = countProduct;
-                    /*$(cartCountProduct).text('+' + countProduct);
-                    $(cartCountProduct).removeClass("hidden");
-                    if (countProduct == 0){
-                        $(cartCountProduct).addClass("hidden");
-                        $(cartCountProduct).hide();
-                    } else {
-                        $(cartCountProduct).removeClass("hidden");
-                        $(cartCountProduct).show();
-                    }*/
                     Shopify.itemsToAddPrice = Shopify.itemsToAddPrice - (itemsToAddCountPrice / 100);
                 }
                 if (Shopify.itemsToAddProducts[idProduct] != undefined) {
@@ -576,35 +551,19 @@ function byokScriptsEvents() {
                     } else {
                         Shopify.itemsToAddProducts[idProduct].qty = Shopify.itemsToAddProducts[idProduct].qty - 1;
                     }
-                    //Shopify.byob.dRUpdateProgressBar();
                 }
                 //console.log('countProduct', countProduct);
                 if (countProduct > 0) {
-                    addCartProduct.innerText = 'Add 1 more';
-                    addCartProduct.classList.add('more');
+                    addCartProduct.forEach(item => {
+                        item.innerText = 'Add 1 more';
+                        item.classList.add('more');
+                    });
                 } else {
-                    addCartProduct.innerText = 'Add to Cart';
-                    addCartProduct.classList.remove('more');
+                    addCartProduct.forEach(item => {
+                        item.innerText = 'Add to Cart';
+                        item.classList.remove('more');
+                    });
                 }
-                if (Shopify.itemsToAddCount > 0) {
-                    document.querySelectorAll(".btn_show_byob").forEach(item => { item.classList.add('active') });
-                } else {
-                    document.querySelectorAll(".btn_show_byob").forEach(item => { item.classList.remove('active') });
-                }
-                /*if((countProduct == 0) && (countProductSubs == 0)) {
-                    $(deleteCartProduct).hide();
-        
-                    $(wrapperProduct).removeClass("showBtnDelete");
-                } else {
-                    $(deleteCartProduct).removeClass("hidden");
-                    $(deleteCartProduct).show();
-                    $(deleteCartProduct).css('display', 'inline-block');
-                    $(wrapperProduct).addClass("showBtnDelete");
-                }*/
-        
-                /*if (itemsToAddCountLast > 0 && Shopify.itemsToAddCount == 0) {
-                    $('.cart__checkout').addClass('disabled').attr('disabled', true);
-                }*/
                 Shopify.byob.dRAddSelectProduct(idProduct, countProduct, itemsToAddCountPrice, false);
                 return false;
             }
@@ -640,29 +599,22 @@ function byokScriptsEvents() {
                 Shopify.byob.dRAddItemstoTheCart();
             }*/
         }
-        if (e.target.closest(".m-remove") || e.target.closest(".js-cart_byob_data__quantity-minus")) {
+        if (e.target.closest(".js-cart_byob_data__quantity-minus")) {
             let dataId = e.target.closest(".cart_byob_item").getAttribute('data-product-id');
             //console.log('removetocart-btn', document.querySelector('#product-grid .card-wrapper .removetocart-btn[data-id="' + dataId + '"]'));
             if (document.querySelector('#product-grid .card-wrapper .removetocart-btn[data-id="' + dataId + '"]') != null) {
                 document.querySelector('#product-grid .card-wrapper .removetocart-btn[data-id="' + dataId + '"]').click();
             }
         }
-        /*
-        if (e.target.closest("#close_byob") || e.target.closest("#overlay_byob")) {
-            document.querySelectorAll(".contain_cart_byob").forEach(item => {
-                item.classList.add('close_byob_contain');
-                item.classList.remove('show_byob_contain');
-            });
-            document.querySelectorAll("#overlay_byob").forEach(item => { item.style.display = "none" });
+        if (e.target.closest(".m-remove")) {
+            let dataId = e.target.closest(".cart_byob_item").getAttribute('data-product-id');
+            //console.log('removetocart-btn', document.querySelector('#product-grid .card-wrapper .removetocart-btn[data-id="' + dataId + '"]'));
+            if (document.querySelector('#product-grid .card-wrapper .removetocart-btn[data-id="' + dataId + '"]') != null) {
+                for (let index = 1; index <= document.querySelector('#product-grid .card-wrapper .product_byob_quantity[data-id="' + dataId + '"]').value; index++) {
+                    document.querySelector('#product-grid .card-wrapper .removetocart-btn[data-id="' + dataId + '"]').click();
+                }
+            }
         }
-        if (e.target.closest(".btn_show_byob")) {
-            document.querySelectorAll(".contain_cart_byob").forEach(item => {
-                item.classList.add('show_byob_contain');
-                item.classList.remove('close_byob_contain');
-            });
-            document.querySelectorAll("#overlay_byob").forEach(item => { item.style.display = "block" });
-        }
-        */
     });
 }
 

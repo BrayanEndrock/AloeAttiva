@@ -1,3 +1,14 @@
+
+{{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+{{ 'component-accordion.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-rte.css' | asset_url | stylesheet_tag }}
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'component-rating.css' | asset_url | stylesheet_tag }}
+{{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
+
+<link rel="stylesheet" href="{{ 'component-deferred-media.css' | asset_url }}" media="print" onload="this.media='all'">
+
 {{ 'template-collection.css' | asset_url | stylesheet_tag }}
 {{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
@@ -368,7 +379,7 @@
                                 {% assign fractional = price_split[1] | default: "00" %}
                                 <div class="subtotal_cart_byob-value-discount">{{ integral | append: '.' | append: fractional }}</div>
                             </div>
-                            <button id="btn_add_box" class="btn_add_box{% if byobCartTotalPriceCollectionQ == 0 %} disabled{% endif %}"{% if byobCartTotalPriceCollectionQ == 0 %} disabled{% endif %}>Add Box To Cart</button>
+                            <button id="btn_add_box" class="btn_add_box{% if byobCartTotalPriceCollectionQ == 0 %} disabled{% endif %}"{% if byobCartTotalPriceCollectionQ == 0 %} disabled{% endif %}>add to bag</button>
                             <button id="btn_clear_box" class="btn_clear_box{% if byobCartTotalPriceCollectionQ == 0 %} disabled{% endif %}"{% if byobCartTotalPriceCollectionQ == 0 %} disabled{% endif %}{% if byobCartTotalPriceCollectionQ == 0 %} style="display: none;"{% endif %}>Clear Cart</button>
                         </div>
                     </div>

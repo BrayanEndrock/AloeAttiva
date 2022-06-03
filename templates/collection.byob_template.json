@@ -61,7 +61,7 @@
         "collapse_on_larger_devices": false,
         "padding_top": 0,
         "padding_bottom": 0,
-        "custom_tier_message": "Spend $##SPEND## and get $##GET## OFF"
+        "custom_tier_message": "Spend <b>$##SPEND##<\/b> and get <b>$##GET## OFF<\/b>"
       }
     }
   },
