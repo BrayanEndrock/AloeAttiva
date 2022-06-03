@@ -529,6 +529,10 @@
   {%- endfor -%}
 </section>
 
+{%- comment -%} Sticky Add-to-cart {%- endcomment -%}
+{% include 'sticky-add-to-cart' %}
+{%- comment -%} END: Sticky Add-to-cart {%- endcomment -%}
+
 {% javascript %}
   class ProductModal extends ModalDialog {
     constructor() {
