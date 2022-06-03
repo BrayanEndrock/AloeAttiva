@@ -100,25 +100,11 @@
     "16445184171eba2d12": {
       "type": "image-banner",
       "blocks": {
-        "1644518417eb9d2474-0": {
-          "type": "heading",
-          "settings": {
-            "heading": "Say Aloe to Summer Sale",
-            "heading_size": "medium"
-          }
-        },
-        "1644518417eb9d2474-1": {
-          "type": "text",
-          "settings": {
-            "text": "save 30 % off our best selling bundles, sale ends today!",
-            "text_style": "body"
-          }
-        },
         "1644518417eb9d2474-2": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "SHOP & SAVE",
-            "button_link_1": "shopify:\/\/collections\/bundles",
+            "button_label_1": "SHOP",
+            "button_link_1": "shopify:\/\/collections\/all",
             "button_style_secondary_1": false,
             "button_label_2": "",
             "button_link_2": "shopify:\/\/pages\/about",
@@ -127,14 +113,12 @@
         }
       },
       "block_order": [
-        "1644518417eb9d2474-0",
-        "1644518417eb9d2474-1",
         "1644518417eb9d2474-2"
       ],
       "settings": {
-        "image": "shopify:\/\/shop_images\/AA_BEACH.jpg",
-        "image_overlay_opacity": 30,
-        "image_height": "large",
+        "image": "shopify:\/\/shop_images\/AA_BEACH2.jpg_copy.png",
+        "image_overlay_opacity": 0,
+        "image_height": "medium",
         "adapt_height_first_image": false,
         "desktop_content_position": "middle-center",
         "show_text_box": false,
@@ -143,23 +127,6 @@
         "mobile_content_alignment": "center",
         "stack_images_on_mobile": false,
         "show_text_below": false
-      }
-    },
-    "1651373989375f45ed": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Enjoy 30% off, while supplies last!",
-        "collection": "bundles",
-        "products_to_show": 2,
-        "color_scheme": "background-1",
-        "show_view_all": true,
-        "swipe_on_mobile": true,
-        "image_ratio": "adapt",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "padding_top": 0,
-        "padding_bottom": 0
       }
     },
     "16517799384a3081e4": {
@@ -182,7 +149,7 @@
         "16517799386d57162a-2": {
           "type": "button",
           "settings": {
-            "button_label": "Learn More About Why Our Aloe Is Better",
+            "button_label": "Learn More",
             "button_link": "shopify:\/\/blogs\/news\/why-is-our-aloe-different"
           }
         }
@@ -231,7 +198,7 @@
           "type": "heading",
           "settings": {
             "heading": "Hundreds of five star reviews say it all...",
-            "heading_size": "h1"
+            "heading_size": "h2"
           }
         },
         "16505723233ba3d18f-1": {
@@ -275,6 +242,23 @@
       ],
       "settings": {
         "include_margins": true
+      }
+    },
+    "1651373989375f45ed": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Bestselling Bundles",
+        "collection": "bundles",
+        "products_to_show": 2,
+        "color_scheme": "background-1",
+        "show_view_all": true,
+        "swipe_on_mobile": true,
+        "image_ratio": "adapt",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "collection-list": {
@@ -557,11 +541,11 @@
     "16508896397afca36a",
     "1652916037ca6beaff",
     "16445184171eba2d12",
-    "1651373989375f45ed",
     "16517799384a3081e4",
     "featured-collection",
     "1650572323276663ac",
     "1650572313dbdd9796",
+    "1651373989375f45ed",
     "collection-list",
     "16463407623c24c9d8",
     "image-with-text",

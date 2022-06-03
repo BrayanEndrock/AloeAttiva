@@ -17,7 +17,7 @@
       };
 
 
-      appstleLoadScript("https://cdn.shopify.com/s/files/1/0468/3730/1414/t/15/assets/appstle-subscription.js?v=1652394110");
+      appstleLoadScript("https://cdn.shopify.com/s/files/1/0468/3730/1414/t/20/assets/appstle-subscription.js?v=1654199499");
 
       window.RS = Window.RS || {};
       RS.Config = {
@@ -35,15 +35,15 @@
             "cartLineItemPriceSelector": "",
         },
         "enableCartWidgetFeature": "false",
-        "useUrlWithCustomerId": "false",
+        "useUrlWithCustomerId": "true",
         "atcButtonSelector": "div.product-form__buttons",
         "moneyFormat": "{% raw %}${{amount_no_decimals}}{% endraw %}",
-        "oneTimePurchaseText": "One Time Purchase",
+        "oneTimePurchaseText": "One time purchase",
         "shop": "aloe-attiva-italia.myshopify.com",
         "deliveryText": "delivery",
         "purchaseOptionsText": "Purchase Options",
         "manageSubscriptionButtonText": "Manage Subscription",
-        "subscriptionOptionText": "Subscribe and save",
+        "subscriptionOptionText": "Auto-Replenish: 15% off 1st order & 20% off recurring orders, plus free shipping (Over $50)",
         "sellingPlanSelectTitle": "DELIVERY FREQUENCY",
         "subscriptionPriceDisplayText": "",
         "tooltipTitle": "Subscription detail",
@@ -56,7 +56,7 @@
         "orderStatusManageSubscriptionTitle": "Subscription",
         "orderStatusManageSubscriptionDescription": "Continue to your account to view and manage your subscriptions. Please use the same email address that you used to buy the subscription.",
         "orderStatusManageSubscriptionButtonText": "Manage your subscription",
-        "subscriptionOptionSelectedByDefault" : false,
+        "subscriptionOptionSelectedByDefault" : true,
         "totalPricePerDeliveryText" : "{{prepaidPerDeliveryPrice}}\/delivery",
         "memberOnlySellingPlansJson": {},
         "nonMemberOnlySellingPlansJson": {},
