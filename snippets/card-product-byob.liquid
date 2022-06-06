@@ -69,6 +69,7 @@
       style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
       id="product-card--{{ card_product.handle }}"
       data-id="{{card_product.id}}" data-variant-id="{{variant_card.id}}" data-handle="{{card_product.handle}}" 
+      onclick="void(0)"
     >
       <input name="updates[{{variant_card.id}}]" type="hidden" data-count-onetime="{{ cart_count_product }}" data-count-subscription="{{ cart_count_product_subs }}" data-id="{{card_product.variants.first.id}}{% comment %}{{variant_card.id}}{% endcomment%}"  data-product-selling-plan-id="{{productSellingPlanId}}" data-name="{{ card_product.title }}" data-price="{{ variant_card.price }}" value="{{ cart_count_product }}" class="product_byob_quantity" />
       <div class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }}{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}" style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;">
@@ -927,6 +928,12 @@
             <span class="badge badge--bottom-left color-{{ settings.sale_badge_color_scheme }}">{{ 'products.product.on_sale' | t }}</span>
           {%- endif -%}
         </div>       
+        <div class="card_product-options">
+          <modal-opener class="product-popup-modal__opener no-js-hidden" data-modal="#PopupModal-{{ section.id }}-{{ card_product.id }}" style="width:100%;">
+            <button id="ProductPopup-{{ card_product }}" class="btn product-popup-modal__button" type="button" aria-haspopup="dialog">Show More</button>
+          </modal-opener>
+          <button type="button" class="btn addtocart-btn{% if variant_card == nil %} disabled{% endif %}"{% if variant_card == nil %} disabled{% endif %} data-id="{{variant_card.id}}" data-product-count="{{ cart_count_product }}" data-product-selling-plan-id="{{productSellingPlanId}}">{% if variant_card == nil %}Sold Out{% else %}{% if cart_count_product == 0 %}Add to Cart{% else %}Add 1 More{% endif %}{% endif %}</button>
+        </div>
       </div>
     </div>
   </div>

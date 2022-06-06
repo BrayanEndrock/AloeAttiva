@@ -485,6 +485,7 @@ function byokScriptsEvents() {
         countProduct = countProduct + 1;
         Shopify.itemsToAddCount = Shopify.itemsToAddCount + 1;
         inputCountProduct.dataset.countOnetime = countProduct;
+        inputCountProduct.value = countProduct;
 
         //console.log('countProduct', countProduct);
         if (countProduct > 0) {
@@ -543,6 +544,7 @@ function byokScriptsEvents() {
                     countProduct = countProduct - 1;
                     Shopify.itemsToAddCount = Shopify.itemsToAddCount - 1;
                     inputCountProduct.dataset.countOnetime = countProduct;
+                    inputCountProduct.value = countProduct;
                     Shopify.itemsToAddPrice = Shopify.itemsToAddPrice - (itemsToAddCountPrice / 100);
                 }
                 if (Shopify.itemsToAddProducts[idProduct] != undefined) {
@@ -606,11 +608,12 @@ function byokScriptsEvents() {
                 document.querySelector('#product-grid .card-wrapper .removetocart-btn[data-id="' + dataId + '"]').click();
             }
         }
-        if (e.target.closest(".m-remove")) {
+        if (e.target.closest(".m-remove")) { console.log('hola');
             let dataId = e.target.closest(".cart_byob_item").getAttribute('data-product-id');
             //console.log('removetocart-btn', document.querySelector('#product-grid .card-wrapper .removetocart-btn[data-id="' + dataId + '"]'));
             if (document.querySelector('#product-grid .card-wrapper .removetocart-btn[data-id="' + dataId + '"]') != null) {
-                for (let index = 1; index <= document.querySelector('#product-grid .card-wrapper .product_byob_quantity[data-id="' + dataId + '"]').value; index++) {
+                let indexCount = document.querySelector('#product-grid .card-wrapper .product_byob_quantity[data-id="' + dataId + '"]').value;
+                for (let index = 1; index <= indexCount; index++) {
                     document.querySelector('#product-grid .card-wrapper .removetocart-btn[data-id="' + dataId + '"]').click();
                 }
             }
