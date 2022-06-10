@@ -608,7 +608,7 @@ function byokScriptsEvents() {
                 document.querySelector('#product-grid .card-wrapper .removetocart-btn[data-id="' + dataId + '"]').click();
             }
         }
-        if (e.target.closest(".m-remove")) { console.log('hola');
+        if (e.target.closest(".m-remove")) {
             let dataId = e.target.closest(".cart_byob_item").getAttribute('data-product-id');
             //console.log('removetocart-btn', document.querySelector('#product-grid .card-wrapper .removetocart-btn[data-id="' + dataId + '"]'));
             if (document.querySelector('#product-grid .card-wrapper .removetocart-btn[data-id="' + dataId + '"]') != null) {

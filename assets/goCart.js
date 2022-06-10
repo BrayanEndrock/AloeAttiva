@@ -942,17 +942,18 @@
                           t.closeCartOverlay();
                       });
                     }),
-                  this.cartModalFailClose && this.cartModalFailClose.addEventListener(
-                    "click",
-                    function () {
-                      t.closeFailModal(),
-                        t.closeCartModal(),
-                        t.isDrawerMode
-                          ? t.closeCartDrawer()
-                          : t.closeMiniCart(),
-                        t.closeCartOverlay();
-                    }
-                  );
+                  this.cartModalFailClose &&
+                    this.cartModalFailClose.addEventListener(
+                      "click",
+                      function () {
+                        t.closeFailModal(),
+                          t.closeCartModal(),
+                          t.isDrawerMode
+                            ? t.closeCartDrawer()
+                            : t.closeMiniCart(),
+                          t.closeCartOverlay();
+                      }
+                    );
               },
             },
             {
@@ -1270,14 +1271,14 @@
                     if( subtotalCart < 1) {
                       document.getElementById('freeShippingPromo').classList.remove('hide');
                       document.getElementById('freeShippingReached').classList.add('hide');
-                      goal = 5000;
+                      goal = 4500;
                       document.querySelector('.goal').innerHTML = formatMoney(goal, this.moneyFormat);
-                    } else if ( subtotalCart >= 1 && subtotalCart < 5000) {
+                    } else if ( subtotalCart >= 1 && subtotalCart < 4500) {
                       document.getElementById('freeShippingPromo').classList.remove('hide');
                       document.getElementById('freeShippingReached').classList.add('hide');
-                      goal = 5000 - subtotalCart;
+                      goal = 4500 - subtotalCart;
                       document.querySelector('.goal').innerHTML = formatMoney(goal, this.moneyFormat);
-                    } else if(subtotalCart >= 5000) {
+                    } else if(subtotalCart >= 4500) {
                       document.getElementById('freeShippingPromo').classList.add('hide');
                       document.getElementById('freeShippingReached').classList.remove('hide');
                     }
@@ -1390,7 +1391,7 @@
                 this.cartDrawerSubTotal.parentNode.classList.add("is-invisible"),
                 document.getElementById('freeShippingPromo').classList.remove('hide'),
                 document.getElementById('freeShippingReached').classList.add('hide'),
-                document.querySelector('.goal').innerHTML = formatMoney(5000, this.moneyFormat),
+                document.querySelector('.goal').innerHTML = formatMoney(4500, this.moneyFormat),
                 document.querySelector('.cart-count-bubble').classList.add("is-invisible"),
                 document.querySelector('.go-cart-drawer__order-instructions').classList.add("is-invisible");
               },
