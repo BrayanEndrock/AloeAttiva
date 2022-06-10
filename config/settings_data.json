@@ -23,9 +23,9 @@
           "announcement-bar-0": {
             "type": "announcement",
             "settings": {
-              "text": "EXPERIENCE OUR BESTSELLING TRIO",
+              "text": "NEW! BUILD YOUR OWN BUNDLE AND SAVE",
               "color_scheme": "accent-1",
-              "link": "shopify:\/\/products\/all-the-amore-skincare-set"
+              "link": "shopify:\/\/collections\/byob"
             }
           }
         },
@@ -96,7 +96,8 @@
         "settings": {
           "title": "Your cart",
           "label": "Continue shopping",
-          "link": "shopify:\/\/collections\/all"
+          "link": "shopify:\/\/collections\/all",
+          "upsell-title": "Recommended Products"
         }
       }
     },
