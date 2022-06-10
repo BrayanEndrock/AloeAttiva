@@ -1157,7 +1157,7 @@
                           <div class="go-cart-item__info-wrapper">\n
                             <div class="go-cart-item__image" style="background-image: url(${t.image});"></div>\n
                             <div class="go-cart-item__info">\n
-                              <${ isBYOP == false ? 'a href="' + t.url : 'div'} class="go-cart-item__title">${ t.product_title }</${ isBYOP == false ? 'a' : 'div'}>\n
+                              <${ isBYOP == false ? 'a href="' + t.url + '"' : 'div'} class="go-cart-item__title">${ t.product_title }</${ isBYOP == false ? 'a' : 'div'}>\n
                               <div class="go-cart-item__price-item">${ formatMoney(t.line_price, e.moneyFormat) }</div>\n
                               <div class="go-cart-item__variant">${ a }</div>\n
                               ${ isBYOP == false ? oQuantity : '<input type="hidden" value="' + t.quantity + '"><div class="">' + t.quantity + '</div>\n'}
