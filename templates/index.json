@@ -103,7 +103,7 @@
         "1644518417eb9d2474-2": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "SHOP",
+            "button_label_1": "",
             "button_link_1": "shopify:\/\/collections\/all",
             "button_style_secondary_1": false,
             "button_label_2": "",
@@ -135,14 +135,14 @@
         "16517799386d57162a-0": {
           "type": "heading",
           "settings": {
-            "heading": "Experience our patented 4X Aloe Activated Elixir",
+            "heading": "Experience Our Patented 4X Aloe Activated Elixir",
             "heading_size": "h2"
           }
         },
         "16517799386d57162a-1": {
           "type": "text",
           "settings": {
-            "text": "<p><strong>Clinically Proven to be                      four times<\/strong><em><strong> (4x) more effective<\/strong><\/em><strong> than commercial grade Aloe!<\/strong><\/p>",
+            "text": "<p><strong>Clinically Proven to be<\/strong><\/p><p><strong>                      Four Times<\/strong><em><strong> (4X) More Effective<\/strong><\/em><strong> Than Commercial Grade Aloe!<\/strong><\/p>",
             "text_style": "subtitle"
           }
         },
@@ -162,11 +162,11 @@
       "settings": {
         "image": "shopify:\/\/shop_images\/20F75200-342A-404B-85F6-795A94940FE8_2.jpg",
         "height": "adapt",
-        "desktop_image_width": "small",
+        "desktop_image_width": "medium",
         "layout": "text_first",
-        "desktop_content_position": "middle",
+        "desktop_content_position": "top",
         "desktop_content_alignment": "center",
-        "content_layout": "no-overlap",
+        "content_layout": "overlap",
         "color_scheme": "accent-1",
         "mobile_content_alignment": "center",
         "padding_top": 0,
@@ -234,7 +234,8 @@
       "blocks": {
         "52c1ee46-c811-48b1-b691-4bd186161f1c": {
           "type": "shopify:\/\/apps\/product-reviews-ugc-with-q-a\/blocks\/carousel-widget\/34006358-52bd-4ec7-8c78-200fe58b77ba",
-          "settings": {}
+          "settings": {
+          }
         }
       },
       "block_order": [
@@ -292,7 +293,7 @@
         "title": "Skincare Solutions",
         "image_ratio": "portrait",
         "color_scheme": "background-1",
-        "swipe_on_mobile": true,
+        "swipe_on_mobile": false,
         "show_view_all": false,
         "padding_top": 0,
         "padding_bottom": 0
@@ -331,8 +332,8 @@
       "settings": {
         "color_scheme": "accent-1",
         "full_width": true,
-        "padding_top": 20,
-        "padding_bottom": 20
+        "padding_top": 36,
+        "padding_bottom": 44
       }
     },
     "image-with-text": {
@@ -522,7 +523,8 @@
         },
         "newsletter-2": {
           "type": "email_form",
-          "settings": {}
+          "settings": {
+          }
         }
       },
       "block_order": [
