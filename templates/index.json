@@ -103,7 +103,7 @@
         "1644518417eb9d2474-2": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "SHOP",
+            "button_label_1": "",
             "button_link_1": "shopify:\/\/collections\/all",
             "button_style_secondary_1": false,
             "button_label_2": "",
@@ -129,20 +129,64 @@
         "show_text_below": false
       }
     },
+    "165489133704f05170": {
+      "type": "image-with-text",
+      "blocks": {
+        "165489133729937939-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "Build Your Own Bundle",
+            "heading_size": "h1"
+          }
+        },
+        "165489133729937939-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>NEW!<\/strong><\/p><p><strong>Build your own bundle of our signature skincare products & save.<\/strong><\/p>",
+            "text_style": "body"
+          }
+        },
+        "165489133729937939-2": {
+          "type": "button",
+          "settings": {
+            "button_label": "Build My Bundle",
+            "button_link": "shopify:\/\/collections\/byob"
+          }
+        }
+      },
+      "block_order": [
+        "165489133729937939-0",
+        "165489133729937939-1",
+        "165489133729937939-2"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/MDW-BANNER.jpg",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "accent-1",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "16517799384a3081e4": {
       "type": "image-with-text",
       "blocks": {
         "16517799386d57162a-0": {
           "type": "heading",
           "settings": {
-            "heading": "Experience our patented 4X Aloe Activated Elixir",
+            "heading": "Experience Our Patented 4X Aloe Activated Elixir",
             "heading_size": "h2"
           }
         },
         "16517799386d57162a-1": {
           "type": "text",
           "settings": {
-            "text": "<p><strong>Clinically Proven to be                      four times<\/strong><em><strong> (4x) more effective<\/strong><\/em><strong> than commercial grade Aloe!<\/strong><\/p>",
+            "text": "<p><strong>Clinically Proven to be<\/strong><\/p><p><strong>                      Four Times<\/strong><em><strong> (4X) More Effective<\/strong><\/em><strong> Than Commercial Grade Aloe!<\/strong><\/p>",
             "text_style": "subtitle"
           }
         },
@@ -162,11 +206,11 @@
       "settings": {
         "image": "shopify:\/\/shop_images\/20F75200-342A-404B-85F6-795A94940FE8_2.jpg",
         "height": "adapt",
-        "desktop_image_width": "small",
+        "desktop_image_width": "medium",
         "layout": "text_first",
-        "desktop_content_position": "middle",
+        "desktop_content_position": "top",
         "desktop_content_alignment": "center",
-        "content_layout": "no-overlap",
+        "content_layout": "overlap",
         "color_scheme": "accent-1",
         "mobile_content_alignment": "center",
         "padding_top": 0,
@@ -292,7 +336,7 @@
         "title": "Skincare Solutions",
         "image_ratio": "portrait",
         "color_scheme": "background-1",
-        "swipe_on_mobile": true,
+        "swipe_on_mobile": false,
         "show_view_all": false,
         "padding_top": 0,
         "padding_bottom": 0
@@ -331,8 +375,8 @@
       "settings": {
         "color_scheme": "accent-1",
         "full_width": true,
-        "padding_top": 20,
-        "padding_bottom": 20
+        "padding_top": 36,
+        "padding_bottom": 44
       }
     },
     "image-with-text": {
@@ -492,25 +536,6 @@
         "padding_bottom": 0
       }
     },
-    "165230573328323c46": {
-      "type": "home-instagram-link",
-      "settings": {
-        "label": "@ A l o e A t t i v a",
-        "link": "https:\/\/instagram.com\/aloeattiva",
-        "padding_top": 28,
-        "padding_bottom": 28,
-        "color_scheme": "background-2"
-      }
-    },
-    "164634066905f752a2": {
-      "type": "custom-liquid",
-      "settings": {
-        "custom_liquid": "<script src=\"https:\/\/apps.elfsight.com\/p\/platform.js\" defer><\/script>\n<div class=\"elfsight-app-584a91ef-dd0b-4d6f-bba9-7171ee275732\"><\/div>",
-        "color_scheme": "background-2",
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
     "newsletter": {
       "type": "newsletter",
       "blocks": {
@@ -541,6 +566,7 @@
     "16508896397afca36a",
     "1652916037ca6beaff",
     "16445184171eba2d12",
+    "165489133704f05170",
     "16517799384a3081e4",
     "featured-collection",
     "1650572323276663ac",
@@ -552,8 +578,6 @@
     "collage",
     "multicolumn",
     "1651785177bea040d1",
-    "165230573328323c46",
-    "164634066905f752a2",
     "newsletter"
   ]
 }

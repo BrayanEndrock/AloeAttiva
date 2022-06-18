@@ -17,7 +17,7 @@
       };
 
 
-      appstleLoadScript("https://cdn.shopify.com/s/files/1/0468/3730/1414/t/20/assets/appstle-subscription.js?v=1654199499");
+      appstleLoadScript("https://cdn.shopify.com/s/files/1/0468/3730/1414/t/20/assets/appstle-subscription.js?v=1654619311");
 
       window.RS = Window.RS || {};
       RS.Config = {
@@ -43,7 +43,7 @@
         "deliveryText": "delivery",
         "purchaseOptionsText": "Purchase Options",
         "manageSubscriptionButtonText": "Manage Subscription",
-        "subscriptionOptionText": "Auto-Replenish: 15% off 1st order & 20% off recurring orders, plus free shipping (Over $50)",
+        "subscriptionOptionText": "Auto-Replenish: 15% off 1st order & 20% off recurring orders, plus free shipping (Over $45)",
         "sellingPlanSelectTitle": "DELIVERY FREQUENCY",
         "subscriptionPriceDisplayText": "",
         "tooltipTitle": "Subscription detail",

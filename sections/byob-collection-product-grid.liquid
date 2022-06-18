@@ -1,0 +1,700 @@
+
+{{ 'section-main-product.css' | asset_url | stylesheet_tag }}
+{{ 'component-accordion.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+{{ 'component-rte.css' | asset_url | stylesheet_tag }}
+{{ 'component-slider.css' | asset_url | stylesheet_tag }}
+{{ 'component-rating.css' | asset_url | stylesheet_tag }}
+{{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
+
+<link rel="stylesheet" href="{{ 'component-deferred-media.css' | asset_url }}" media="print" onload="this.media='all'">
+
+{{ 'template-collection.css' | asset_url | stylesheet_tag }}
+{{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
+{{ 'component-card.css' | asset_url | stylesheet_tag }}
+{{ 'component-price.css' | asset_url | stylesheet_tag }}
+
+<link rel="preload" href="{{ 'component-rte.css' | asset_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<noscript>{{ 'component-rte.css' | asset_url | stylesheet_tag }}</noscript>
+
+{{ 'template-collection-byob.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+    .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+        padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+
+    @media screen and (min-width: 750px) {
+        .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+        }
+    }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding contain_collection_byob">
+    {%- if section.settings.enable_filtering or section.settings.enable_sorting -%}
+        {{ 'component-facets.css' | asset_url | stylesheet_tag }}
+        <script src="{{ 'facets.js' | asset_url }}" defer="defer"></script>
+    
+        <div class="page-width" id="main-collection-filters" data-id="{{ section.id }}">
+            {% render 'facets', results: collection, enable_filtering: section.settings.enable_filtering, enable_sorting: section.settings.enable_sorting, collapse_on_larger_devices: section.settings.collapse_on_larger_devices %}
+        </div>
+    {%- endif -%}
+  
+    <div id="ProductGridContainer">
+        {%- paginate collection.products by collection.all_products_count -%}
+            {%- liquid
+                assign byobCustomTierMessage = section.settings.custom_tier_message
+                assign byobTiers = ''
+                assign byobTiersMessage = ''
+
+                assign byobTier1Spend = false
+                assign byobTier1Get = 0
+                assign byobTier1TargetDiscound = ''
+                assign byobTier1CustomMessage = ''
+                assign byobTier1Tier = ''
+                if section.blocks[0].settings.spend != nil
+                    assign byobTier1Spend = section.blocks[0].settings.spend
+                    assign byobTier1Get = section.blocks[0].settings.get
+                    assign byobTier1TargetDiscound = section.blocks[0].settings.target_discount
+                    assign byobTier1CustomMessage = section.blocks[0].settings.custom_message
+                    assign byobTier1Tier = section.blocks[0].settings.tier
+                    capture byobTiersMessage
+                        echo byobTiersMessage
+                        echo '<li>'
+                        if byobTier1CustomMessage != blank
+                            echo byobTier1CustomMessage
+                        else
+                            echo byobCustomTierMessage | replace: '##SPEND##', byobTier1Spend | replace: '##GET##', byobTier1Get
+                        endif
+                        echo '</li>'
+                    endcapture
+                endif
+
+                assign byobTier2Spend = false
+                assign byobTier2Get = 0
+                assign byobTier2TargetDiscound = ''
+                assign byobTier2CustomMessage = ''
+                if section.blocks[1].settings.spend != nil
+                    assign byobTier2Spend = section.blocks[1].settings.spend
+                    assign byobTier2Get = section.blocks[1].settings.get
+                    assign byobTier2TargetDiscound = section.blocks[1].settings.target_discount
+                    assign byobTier2CustomMessage = section.blocks[1].settings.custom_message
+                    assign byobTier2Tier = section.blocks[1].settings.tier
+                    capture byobTiersMessage
+                        echo byobTiersMessage
+                        echo '<li>'
+                        if byobTier2CustomMessage != blank
+                            echo byobTier2CustomMessage
+                        else
+                            echo byobCustomTierMessage | replace: '##SPEND##', byobTier2Spend | replace: '##GET##', byobTier2Get
+                        endif
+                        echo '</li>'
+                    endcapture
+                endif
+
+                assign byobTier3Spend = false
+                assign byobTier3Get = 0
+                assign byobTier3TargetDiscound = ''
+                assign byobTier3CustomMessage = ''
+                if section.blocks[2].settings.spend != nil
+                    assign byobTier3Spend = section.blocks[2].settings.spend
+                    assign byobTier3Get = section.blocks[2].settings.get
+                    assign byobTier3TargetDiscound = section.blocks[2].settings.target_discount
+                    assign byobTier3CustomMessage = section.blocks[2].settings.custom_message
+                    assign byobTier3Tier = section.blocks[2].settings.tier
+                    capture byobTiersMessage
+                        echo byobTiersMessage
+                        echo '<li>'
+                        if byobTier3CustomMessage != blank
+                            echo byobTier3CustomMessage
+                        else
+                            echo byobCustomTierMessage | replace: '##SPEND##', byobTier3Spend | replace: '##GET##', byobTier3Get
+                        endif
+                        echo '</li>'
+                    endcapture
+                endif
+
+                assign byobTier4Spend = false
+                assign byobTier4Get = 0
+                assign byobTier4TargetDiscound = ''
+                assign byobTier4CustomMessage = ''
+                if section.blocks[3].settings.spend != nil
+                    assign byobTier4Spend = section.blocks[3].settings.spend
+                    assign byobTier4Get = section.blocks[3].settings.get
+                    assign byobTier4TargetDiscound = section.blocks[3].settings.target_discount
+                    assign byobTier4CustomMessage = section.blocks[3].settings.custom_message
+                    assign byobTier4Tier = section.blocks[3].settings.tier
+                    capture byobTiersMessage
+                        echo byobTiersMessage
+                        echo '<li>'
+                        if byobTier4CustomMessage != blank
+                            echo byobTier4CustomMessage
+                        else
+                            echo byobCustomTierMessage | replace: '##SPEND##', byobTier4Spend | replace: '##GET##', byobTier4Get
+                        endif
+                        echo '</li>'
+                    endcapture
+                endif
+            -%}
+            {%- if collection.products.size == 0 -%}
+                <div class="collection collection--empty page-width" id="product-grid" data-id="{{ section.id }}">
+                    <div class="loading-overlay gradient"></div>
+                    <div class="title-wrapper center">
+                        <h2 class="title title--primary">
+                            {{ 'sections.collection_template.empty' | t }}<br>
+                            {{ 'sections.collection_template.use_fewer_filters_html' | t: link: collection.url, class: "underlined-link link" }}
+                        </h2>
+                    </div>
+                </div>
+            {%- else -%}
+                {%- liquid
+                    assign byobCartProductsId = ''
+                    assign byobCartProductsPrice = ''
+                    assign byobCartProductsQty = ''
+                    assign byobCartProducts = ''
+                    assign byobCartProductsCount = 0
+                    assign byobCartTotalPriceCollection = 0
+                    assign byobCartTotalPriceCollectionQ = 0
+                    assign byobCartTotalPriceCollectionShow = 0
+
+                    assign byobProducts = ''
+                    assign byobItemProductCount = 0
+                    for product in collection.products
+                        assign lazy_load = false
+                        if forloop.index > 2
+                            assign lazy_load = true
+                        endif
+
+                        assign byobItemProductCount = 0
+                        for line_item in cart.items
+                            if line_item.product.available and line_item.variant_id == product.first_available_variant.id
+                                capture byobCartProducts
+                                    assign dataId = line_item.product.selected_or_first_available_variant.id
+                                    assign dataHandle = line_item.product.handle
+                                    assign dataImage = line_item.product
+                                    if line_item.product.metafields.global.image_byob
+                                        assign dataImage = line_item.product.metafields.global.image_byob.value
+                                    endif
+                                    capture dataProductImage
+                                        if dataImage.width >= 165
+                                            echo dataImage | image_url: width: 165 | append: ' 165w,'
+                                        endif
+                                        if dataImage.width >= 360
+                                            echo dataImage | image_url: width: 360 | append: '360w,'
+                                        endif
+                                        if dataImage.width >= 533
+                                            echo dataImage | image_url: width: 533 | append: '533w,'
+                                        endif
+                                        if dataImage.width >= 720
+                                            echo dataImage | image_url: width: 720 | append: '720w,'
+                                        endif
+                                        if dataImage.width >= 940
+                                            echo dataImage | image_url: width: 940 | append: '940w,'
+                                        endif
+                                        if dataImage.width >= 1066
+                                            echo dataImage | image_url: width: 1066 | append: '1066w'
+                                        endif
+                                    endcapture
+                                    assign dataProductImage30 = dataImage | image_url: width: 533
+                                    assign dataProductImageWidth = dataImage.width
+                                    assign dataProductImageHeight = dataImage.height
+                                    assign dataProductTitle = line_item.product.title
+                                    assign dataProductPrice = line_item.product.price | money
+                                    assign dataSize = settings.page_width | minus: 130 | divided_by: 4
+                                    echo byobCartProducts
+                                    echo '<li class="cart_byob_item" data-product-id="' | append: dataId  | append: '" data-qty="1">'
+                                    echo '  <div class="cart_byob_img">'
+                                    echo '    <img'
+                                    echo '        srcset="' | append: dataProductImage  | append: '"'
+                                    echo '        src="' | append: dataProductImage30  | append: '"'
+                                    echo '        sizes="(min-width: ' | append: settings.page_width | append: 'px) ' | append: dataSize | append: 'px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)"'
+                                    echo '        alt="' | append: dataProductTitle  | append: '"'
+                                    echo '        loading="lazy"'
+                                    echo '        class="motion-reduce"'
+                                    echo '        width="' | append: dataProductImageWidth  | append: '"'
+                                    echo '        height="' | append: dataProductImageHeight  | append: '"'
+                                    echo '        >'
+                                    echo '    <div class="m-remove" data-id="' | append: dataId  | append: '">'
+                                    echo '        <svg width="7" height="6" viewBox="0 0 7 6" fill="none" xmlns="http://www.w3.org/2000/svg">'
+                                    echo '            <path d="M5.96947 0.083252L3.6403 2.41242L1.31113 0.083252L0.723633 0.670752L3.0528 2.99992L0.723633 5.32909L1.31113 5.91659L3.6403 3.58742L5.96947 5.91659L6.55697 5.32909L4.2278 2.99992L6.55697 0.670752L5.96947 0.083252Z" fill="#313131"/>'
+                                    echo '        </svg>'
+                                    echo '    </div>'
+                                    echo '  </div>'
+                                    echo '  <div class="cart_byob_data">'
+                                    echo '    <!--<div class="cart_byob_data-left">'
+                                    echo '        <p class="cart_byob_title">' | append: dataProductTitle  | append: '</p>'
+                                    echo '        <p class="cart_byob_price">' | append: dataProductPrice  | append: '</p>'
+                                    echo '    </div>-->'
+                                    echo '    <div class="cart_byob_data__quantity">'
+                                    echo '        <span class="cart_byob_data__quantity-label">Quantity: </span>'
+                                    echo '        <span class="cart_byob_data__quantity-button js-cart_byob_data__quantity-minus">-</span>'
+                                    echo '        <input class="cart_byob_data__quantity-number js-cart_byob_data__quantity" type="number" value="' | append: line_item.quantity | append: '" disabled="">'
+                                    echo '        <span class="cart_byob_data__quantity-button js-cart_byob_data__quantity-plus">+</span>'
+                                    echo '    </div>'
+                                    echo '  </div>'
+                                    echo '</li>'
+                                endcapture
+
+                                assign byobCartProductsCount = byobCartProductsCount | plus: line_item.quantity
+                                assign byobItemProductCount = byobItemProductCount | plus: line_item.quantity
+
+                                if byobCartProductsId != ''
+                                    assign byobCartProductsId = byobCartProductsId | append: ','
+                                    assign byobCartProductsPrice = byobCartProductsPrice | append: ','
+                                    assign byobCartProductsQty = byobCartProductsQty | append: ','
+                                endif
+
+                                assign price = line_item.final_price | times: byobItemProductCount
+                                assign byobCartTotalPriceCollectionShow = byobCartTotalPriceCollectionShow | plus: price
+
+                                assign byobCartProductsPrice = byobCartProductsPrice | append: line_item.final_price
+                                assign byobCartTotalPriceCollectionQ = byobCartTotalPriceCollectionQ | plus: byobItemProductCount
+                                assign byobCartTotalPriceCollection = byobCartTotalPriceCollection | plus: price
+
+                                assign byobCartProductsId = byobCartProductsId | append: line_item.product.selected_or_first_available_variant.id
+                                assign byobCartProductsQty = byobCartProductsQty | append: byobItemProductCount
+
+                                comment
+                                echo 'byobCartTotalPriceCollectionShow=' | append: byobCartTotalPriceCollectionShow
+                                echo 'byobCartTotalPriceCollection=' | append: byobCartTotalPriceCollection
+                                endcomment
+                            endif
+                        endfor
+                        
+                        comment
+                        echo '_-byobCartTotalPriceCollectionShow=' | append: byobCartTotalPriceCollectionShow | append: '-_'
+                        echo '_-byobCartTotalPriceCollection=' | append: byobCartTotalPriceCollection | append: '-_'
+                        endcomment
+
+                        capture byobProducts
+                            echo byobProducts
+                            echo '<li class="grid__item">'
+                                render 'card-product-byob', card_product: product, media_aspect_ratio: section.settings.image_ratio, show_secondary_image: section.settings.show_secondary_image, show_vendor: section.settings.show_vendor, show_rating: section.settings.show_rating, lazy_load: lazy_load, cartCountProduct: byobItemProductCount
+                            echo '</li>'
+                        endcapture
+                    endfor
+    
+                    assign byobCartTotalPriceCollection = byobCartTotalPriceCollection | divided_by: 100
+                    assign byobCartTotalPriceCollectionShow = byobCartTotalPriceCollection
+                    if byobTier1Spend != false
+                        capture byobTiers
+                            echo byobTiers
+                            assign byobTierActive = ''
+                            if byobTier2Spend != nil
+                                if byobTier1Spend <= byobCartTotalPriceCollection and byobTier2Spend >= byobCartTotalPriceCollection
+                                    assign byobTierActive = ' active'
+                                endif
+                            else
+                                if byobTier1Spend <= byobCartTotalPriceCollection
+                                    assign byobTierActive = ' active'
+                                endif
+                            endif
+                            echo '<li class="tier-1' | append: byobTierActive | append: '"><span>Get</span><div>' | append: byobTier1Tier | append: '</div></li>'
+                            if byobTierActive != ''
+                                assign byobCartTotalPriceCollectionShow = byobCartTotalPriceCollection | minus: byobTier1Get
+                            endif
+                        endcapture
+                    endif
+    
+                    if byobTier2Spend != false
+                        capture byobTiers
+                            echo byobTiers
+                            assign byobTierActive = ''
+                            if byobTier3Spend != nil
+                                if byobTier2Spend <= byobCartTotalPriceCollection and byobTier3Spend >= byobCartTotalPriceCollection
+                                    assign byobTierActive = ' active'
+                                endif
+                            else
+                                if byobTier2Spend <= byobCartTotalPriceCollection
+                                    assign byobTierActive = ' active'
+                                endif
+                            endif
+                            echo '<li class="tier-2' | append: byobTierActive | append: '"><span>Get</span><div>' | append: byobTier2Tier | append: '</div></li>'
+                            if byobTierActive != ''
+                                assign byobCartTotalPriceCollectionShow = byobCartTotalPriceCollection | minus: byobTier2Get
+                            endif
+                        endcapture
+                    endif
+    
+                    if byobTier3Spend != false
+                        capture byobTiers
+                            echo byobTiers
+                            assign byobTierActive = ''
+                            if byobTier4Spend != nil
+                                if byobTier3Spend <= byobCartTotalPriceCollection and byobTier4Spend >= byobCartTotalPriceCollection
+                                    assign byobTierActive = ' active'
+                                endif
+                            else
+                                if byobTier3Spend <= byobCartTotalPriceCollection
+                                    assign byobTierActive = ' active'
+                                endif
+                            endif
+                            echo '<li class="tier-3' | append: byobTierActive | append: '"><span>Get</span><div>' | append: byobTier3Tier | append: '</div></li>'
+                            if byobTierActive != ''
+                                assign byobCartTotalPriceCollectionShow = byobCartTotalPriceCollection | minus: byobTier3Get
+                            endif
+                        endcapture
+                    endif
+    
+                    if byobTier4Spend != nil
+                        capture byobTiers
+                            echo byobTiers
+                            assign byobTierActive = ''
+                            if byobTier4Spend <= byobCartTotalPriceCollection
+                                assign byobTierActive = ' active'
+                            endif
+                            echo '<li class="tier-4' | append: byobTierActive | append: '"><span>Get</span><div>' | append: byobTier4Tier | append: '</div></li>'
+                            if byobTierActive != ''
+                                assign byobCartTotalPriceCollectionShow = byobCartTotalPriceCollection | minus: byobTier4Get
+                            endif
+                        endcapture
+                    endif
+                -%}
+                <div class="collection page-width">
+                    <div class="loading-overlay gradient"></div>
+                    <div class="byob-header">
+                        <div class="title_contain_byob">
+                            <h1>{{ collection.title }}</h1>
+                            <div class="">{{ collection.description }}</div>
+                            {{ '<ul>' | append: byobTiersMessage | append: '</ul>' }}
+                        </div>
+                        <div class="products_contain_byob">
+                            <ul class="byob-tiers">{{ byobTiers }}</ul>
+                            <ul class="byob-products">{{ byobCartProducts }}</ul>
+                            <div class="products_contain_byob-value"{% if byobCartTotalPriceCollectionQ == 0 %} style="display: none;"{% endif %%}>Items Added : <b>{{ byobCartTotalPriceCollection | times: 100 | money_without_trailing_zeros }}</b></div>
+                        </div>
+                        <div class="options_contain_byob">
+                            <div class="subtotal_cart_byob_wrapper">
+                                <div class="subtotal_cart_byob-label">Subtotal</div>
+                                {% assign price_split = byobCartTotalPriceCollection | times: 100 | money | split: "." %}
+                                {% assign integral = price_split[0] %}
+                                {% assign fractional = price_split[1] | default: "00" %}
+                                <div class="subtotal_cart_byob-value"{% if byobCartTotalPriceCollectionShow == byobCartTotalPriceCollection %} style="display: none;"{% endif %%}>{{ integral | append: '.' | append: fractional }}</div>
+                                {% assign price_split = byobCartTotalPriceCollectionShow | times: 100 | money | split: "." %}
+                                {% assign integral = price_split[0] %}
+                                {% assign fractional = price_split[1] | default: "00" %}
+                                <div class="subtotal_cart_byob-value-discount">{{ integral | append: '.' | append: fractional }}</div>
+                            </div>
+                            <button id="btn_add_box" class="btn_add_box{% if byobCartTotalPriceCollectionQ == 0 %} disabled{% endif %}"{% if byobCartTotalPriceCollectionQ == 0 %} disabled{% endif %}>add to bag</button>
+                            <button id="btn_clear_box" class="btn_clear_box{% if byobCartTotalPriceCollectionQ == 0 %} disabled{% endif %}"{% if byobCartTotalPriceCollectionQ == 0 %} disabled{% endif %}{% if byobCartTotalPriceCollectionQ == 0 %} style="display: none;"{% endif %}>Clear Cart</button>
+                        </div>
+                    </div>
+            
+                    <ul id="product-grid" data-id="{{ section.id }}" class="grid grid--2-col product-grid
+                        {%- if collection.products_count < 4 %} grid--{{ collection.products_count }}-col-tablet{% else %}
+                            {%- if collection.products_count == 4 %} grid--4-col-desktop{% else %} grid--2-col-tablet grid--one-third-max grid--3-col-desktop grid--quarter-max{% endif -%}
+                        {%- endif %}">
+                        {{ byobProducts }}
+                    </ul>
+        
+                    {%- if paginate.pages > 1 -%}
+                        {% render 'pagination', paginate: paginate, anchor: '' %}
+                    {%- endif -%}
+                </div>
+            {%- endif -%}
+    
+            <div id="byo-moreinfo-popup" class="moreinfo-popup mfp-hide">
+                <div class="moreinfo-popup_content">
+                </div>
+            </div>
+        {%- endpaginate -%}
+    </div>
+</div>
+{% comment %}
+<script>
+    // When the user scrolls the page, execute myFunction
+    window.onscroll = function() { byobSticky() };
+
+    // Get the navbar
+    let navbar = document.getElementById("contain_cart_byob");
+
+    // Get the offset position of the navbar
+    let sticky = navbar.offsetTop;
+
+    // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+    function byobSticky() {
+        let footer = document.querySelector('#shopify-section-footer');
+        let top = 10;
+        if (document.querySelector('.announcement-bar') != null) {
+            top += getAbsoluteHeight(document.querySelector('.announcement-bar'));
+            //console.log('announcement-bar',getAbsoluteHeight(document.querySelector('.announcement-bar')));
+        }
+        if (document.querySelector('#header_menu') != null) {
+            top += getAbsoluteHeight(document.querySelector('#header_menu'));
+            //console.log('header_menu',getAbsoluteHeight(document.querySelector('#header_menu')));
+        }
+        //console.log('top',top);
+        navbar.style.top = top + 'px';
+        navbar.style.maxHeight = 'calc(100vh - ' + top + 'px - 40px)';
+        if (window.pageYOffset >= sticky) {
+            navbar.classList.add("sticky");
+        } else {
+            navbar.classList.remove("sticky");
+        }
+        if((getRectTop(navbar) + document.body.scrollTop) + getAbsoluteHeight(navbar) >= (getRectTop(footer) + document.body.scrollTop) - 10) {
+            console.log('end',getRectTop(footer),document.body.scrollTop);
+            navbar.style.top = 'inherit';
+            navbar.style.bottom = 'calc(100vh - ' + getRectTop(footer) + 'px + 40px)';
+        } else {
+            navbar.style.bottom = 'inherit';
+        }
+    }
+    function getAbsoluteHeight(el) {
+        // Get the DOM Node if you pass in a string
+        el = (typeof el === 'string') ? document.querySelector(el) : el; 
+
+        var styles = window.getComputedStyle(el);
+        var margin = parseFloat(styles['marginTop']) +
+                    parseFloat(styles['marginBottom']);
+
+        return Math.ceil(el.offsetHeight + margin);
+    }
+    function getRectTop(el){
+        var rect = el.getBoundingClientRect();
+        return rect.top;
+    }
+    
+    var ready = (callback) => {
+        if (document.readyState != "loading") callback();
+        else document.addEventListener("DOMContentLoaded", callback);
+    }
+    ready(() => { 
+        /* Do things after DOM has fully loaded */ 
+        byobSticky();
+    });
+</script>
+{% endcomment %}
+<script>
+    function deepFreeze(object) {
+        // Retrieve the property names defined on object
+        const propNames = Object.getOwnPropertyNames(object);
+
+        // Freeze properties before freezing self
+
+        for (const name of propNames) {
+            const value = object[name];
+
+            if (value && typeof value === "object") {
+                deepFreeze(value);
+            }
+        }
+
+        return Object.freeze(object);
+    }
+    byobConfig = {
+        customTierMessage: {{ byobCustomTierMessage | json }},
+        discounts: {
+            one: {
+                spend: {{ byobTier1Spend | default: false | json }},
+                get: {{ byobTier1Get | default: false | json }},
+                discount: {{ byobTier1TargetDiscound | default: '' | json }}
+            },
+            two: {
+                spend: {{ byobTier2Spend | default: false | json }},
+                get: {{ byobTier2Get | default: false | json }},
+                discount: {{ byobTier2TargetDiscound | default: '' | json }}
+            },
+            three: {
+                spend: {{ byobTier3Spend | default: false | json }},
+                get: {{ byobTier3Get | default: false | json }},
+                discount: {{ byobTier3TargetDiscound | default: '' | json }}
+            },
+            four: {
+                spend: {{ byobTier4Spend | default: false | json }},
+                get: {{ byobTier4Get | default: false | json }},
+                discount: {{ byobTier4TargetDiscound | default: '' | json }}
+            }
+        }
+    };
+    deepFreeze(byobConfig);
+    //console.log('byobConfig',byobConfig);
+
+    Shopify.itemsToAdd = [];
+    Shopify.itemsToAddProducts = new Object();
+    {% if byobCartProductsId != '' -%}
+        {%- assign byobCartProductsIdArray = byobCartProductsId | split: ',' -%}
+        {%- assign byobCartProductsPriceArray = byobCartProductsPrice | split: ',' -%}
+        {%- assign byobCartProductsQtyArray = byobCartProductsQty | split: ',' -%}
+        {%- assign byobCartProductsIdArraySize = byobCartProductsIdArray | size | minus: 1 -%}
+        {% for i in (0..byobCartProductsIdArraySize) -%}
+            Shopify.itemsToAddProducts[{{ byobCartProductsIdArray[i] }}] = {
+                price: {{ byobCartProductsPriceArray[i] }},
+                qty: {{ byobCartProductsQtyArray[i] }}
+            };
+        {% endfor %}
+    {%- endif %}
+
+    Shopify.itemsToAddCount = {{ byobCartProductsCount }};
+    Shopify.itemsToAddCountInit = {{ byobCartProductsCount }};
+    Shopify.itemsToAddPrice = {{ byobCartTotalPriceCollection }};
+</script>
+<script src="{{ 'collection-byob.js' | asset_url }}" defer="defer"></script>
+
+{% schema %}
+    {
+        "name": "Product grid - BYO",
+        "class": "section section-byob",
+        "settings": [
+            {
+                "type": "range",
+                "id": "products_per_page",
+                "min": 8,
+                "max": 24,
+                "step": 4,
+                "default": 16,
+                "label": "t:sections.main-collection-product-grid.settings.products_per_page.label"
+            },
+            {
+                "type": "header",
+                "content": "t:sections.main-collection-product-grid.settings.header__3.content"
+            },
+            {
+                "type": "select",
+                "id": "image_ratio",
+                "options": [
+                    {
+                        "value": "adapt",
+                        "label": "t:sections.main-collection-product-grid.settings.image_ratio.options__1.label"
+                    },
+                    {
+                        "value": "portrait",
+                        "label": "t:sections.main-collection-product-grid.settings.image_ratio.options__2.label"
+                    },
+                    {
+                        "value": "square",
+                        "label": "t:sections.main-collection-product-grid.settings.image_ratio.options__3.label"
+                    }
+                ],
+                "default": "adapt",
+                "label": "t:sections.main-collection-product-grid.settings.image_ratio.label"
+            },
+            {
+                "type": "checkbox",
+                "id": "show_secondary_image",
+                "default": false,
+                "label": "t:sections.main-collection-product-grid.settings.show_secondary_image.label"
+            },
+            {
+                "type": "checkbox",
+                "id": "show_vendor",
+                "default": false,
+                "label": "t:sections.main-collection-product-grid.settings.show_vendor.label"
+            },
+            {
+                "type": "checkbox",
+                "id": "show_rating",
+                "default": false,
+                "label": "t:sections.main-collection-product-grid.settings.show_rating.label",
+                "info": "t:sections.main-collection-product-grid.settings.show_rating.info"
+            },
+            {
+                "type": "header",
+                "content": "t:sections.main-collection-product-grid.settings.header__1.content"
+            },
+            {
+                "type": "checkbox",
+                "id": "enable_filtering",
+                "default": true,
+                "label": "t:sections.main-collection-product-grid.settings.enable_filtering.label",
+                "info": "t:sections.main-collection-product-grid.settings.enable_filtering.info"
+            },
+            {
+                "type": "checkbox",
+                "id": "enable_sorting",
+                "default": true,
+                "label": "t:sections.main-collection-product-grid.settings.enable_sorting.label"
+            },
+            {
+                "type": "checkbox",
+                "id": "collapse_on_larger_devices",
+                "default": false,
+                "label": "t:sections.main-collection-product-grid.settings.collapse_on_larger_devices.label"
+            },
+            {
+                "type": "header",
+                "content": "t:sections.all.padding.section_padding_heading"
+            },
+            {
+                "type": "range",
+                "id": "padding_top",
+                "min": 0,
+                "max": 100,
+                "step": 4,
+                "unit": "px",
+                "label": "t:sections.all.padding.padding_top",
+                "default": 36
+            },
+            {
+                "type": "range",
+                "id": "padding_bottom",
+                "min": 0,
+                "max": 100,
+                "step": 4,
+                "unit": "px",
+                "label": "t:sections.all.padding.padding_bottom",
+                "default": 36
+            },
+            {
+                "type": "header",
+                "content": "BYOP"
+            },
+            {
+                "type": "paragraph",
+                "content": "Tier message, example: Spend <b>$50</b> and get <b>$5 OFF</b>"
+            },
+            {
+                "type": "text",
+                "id": "custom_tier_message",
+                "label": "Custom tier message",
+                "default": "Spend <b>$##SPEND##</b> and get <b>$##GET## OFF</b>",
+                "info": "Spend <b>$##SPEND##</b> and get <b>$##GET## OFF</b>"
+            }
+        ],
+        "max_blocks": 4,
+        "blocks": [
+            {
+                "type": "tier",
+                "name": "Tier",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "tier",
+                        "label": "Tier"
+                    },
+                    {
+                        "type": "range",
+                        "id": "spend",
+                        "min": 20,
+                        "max": 200,
+                        "step": 5,
+                        "default": 50,
+                        "label": "Spend $"
+                    },
+                    {
+                        "type": "range",
+                        "id": "get",
+                        "min": 0,
+                        "max": 90,
+                        "step": 5,
+                        "default": 0,
+                        "label": "Get $ Off"
+                    },
+                    {
+                        "type": "text",
+                        "id": "target_discount",
+                        "label": "Target discount code"
+                    },
+                    {
+                        "type": "text",
+                        "id": "custom_message",
+                        "label": "Custom message"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}
