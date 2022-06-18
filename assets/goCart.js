@@ -942,17 +942,18 @@
                           t.closeCartOverlay();
                       });
                     }),
-                  this.cartModalFailClose.addEventListener(
-                    "click",
-                    function () {
-                      t.closeFailModal(),
-                        t.closeCartModal(),
-                        t.isDrawerMode
-                          ? t.closeCartDrawer()
-                          : t.closeMiniCart(),
-                        t.closeCartOverlay();
-                    }
-                  );
+                  this.cartModalFailClose &&
+                    this.cartModalFailClose.addEventListener(
+                      "click",
+                      function () {
+                        t.closeFailModal(),
+                          t.closeCartModal(),
+                          t.isDrawerMode
+                            ? t.closeCartDrawer()
+                            : t.closeMiniCart(),
+                          t.closeCartOverlay();
+                      }
+                    );
               },
             },
             {
@@ -1129,9 +1130,45 @@
                 var e = this;
                 this.clearCartDrawer(),
                   t.items.forEach(function (t, r) {
-                    var a = t.variant_title;
+                    var a = t.variant_title,
+                      isBYOP = false;
+                    if (t.properties != null) {
+                      if (t.properties['Product from'] != null && t.properties['Product from'] == 'BYOB page') {
+                        isBYOP = true;
+                      }
+                    }
                     null === a && (a = "");
-                    var o =
+                    var oQuantity = `
+                      <div class="go-cart-item__quantity">\n
+                        <span class="go-cart-item__quantity-label">${e.labelQuantity}</span>\n
+                        <span class="go-cart-item__quantity-button js-go-cart-quantity-minus">-</span>\n
+                        <input class="go-cart-item__quantity-number js-go-cart-quantity" type="number" value="${ t.quantity }" disabled>\n
+                        <span class="go-cart-item__quantity-button js-go-cart-quantity-plus">+</span>\n
+                      </div>\n
+                    `;
+                    var oRemove = `
+                      <a class="go-cart-item__remove ${ e.removeFromCartNoDot }">
+                        <svg width='14' height='15' viewBox='0 0 14 15' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M3.49999 3.5V12.5C3.49999 13 4 13.5 4.99999 13.5C6.59999 13.5 9.33333 13.5 10.5 13.5C11 13.5 11.5 13 11.5 12.5C11.5 11.3 11.5 6 11.5 3.5M1 3.5H13.5M6.5 11V6M8.5 11V6M5.5 3C5.5 2.33333 5.9 1 7.5 1C9.1 1 9.5 2.33333 9.5 3' stroke='#747474'/></svg>
+                      </a>\n
+                    `;
+                    var o = `
+                        \n
+                        <div class="go-cart-item__single" data-line="${ Number(r + 1) }">\n
+                          <div class="go-cart-item__info-wrapper">\n
+                            <div class="go-cart-item__image" style="background-image: url(${t.image});"></div>\n
+                            <div class="go-cart-item__info">\n
+                              <${ isBYOP == false ? 'a href="' + t.url + '"' : 'div'} class="go-cart-item__title">${ t.product_title }</${ isBYOP == false ? 'a' : 'div'}>\n
+                              <div class="go-cart-item__price-item">${ formatMoney(t.line_price, e.moneyFormat) }</div>\n
+                              <div class="go-cart-item__variant">${ a }</div>\n
+                              ${ isBYOP == false ? oQuantity : '<input type="hidden" value="' + t.quantity + '"><div class="">' + t.quantity + '</div>\n'}
+                              ${ isBYOP == false ? '' : '<a class="" href="/collections/byob" style="font-weight: 500;font-size: 14px;line-height: 19px;margin-bottom: 15px;color: #46434D;">Return to BYOB page</a>'}
+                            </div>\n
+                          </div>\n
+                          <div class="go-cart-item__price">${ formatMoney(t.line_price, e.moneyFormat) }</div>\n
+                          ${ isBYOP == false ? oRemove : ''}
+                        </div>\n
+                      `;
+                    /*var o =
                       '\n        <div class="go-cart-item__single" data-line="'
                         .concat(
                           Number(r + 1),
@@ -1170,7 +1207,7 @@
                           '</div>\n            <a class="go-cart-item__remove '
                         )
                         .concat(e.removeFromCartNoDot, '">')
-                        .concat("<svg width='14' height='15' viewBox='0 0 14 15' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M3.49999 3.5V12.5C3.49999 13 4 13.5 4.99999 13.5C6.59999 13.5 9.33333 13.5 10.5 13.5C11 13.5 11.5 13 11.5 12.5C11.5 11.3 11.5 6 11.5 3.5M1 3.5H13.5M6.5 11V6M8.5 11V6M5.5 3C5.5 2.33333 5.9 1 7.5 1C9.1 1 9.5 2.33333 9.5 3' stroke='#747474'/></svg></a>\n        </div>\n      ");
+                        .concat("<svg width='14' height='15' viewBox='0 0 14 15' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M3.49999 3.5V12.5C3.49999 13 4 13.5 4.99999 13.5C6.59999 13.5 9.33333 13.5 10.5 13.5C11 13.5 11.5 13 11.5 12.5C11.5 11.3 11.5 6 11.5 3.5M1 3.5H13.5M6.5 11V6M8.5 11V6M5.5 3C5.5 2.33333 5.9 1 7.5 1C9.1 1 9.5 2.33333 9.5 3' stroke='#747474'/></svg></a>\n        </div>\n      ");*/
                     e.cartDrawerContent.innerHTML += o;
                   }),
                   (this.cartDrawerSubTotal.innerHTML = formatMoney(
@@ -1234,14 +1271,14 @@
                     if( subtotalCart < 1) {
                       document.getElementById('freeShippingPromo').classList.remove('hide');
                       document.getElementById('freeShippingReached').classList.add('hide');
-                      goal = 5000;
+                      goal = 4500;
                       document.querySelector('.goal').innerHTML = formatMoney(goal, this.moneyFormat);
-                    } else if ( subtotalCart >= 1 && subtotalCart < 5000) {
+                    } else if ( subtotalCart >= 1 && subtotalCart < 4500) {
                       document.getElementById('freeShippingPromo').classList.remove('hide');
                       document.getElementById('freeShippingReached').classList.add('hide');
-                      goal = 5000 - subtotalCart;
+                      goal = 4500 - subtotalCart;
                       document.querySelector('.goal').innerHTML = formatMoney(goal, this.moneyFormat);
-                    } else if(subtotalCart >= 5000) {
+                    } else if(subtotalCart >= 4500) {
                       document.getElementById('freeShippingPromo').classList.add('hide');
                       document.getElementById('freeShippingReached').classList.remove('hide');
                     }
@@ -1354,7 +1391,7 @@
                 this.cartDrawerSubTotal.parentNode.classList.add("is-invisible"),
                 document.getElementById('freeShippingPromo').classList.remove('hide'),
                 document.getElementById('freeShippingReached').classList.add('hide'),
-                document.querySelector('.goal').innerHTML = formatMoney(5000, this.moneyFormat),
+                document.querySelector('.goal').innerHTML = formatMoney(4500, this.moneyFormat),
                 document.querySelector('.cart-count-bubble').classList.add("is-invisible"),
                 document.querySelector('.go-cart-drawer__order-instructions').classList.add("is-invisible");
               },
@@ -1418,13 +1455,13 @@
             {
               key: "openFailModal",
               value: function () {
-                this.cartModalFail.classList.add("is-open");
+                this.cartModalFail && this.cartModalFail.classList.add("is-open");
               },
             },
             {
               key: "closeFailModal",
               value: function () {
-                this.cartModalFail.classList.remove("is-open");
+                this.cartModalFail && this.cartModalFail.classList.remove("is-open");
               },
             },
             {

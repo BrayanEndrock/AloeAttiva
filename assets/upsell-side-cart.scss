@@ -1,0 +1,85 @@
+.go-cart-drawer__upsell {
+    padding: 35px 0 0;
+    @media screen and (max-width: 768px) {
+        padding-top: 20px;
+    }
+    .go-cart-drawer__upsell--wrapper {
+        h5 {
+            color: #292631;
+            font-size: 20px;
+            font-style: normal;
+            letter-spacing: 0.02em;
+            line-height: 18px;
+            margin: 0 auto;
+            padding: 0;
+            text-align: center;
+        }
+        .upsell-container {
+            margin-top: 25px;
+            .upsell-card-wrapper {
+                .card__inner {
+                    height: 74px;
+                    margin: 0 auto;
+                    width: 74px;
+                }
+                .upsell-card__content {
+                    .upsell-card__information {
+                        .card__heading {
+                            margin-bottom: 20px;
+                            @media screen and (max-width: 768px) {
+                                margin-bottom: 10px;
+                            }
+                            a {
+                                color: #292631;
+                                font-size: 12px;
+                                letter-spacing: 0.02em;
+                                line-height: 18px;
+                                margin: 0 auto;
+                                max-width: 130px;
+                                text-align: center;
+                                text-decoration: none !important;
+                                &:hover {
+                                    text-decoration: none !important;
+                                }
+                            }
+                        }
+                        .product-form__buttons {
+                            button {
+                                padding: 4px 15px !important;
+                                min-height: 30px !important;
+                                min-width: 60px !important;
+                                width: auto !important;
+                                margin: 0 auto !important;
+                            }
+                        }
+                        @media screen and (max-width: 768px) {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-between;
+                            min-height: 112px;
+                        }
+                    }
+                }
+            }
+        }
+        .upsell-slider {
+            .slick-arrow {
+                background: transparent;
+                border: none;
+                cursor: pointer;
+                position: absolute;
+                top: 50%; 
+                z-index: 10;
+                svg {
+                    stroke: #A0B7AB;
+                }
+            }
+            .slick-next {
+                right: -25px;
+            }
+            .slick-prev {
+                left: -25px;
+            }
+        }
+    }
+}
