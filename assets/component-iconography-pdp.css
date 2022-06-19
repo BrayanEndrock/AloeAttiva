@@ -56,3 +56,9 @@
         margin-left: 0px;
     }
 }
+@media screen and (min-width: 769px) {
+    #product__template--3d-powerhydrator .product__iconography .product__iconography--wrapper .icon__box:nth-of-type(3) h6 {
+        margin-left: 14px;
+        width: 101px;
+    }
+}
