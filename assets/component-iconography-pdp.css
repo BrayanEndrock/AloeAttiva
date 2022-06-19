@@ -16,6 +16,8 @@
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 19px;
+    max-width: 50%;
+    width: 50%;
 }
 .product__iconography .product__iconography--wrapper .icon__box h6 {
     color: #54565A;
