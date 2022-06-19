@@ -31,6 +31,10 @@
     margin-left: 20px;
     width: 91px;
 }
+#product__template--xl-powerlip-refill .product__iconography .product__iconography--wrapper .icon__box:first-of-type h6 {
+    margin-left: 20px;
+    width: 91px;
+}
 @media screen and (max-width: 768px) {
     .product__iconography .product__iconography--wrapper .icon__box {
         width: auto;
@@ -41,5 +45,12 @@
     }
     #product__template--xl-powerlip .product__iconography .product__iconography--wrapper .icon__box:nth-of-type(5) h6 {
         margin-left: 0px;
-    }   
+    }
+    #product__template--xl-powerlip-refill .product__iconography .product__iconography--wrapper .icon__box:first-of-type h6 {
+        margin-left: 20px;
+        width: 102px;
+    }
+    #product__template--xl-powerlip-refill .product__iconography .product__iconography--wrapper .icon__box:nth-of-type(5) h6 {
+        margin-left: 0px;
+    }
 }
