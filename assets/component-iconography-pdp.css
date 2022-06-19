@@ -1,0 +1,23 @@
+.product__iconography .product__iconography--wrapper {
+    align-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.product__iconography .product__iconography--wrapper .icon__box {
+    align-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.product__iconography .product__iconography--wrapper .icon__box h6 {
+    color: #54565A;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    line-height: 18px;
+}
