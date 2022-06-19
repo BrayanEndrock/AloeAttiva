@@ -11,7 +11,7 @@
     justify-content: space-between;
 }
 .product__iconography .product__iconography--wrapper .icon__box {
-    align-items: center;
+    align-items: flex-start;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -21,10 +21,10 @@
 }
 .product__iconography .product__iconography--wrapper .icon__box h6 {
     color: #54565A;
-    font-size: 14px;
+    font-size: 11px;
     font-style: normal;
     letter-spacing: 0.04em;
-    line-height: 18px;
+    line-height: 16px;
     margin: 0 0 0 6px;
     padding: 0;
     width: 101px;
