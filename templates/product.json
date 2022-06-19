@@ -96,12 +96,6 @@
             "content": "",
             "page": ""
           }
-        },
-        "c639a280-c7b8-48bd-b802-ac9d0ca63211": {
-          "type": "icon",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/refillable-icon.png"
-          }
         }
       },
       "block_order": [
@@ -117,8 +111,7 @@
         "collapsible-content-0",
         "collapsible-content-1",
         "collapsible-content-2",
-        "collapsible-content-3",
-        "c639a280-c7b8-48bd-b802-ac9d0ca63211"
+        "collapsible-content-3"
       ],
       "settings": {
         "enable_sticky_info": true,

@@ -33,7 +33,7 @@
   <link id="ModelViewerOverride" rel="stylesheet" href="{{ 'component-model-viewer-ui.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
 
-<section class="page-width section-{{ section.id }}-padding">
+<section class="page-width section-{{ section.id }}-padding" id="product__template--{{ product.handle }}">
   <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.gallery_layout }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
     <div class="grid__item product__media-wrapper">
       <media-gallery id="MediaGallery-{{ section.id }}" role="region" {% if section.settings.enable_sticky_info %}class="product__media-gallery"{% endif %} aria-label="{{ 'products.product.media.gallery_viewer' | t }}" data-desktop-layout="{{ section.settings.gallery_layout }}">
@@ -253,15 +253,15 @@
               <div class="product__iconography--wrapper">
                 {% for block in section.blocks %}
                   {% if block.type == 'icon'%}
-                    <div class="icon__box">              
+                    <div class="grid__item icon__box">            
                       {% assign img_url = block.settings.icon | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
                       <img class="lazyload"
-                        src="{{ block.settings.icon | img_url: '88x88' }}"    
+                        src="{{ block.settings.icon | img_url: 'x38' }}"   
                         data-widths="[360, 540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
                         data-aspectratio="{{ block.settings.icon.aspect_ratio }}"  
                         data-sizes="auto"
-                        alt="{{ block.settings.title }}"
-                      >  
+                        alt="{{ block.settings.title | escape }}"
+                      >
                       <h6>{{ block.settings.title }}</h6>   
                   </div>      
                 {% endif %}        
