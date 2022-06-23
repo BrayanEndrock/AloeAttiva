@@ -8,7 +8,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-between; 
 }
 .product__iconography .product__iconography--wrapper .icon__box {
     align-items: flex-start;
