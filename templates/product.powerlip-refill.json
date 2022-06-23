@@ -96,48 +96,6 @@
             "content": "",
             "page": ""
           }
-        },
-        "5c8d0827-7015-48c7-bcf5-02a7ea4f6895": {
-          "type": "icon",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/refillable-icon.png",
-            "title": "Sustainable <br>Refill"
-          }
-        },
-        "975ce90b-c2e7-4dd4-8225-5b90d25f6d44": {
-          "type": "icon",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/volulip-icon.png",
-            "title": "VoluLip<sup>TM<\/sup> <br>Peptides"
-          }
-        },
-        "bfcc2d89-8fe4-456f-9030-a051f485d189": {
-          "type": "icon",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/plant-powered-icon.png",
-            "title": "Plant <br>Powered"
-          }
-        },
-        "f86fdb2c-6b59-41ae-834f-9a2d30012d35": {
-          "type": "icon",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/4x-icon.png",
-            "title": "4x Aloe <br>Powered Elixir"
-          }
-        },
-        "f206155a-79b9-41d0-8aae-7cf7e3eb7b0e": {
-          "type": "icon",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/natural-plumping-icon.png",
-            "title": "Natural <br>Plumping"
-          }
-        },
-        "fe562e19-c0a8-43f7-8c15-5d4ed824b278": {
-          "type": "icon",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/7x-icon.png",
-            "title": "7x Hyaluronic <br>Acids"
-          }
         }
       },
       "block_order": [
@@ -153,13 +111,7 @@
         "collapsible-content-0",
         "collapsible-content-1",
         "collapsible-content-2",
-        "collapsible-content-3",
-        "5c8d0827-7015-48c7-bcf5-02a7ea4f6895",
-        "975ce90b-c2e7-4dd4-8225-5b90d25f6d44",
-        "bfcc2d89-8fe4-456f-9030-a051f485d189",
-        "f86fdb2c-6b59-41ae-834f-9a2d30012d35",
-        "f206155a-79b9-41d0-8aae-7cf7e3eb7b0e",
-        "fe562e19-c0a8-43f7-8c15-5d4ed824b278"
+        "collapsible-content-3"
       ],
       "settings": {
         "enable_sticky_info": true,

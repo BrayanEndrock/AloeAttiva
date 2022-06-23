@@ -96,41 +96,6 @@
             "content": "",
             "page": ""
           }
-        },
-        "89ce4314-6419-43b9-8572-75218de316af": {
-          "type": "icon",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/collagen-icon.png",
-            "title": "Plant-Based <br>Collagen"
-          }
-        },
-        "49e6307c-a499-4a3d-9bc5-6c94612f8b61": {
-          "type": "icon",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/4x-icon.png",
-            "title": "4x Aloe <br>Powered Elixir"
-          }
-        },
-        "31da17c6-8e43-4e37-aa71-73dd7d093a0c": {
-          "type": "icon",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/soothing-icon.png",
-            "title": "Soothing <br>Echinacea"
-          }
-        },
-        "a1dbd836-3d41-4065-9f96-4c836abdbd1a": {
-          "type": "icon",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/7x-icon.png",
-            "title": "7x Hyaluronic <br>Acids"
-          }
-        },
-        "2da13283-699a-4e22-9b42-6ab072dd97bb": {
-          "type": "icon",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/fragance-icon.png",
-            "title": "Fragrance<br>-Free"
-          }
         }
       },
       "block_order": [
@@ -146,12 +111,7 @@
         "collapsible-content-0",
         "collapsible-content-1",
         "collapsible-content-2",
-        "collapsible-content-3",
-        "89ce4314-6419-43b9-8572-75218de316af",
-        "49e6307c-a499-4a3d-9bc5-6c94612f8b61",
-        "31da17c6-8e43-4e37-aa71-73dd7d093a0c",
-        "a1dbd836-3d41-4065-9f96-4c836abdbd1a",
-        "2da13283-699a-4e22-9b42-6ab072dd97bb"
+        "collapsible-content-3"
       ],
       "settings": {
         "enable_sticky_info": true,
