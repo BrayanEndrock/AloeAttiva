@@ -96,62 +96,6 @@
             "content": "",
             "page": ""
           }
-        },
-        "42510862-6da2-47af-9665-55145198c600": {
-          "type": "icon",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/ph-balanced-icon.png",
-            "title": "pH <br>BALANCED"
-          }
-        },
-        "6fb90533-fb30-4cbb-869c-c70e04ba0b46": {
-          "type": "icon",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/fragance-icon.png",
-            "title": "Fragrance<br>-Free"
-          }
-        },
-        "c7c53b1f-d596-44c1-a382-17b07e22f381": {
-          "type": "icon",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/complexion-icon.png",
-            "title": "Clinically <br>Proven to <br>provide 25% <br>Brighter <br>Complexion"
-          }
-        },
-        "7303dd03-d77e-4575-b09f-b2aeded27717": {
-          "type": "icon",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/blend-icon.png",
-            "title": "Signature <br>Blend of 9 <br>Moisturizing <br>Vegan Oils"
-          }
-        },
-        "9e48b355-180c-412b-91e9-7a0b45704b84": {
-          "type": "icon",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/remover-icon.png",
-            "title": "Natural Make <br>UP Remover"
-          }
-        },
-        "ee465ebf-2f05-494a-8f70-84498e0ae5f0": {
-          "type": "icon",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/4x-icon.png",
-            "title": "4x Aloe <br>Powered Elixir"
-          }
-        },
-        "c19d3d5e-42d1-42cb-9591-84d091cc45d7": {
-          "type": "icon",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/tested-icon.png",
-            "title": "Ophthalmologist <br>tested"
-          }
-        },
-        "9dfe7cdb-050e-4711-921b-1bd4b5dd33ba": {
-          "type": "icon",
-          "settings": {
-            "icon": "shopify:\/\/shop_images\/7x-icon.png",
-            "title": "7x Hyaluronic <br>Acids"
-          }
         }
       },
       "block_order": [
@@ -167,15 +111,7 @@
         "collapsible-content-0",
         "collapsible-content-1",
         "collapsible-content-2",
-        "collapsible-content-3",
-        "42510862-6da2-47af-9665-55145198c600",
-        "6fb90533-fb30-4cbb-869c-c70e04ba0b46",
-        "c7c53b1f-d596-44c1-a382-17b07e22f381",
-        "7303dd03-d77e-4575-b09f-b2aeded27717",
-        "9e48b355-180c-412b-91e9-7a0b45704b84",
-        "ee465ebf-2f05-494a-8f70-84498e0ae5f0",
-        "c19d3d5e-42d1-42cb-9591-84d091cc45d7",
-        "9dfe7cdb-050e-4711-921b-1bd4b5dd33ba"
+        "collapsible-content-3"
       ],
       "settings": {
         "enable_sticky_info": true,
