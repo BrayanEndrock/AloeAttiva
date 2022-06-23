@@ -6,6 +6,7 @@
 {{ 'component-slider.css' | asset_url | stylesheet_tag }}
 {{ 'component-rating.css' | asset_url | stylesheet_tag }}
 {{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
+{{ 'component-iconography-pdp.css' | asset_url | stylesheet_tag }}  
 
 <link rel="stylesheet" href="{{ 'component-deferred-media.css' | asset_url }}" media="print" onload="this.media='all'">
 
@@ -32,7 +33,7 @@
   <link id="ModelViewerOverride" rel="stylesheet" href="{{ 'component-model-viewer-ui.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
 
-<section class="page-width section-{{ section.id }}-padding">
+<section class="page-width section-{{ section.id }}-padding" id="product__template--{{ product.handle }}">
   <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.gallery_layout }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
     <div class="grid__item product__media-wrapper">
       <media-gallery id="MediaGallery-{{ section.id }}" role="region" {% if section.settings.enable_sticky_info %}class="product__media-gallery"{% endif %} aria-label="{{ 'products.product.media.gallery_viewer' | t }}" data-desktop-layout="{{ section.settings.gallery_layout }}">
@@ -248,6 +249,29 @@
               </details>
             </div>
           {%- when 'quantity_selector' -%}
+            {% for tag in product.tags %}
+              {% if tag contains 'iconography' %}     
+                <div class="product__iconography">
+                  <div class="product__iconography--wrapper">
+                    {% for block in section.blocks %}
+                      {% if block.type == 'icon'%}
+                        <div class="grid__item icon__box">            
+                          {% assign img_url = block.settings.icon | img_url: '1x1' | replace: '_1x1.', '_{width}x.' %}
+                          <img class="lazyload"
+                            src="{{ block.settings.icon | img_url: 'x38' }}"   
+                            data-widths="[360, 540, 720, 900, 1080, 1296, 1512, 1728, 1944, 2048]"
+                            data-aspectratio="{{ block.settings.icon.aspect_ratio }}"  
+                            data-sizes="auto"
+                            alt="{{ block.settings.title | escape }}"
+                          >
+                          <h6>{{ block.settings.title }}</h6>   
+                        </div>      
+                      {% endif %}        
+                    {% endfor %} 
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
             <div class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}" {{ block.shopify_attributes }}>
               <label class="form__label" for="Quantity-{{ section.id }}">
                 {{ 'products.product.quantity.label' | t }}
@@ -1013,6 +1037,22 @@
           "content": "t:sections.main-product.blocks.rating.settings.paragraph.content"
         }
       ]
+    },
+    {
+      "type": "icon",
+      "name": "Icons",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",      
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        }
+      ]  
     }
   ],
   "settings": [

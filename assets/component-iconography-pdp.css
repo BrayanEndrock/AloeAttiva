@@ -1,0 +1,64 @@
+.product__iconography {
+    border: solid 1px rgba(var(--color-button),var(--alpha-button-background));
+    padding: 22px 25px 3px;
+}
+.product__iconography .product__iconography--wrapper {
+    align-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.product__iconography .product__iconography--wrapper .icon__box {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 19px;
+    max-width: 50%;
+    width: 50%;
+}
+.product__iconography .product__iconography--wrapper .icon__box h6 {
+    color: #54565A;
+    font-size: 11px;
+    font-style: normal;
+    letter-spacing: 0.04em;
+    line-height: 16px;
+    margin: 0 0 0 6px;
+    padding: 0;
+    width: 101px;
+}
+#product__template--xl-powerlip .product__iconography .product__iconography--wrapper .icon__box:first-of-type h6 {
+    margin-left: 20px;
+    width: 91px;
+}
+#product__template--xl-powerlip-refill .product__iconography .product__iconography--wrapper .icon__box:first-of-type h6 {
+    margin-left: 20px;
+    width: 91px;
+}
+@media screen and (max-width: 768px) {
+    .product__iconography .product__iconography--wrapper .icon__box {
+        width: auto;
+    }
+    #product__template--xl-powerlip .product__iconography .product__iconography--wrapper .icon__box:first-of-type h6 {
+        margin-left: 20px;
+        width: 101px;
+    }
+    #product__template--xl-powerlip .product__iconography .product__iconography--wrapper .icon__box:nth-of-type(5) h6 {
+        margin-left: 0px;
+    }
+    #product__template--xl-powerlip-refill .product__iconography .product__iconography--wrapper .icon__box:first-of-type h6 {
+        margin-left: 20px;
+        width: 102px;
+    }
+    #product__template--xl-powerlip-refill .product__iconography .product__iconography--wrapper .icon__box:nth-of-type(5) h6 {
+        margin-left: 0px;
+    }
+}
+@media screen and (min-width: 769px) {
+    #product__template--3d-powerhydrator .product__iconography .product__iconography--wrapper .icon__box:nth-of-type(3) h6 {
+        margin-left: 14px;
+        width: 101px;
+    }
+}

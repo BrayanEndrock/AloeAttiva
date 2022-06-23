@@ -96,6 +96,34 @@
             "content": "",
             "page": ""
           }
+        },
+        "6dfc315d-6096-4cd1-b1fa-7bc61728ff04": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/72-hours-icon.png",
+            "title": "72-hour <br>hydration"
+          }
+        },
+        "aadf6cd6-4618-4324-bc7d-d890189b464d": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/4x-icon.png",
+            "title": "4x Aloe <br>Powered Elixir"
+          }
+        },
+        "9081d9c2-f217-468f-bce4-97e1b25e39ca": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/vitamin-c-icon.png",
+            "title": "Vitamin C <br>rich"
+          }
+        },
+        "451446d7-743d-44bf-be14-2605814abfc9": {
+          "type": "icon",
+          "settings": {
+            "icon": "shopify:\/\/shop_images\/7x-icon.png",
+            "title": "7x Hyaluronic <br>Acids"
+          }
         }
       },
       "block_order": [
@@ -111,7 +139,11 @@
         "collapsible-content-0",
         "collapsible-content-1",
         "collapsible-content-2",
-        "collapsible-content-3"
+        "collapsible-content-3",
+        "6dfc315d-6096-4cd1-b1fa-7bc61728ff04",
+        "aadf6cd6-4618-4324-bc7d-d890189b464d",
+        "9081d9c2-f217-468f-bce4-97e1b25e39ca",
+        "451446d7-743d-44bf-be14-2605814abfc9"
       ],
       "settings": {
         "enable_sticky_info": true,
