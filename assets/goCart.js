@@ -1265,6 +1265,7 @@
                       });
                     });
                     document.querySelector('.cart-count-bubble').classList.remove("is-invisible"),
+                    document.querySelector('.go-cart-drawer__upsell').classList.remove("is-invisible"),
                     document.querySelector('.go-cart-drawer__order-instructions').classList.remove("is-invisible");
                     var subtotalCart = t.total_price;
                     var goal = 0;
@@ -1393,6 +1394,7 @@
                 document.getElementById('freeShippingReached').classList.add('hide'),
                 document.querySelector('.goal').innerHTML = formatMoney(4500, this.moneyFormat),
                 document.querySelector('.cart-count-bubble').classList.add("is-invisible"),
+                document.querySelector('.go-cart-drawer__upsell').classList.add("is-invisible"),
                 document.querySelector('.go-cart-drawer__order-instructions').classList.add("is-invisible");
               },
             },
