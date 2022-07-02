@@ -129,50 +129,6 @@
         "show_text_below": false
       }
     },
-    "165489133704f05170": {
-      "type": "image-with-text",
-      "blocks": {
-        "165489133729937939-0": {
-          "type": "heading",
-          "settings": {
-            "heading": "Build Your Own Bundle",
-            "heading_size": "h1"
-          }
-        },
-        "165489133729937939-1": {
-          "type": "text",
-          "settings": {
-            "text": "<p><strong>NEW!<\/strong><\/p><p><strong>Build your own bundle of our signature skincare products & save.<\/strong><\/p>",
-            "text_style": "body"
-          }
-        },
-        "165489133729937939-2": {
-          "type": "button",
-          "settings": {
-            "button_label": "Build My Bundle",
-            "button_link": "shopify:\/\/collections\/byob"
-          }
-        }
-      },
-      "block_order": [
-        "165489133729937939-0",
-        "165489133729937939-1",
-        "165489133729937939-2"
-      ],
-      "settings": {
-        "image": "shopify:\/\/shop_images\/MDW-BANNER.jpg",
-        "height": "adapt",
-        "desktop_image_width": "medium",
-        "layout": "image_first",
-        "desktop_content_position": "top",
-        "desktop_content_alignment": "left",
-        "content_layout": "no-overlap",
-        "color_scheme": "accent-1",
-        "mobile_content_alignment": "left",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
     "16517799384a3081e4": {
       "type": "image-with-text",
       "blocks": {
@@ -215,6 +171,50 @@
         "mobile_content_alignment": "center",
         "padding_top": 0,
         "padding_bottom": 0
+      }
+    },
+    "165489133704f05170": {
+      "type": "image-with-text",
+      "blocks": {
+        "165489133729937939-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "Build Your Own Bundle",
+            "heading_size": "h1"
+          }
+        },
+        "165489133729937939-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>NEW!<\/strong><\/p><p><strong>Build your own bundle of our signature skincare products & save.<\/strong><\/p>",
+            "text_style": "body"
+          }
+        },
+        "165489133729937939-2": {
+          "type": "button",
+          "settings": {
+            "button_label": "Build My Bundle",
+            "button_link": "shopify:\/\/collections\/byob"
+          }
+        }
+      },
+      "block_order": [
+        "165489133729937939-0",
+        "165489133729937939-1",
+        "165489133729937939-2"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/MDW-BANNER.jpg",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "accent-1",
+        "mobile_content_alignment": "left",
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "featured-collection": {
@@ -278,8 +278,7 @@
       "blocks": {
         "52c1ee46-c811-48b1-b691-4bd186161f1c": {
           "type": "shopify:\/\/apps\/product-reviews-ugc-with-q-a\/blocks\/carousel-widget\/34006358-52bd-4ec7-8c78-200fe58b77ba",
-          "settings": {
-          }
+          "settings": {}
         }
       },
       "block_order": [
@@ -548,8 +547,7 @@
         },
         "newsletter-2": {
           "type": "email_form",
-          "settings": {
-          }
+          "settings": {}
         }
       },
       "block_order": [
@@ -568,8 +566,8 @@
     "16508896397afca36a",
     "1652916037ca6beaff",
     "16445184171eba2d12",
-    "165489133704f05170",
     "16517799384a3081e4",
+    "165489133704f05170",
     "featured-collection",
     "1650572323276663ac",
     "1650572313dbdd9796",

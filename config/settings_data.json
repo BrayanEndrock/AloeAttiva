@@ -23,17 +23,16 @@
           "announcement-bar-0": {
             "type": "announcement",
             "settings": {
-              "text": "NEW! BUILD YOUR OWN BUNDLE AND SAVE",
+              "text": "ALOE AMERICA! SAVE 30% OFF BUNDLES! SHOP OUR INDEPENDENCE DAY SALE",
               "color_scheme": "accent-1",
-              "link": "shopify:\/\/collections\/byob"
+              "link": "https:\/\/aloeattiva.com\/discount\/ALOEAMERICA?redirect=\/collections\/bundles"
             }
           }
         },
         "block_order": [
           "announcement-bar-0"
         ],
-        "settings": {
-        }
+        "settings": {}
       },
       "header": {
         "type": "header",
@@ -101,21 +100,17 @@
         }
       }
     },
-    "content_for_index": [
-
-    ],
+    "content_for_index": [],
     "blocks": {
       "18218067344242134805": {
         "type": "shopify:\/\/apps\/product-reviews-ugc-with-q-a\/blocks\/app\/34006358-52bd-4ec7-8c78-200fe58b77ba",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
       },
       "10436698916776057164": {
         "type": "shopify:\/\/apps\/appstle-subscriptions\/blocks\/appstle-subscription-helper\/fe257d39-6f88-4f35-ab08-bd437e3aa94e",
         "disabled": false,
-        "settings": {
-        }
+        "settings": {}
       }
     }
   }
