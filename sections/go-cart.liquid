@@ -81,10 +81,12 @@
                 {{ 'upsell-side-cart.scss.css' | asset_url | stylesheet_tag }} 
                 <div class="go-cart-drawer__upsell--wrapper">
                     <h5>{{ section.settings.upsell-title }}</h5>
-                    <div class="upsell-container upsell-slider">
-                        {%- for product in collections['best-sellers'].products -%}
-                            {% render 'upsell-card-product', card_product: product %}
-					    {%- endfor -%}
+                    <div class="upsell-container glide">
+                        <div class="upsell-slider__wrapper glide__track" data-glide-el="track">
+                            {%- for product in collections['best-sellers'].products -%}
+                                {% render 'upsell-card-product', card_product: product %}
+					        {%- endfor -%}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -131,6 +133,19 @@
 <div class="go-cart__overlay js-go-cart-overlay"></div>
 <!--end go cart overlay-->
 
+<script>
+    var upsellProductSlider = new Glide('.upsell-container', {
+        type: 'carousel',
+        focusAt: '3',
+        startAt: 1,
+        perView: 3, 
+        breakpoints: {
+            768: { perView: 3 }
+        }
+    });
+    upsellProductSlider.mount();
+</script>
+
 {% schema %}
     {
         "name":"Side Cart",
@@ -163,7 +178,7 @@
 {% endschema %}
 
 {% javascript %}
-	$('.upsell-slider').slick({
+	$('').slick({
 		infinite: true,
 		slidesToShow: 3,
 		slidesToScroll: 1,
