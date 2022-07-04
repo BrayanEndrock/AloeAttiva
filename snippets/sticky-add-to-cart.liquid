@@ -4,6 +4,7 @@
             <img
                 src="{{ product.featured_image | img_url: '75x75' }}"
                 srcset="{{ product.featured_image | img_url: '75x75' }} 1x, {{ product.featured_image | img_url: '150x150', scale: 2 }} 2x"
+                loading="lazy"
                 alt="{{ product.featured_image.alt }}"
             />
         </div>

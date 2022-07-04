@@ -6,6 +6,7 @@
                     <button class="accordion{% if forloop.first == true %} active{% endif %}">
                         <h3>
                             <img
+                                loading="lazy"
                                 src="{{ block.settings.icon | img_url: '24x' }}"
                                 srcset="{{ block.settings.icon | img_url: '24x' }} 1x, {{ block.settings.icon | img_url: '48x', scale: 2 }} 2x"
                                 alt="{{ block.settings.title }} Icon"
