@@ -81,11 +81,17 @@
                 {{ 'upsell-side-cart.scss.css' | asset_url | stylesheet_tag }} 
                 <div class="go-cart-drawer__upsell--wrapper">
                     <h5>{{ section.settings.upsell-title }}</h5>
-                    <div class="upsell-container glide">
-                        <div class="upsell-slider__wrapper glide__track" data-glide-el="track">
-                            {%- for product in collections['best-sellers'].products -%}
-                                {% render 'upsell-card-product', card_product: product %}
-					        {%- endfor -%}
+                    <div class="glide upsell-container">
+                        <div class="glide__track" data-glide-el="track">
+                            <ul class="glide__slides">
+                                {%- for product in collections['best-sellers'].products -%}
+                                    {% render 'upsell-card-product', card_product: product %}
+					            {%- endfor -%}
+                            </ul>
+                        </div>
+                        <div class="glide__arrows hide" data-glide-el="controls">
+                            <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
+                            <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
                         </div>
                     </div>
                 </div>
@@ -134,13 +140,13 @@
 <!--end go cart overlay-->
 
 <script>
-    var upsellProductSlider = new Glide('.upsell-container', {
+    var upsellProductSlider = new Glide('.glide', {
         type: 'carousel',
-        focusAt: '3',
+        focusAt: '1',
         startAt: 1,
-        perView: 3, 
+        perView: 3,
         breakpoints: {
-            768: { perView: 3 }
+            768: { perView: 2 }
         }
     });
     upsellProductSlider.mount();
