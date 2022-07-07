@@ -16,9 +16,11 @@
             {%- if product.featured_media != blank -%}
               <img class="predictive-search__image"
                 src="{{ product.featured_media | img_url: '150x' }}"
+                srcset="{{ product.featured_media | img_url: '150x' }} 1x, {{ product.featured_media | img_url: '300x', scale: 2 }} 2x"
                 alt="{{ product.featured_media.alt }}"
                 width="50"
                 height="{{ 50 | divided_by: product.featured_media.preview_image.aspect_ratio }}"
+                loading="lazy"
               >
             {%- endif -%}
             <div class="predictive-search__item-content{% unless settings.predictive_search_show_vendor or settings.predictive_search_show_price %} predictive-search__item-content--centered{% endunless %}">

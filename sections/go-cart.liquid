@@ -81,10 +81,18 @@
                 {{ 'upsell-side-cart.scss.css' | asset_url | stylesheet_tag }} 
                 <div class="go-cart-drawer__upsell--wrapper">
                     <h5>{{ section.settings.upsell-title }}</h5>
-                    <div class="upsell-container upsell-slider">
-                        {%- for product in collections['best-sellers'].products -%}
-                            {% render 'upsell-card-product', card_product: product %}
-					    {%- endfor -%}
+                    <div class="glide upsell-container">
+                        <div class="glide__track" data-glide-el="track">
+                            <ul class="glide__slides">
+                                {%- for product in collections['best-sellers'].products -%}
+                                    {% render 'upsell-card-product', card_product: product %}
+					            {%- endfor -%}
+                            </ul>
+                        </div>
+                        <div class="glide__arrows hide" data-glide-el="controls">
+                            <button class="glide__arrow glide__arrow--left" data-glide-dir="<">prev</button>
+                            <button class="glide__arrow glide__arrow--right" data-glide-dir=">">next</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -131,6 +139,19 @@
 <div class="go-cart__overlay js-go-cart-overlay"></div>
 <!--end go cart overlay-->
 
+<script>
+    var upsellProductSlider = new Glide('.glide', {
+        type: 'carousel',
+        focusAt: '1',
+        startAt: 1,
+        perView: 3,
+        breakpoints: {
+            768: { perView: 2 }
+        }
+    });
+    upsellProductSlider.mount();
+</script>
+
 {% schema %}
     {
         "name":"Side Cart",
@@ -163,7 +184,7 @@
 {% endschema %}
 
 {% javascript %}
-	$('.upsell-slider').slick({
+	$('').slick({
 		infinite: true,
 		slidesToShow: 3,
 		slidesToScroll: 1,

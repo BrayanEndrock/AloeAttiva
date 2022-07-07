@@ -5,6 +5,7 @@
         <div class="value-props-marquee__item">
           {% assign image_width = block.settings.icon.width | divided_by: 1 | append: 'x' %}
           <img
+            loading="lazy"
             src="{{ block.settings.icon | img_url: image_width }}"
             srcset="{{block.settings.icon | img_url: image_width }} 1x, {{block.settings.icon | img_url: image_width, scale: 2}} 2x" 
             alt="{{ block.settings.proposition | escape }}" 
