@@ -129,6 +129,16 @@
         "show_text_below": false
       }
     },
+    "1657233795d9a1a050": {
+      "type": "home-feature-hero",
+      "settings": {
+        "hero": "shopify:\/\/shop_images\/home-hero.png",
+        "mobile-hero": "shopify:\/\/shop_images\/mobile-hero_f9746d7e-5326-4aa7-b14b-d2cf6d8321a5.png",
+        "title": "Aloe is the way to glow",
+        "url": "shopify:\/\/collections\/best-sellers",
+        "label": "Glow Now"
+      }
+    },
     "16517799384a3081e4": {
       "type": "image-with-text",
       "blocks": {
@@ -169,7 +179,7 @@
         "content_layout": "overlap",
         "color_scheme": "accent-1",
         "mobile_content_alignment": "center",
-        "padding_top": 0,
+        "padding_top": 40,
         "padding_bottom": 0
       }
     },
@@ -566,6 +576,7 @@
     "16508896397afca36a",
     "1652916037ca6beaff",
     "16445184171eba2d12",
+    "1657233795d9a1a050",
     "16517799384a3081e4",
     "165489133704f05170",
     "featured-collection",

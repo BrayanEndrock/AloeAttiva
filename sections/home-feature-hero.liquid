@@ -1,0 +1,76 @@
+{{ 'component-hero.css' | asset_url | stylesheet_tag }}
+<div class="home-feature-hero__template">
+    <div class="home-feature-hero__template--container">
+        <div class="main-content--wrapper">
+            <h1>{{ section.settings.title }}</h1>
+            <a href="{{ section.settings.url }}" class="btn__hero">{{ section.settings.label }}</a>
+        </div>
+    </div>
+</div>
+<style>  
+    .home-feature-hero__template {
+        background-image: url({{ section.settings.hero | img_url: 'master' }}); 
+        background-position: right; 
+        background-repeat: no-repeat;    
+        background-size: cover;
+        height: 560px;         
+    }
+    @media (min-width: 481px) and (max-width: 768px) {
+        .home-feature-hero__template {
+            background-image: url({{ section.settings.mobile-hero | img_url: 'master' }});     
+            background-size: cover;
+            background-position: top; 
+            height: 910px;         
+        }
+    }
+    @media screen and (max-width: 480px) {
+        .home-feature-hero__template {
+            background-image: url({{ section.settings.mobile-hero | img_url: 'master' }});     
+            background-size: cover;
+            background-position: top;
+            height: 340px;         
+        }
+    } 
+</style>
+{% schema %}
+    {
+        "name": "Home Hero",
+        "tag": "section", 
+        "class": "home-feature-hero",
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "hero",
+                "label": "Hero"
+            },
+            {
+                "type": "image_picker",
+                "id": "mobile-hero",
+                "label": "Mobile Hero"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Title",
+                "default": "Aloe is the way to glow"
+            },
+            {
+                "type": "url",
+                "id": "url",
+                "label": "Link"
+            },
+            {
+                "type": "text",
+                "id": "label",
+                "label": "CTA Label",
+                "default": "Glow Now"
+            }
+        ],
+        "presets": [
+            {
+                "category": "Hero",
+                "name":"Home Hero"   
+            }   
+        ]
+    }
+{% endschema %}

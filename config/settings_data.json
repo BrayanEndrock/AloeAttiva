@@ -23,9 +23,9 @@
           "announcement-bar-0": {
             "type": "announcement",
             "settings": {
-              "text": "ALOE AMERICA! SAVE 30% OFF BUNDLES! SHOP OUR INDEPENDENCE DAY SALE",
+              "text": "BACK IN STOCK! GET FREE BEAUTY ROUNDS WITH OUR BEAUTY BUNDLE WHILE SUPPLIES LAST",
               "color_scheme": "accent-1",
-              "link": "https:\/\/aloeattiva.com\/discount\/ALOEAMERICA?redirect=\/collections\/bundles"
+              "link": "shopify:\/\/products\/aloe-beauty-bundle"
             }
           }
         },
