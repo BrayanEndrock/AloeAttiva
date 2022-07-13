@@ -1267,6 +1267,7 @@
                     document.querySelector('.cart-count-bubble').classList.remove("is-invisible"),
                     document.querySelector('.go-cart-drawer__upsell').classList.remove("is-invisible"),
                     document.querySelector('.go-cart-drawer__order-instructions').classList.remove("is-invisible");
+                    /** Side Cart Gamification: Dynamic Copy  */
                     var subtotalCart = t.total_price;
                     var goal = 0;
                     if( subtotalCart < 1) {
@@ -1282,6 +1283,38 @@
                     } else if(subtotalCart >= 4500) {
                       document.getElementById('freeShippingPromo').classList.add('hide');
                       document.getElementById('freeShippingReached').classList.remove('hide');
+                    }
+                    /** Side Cart Gamification: Progress Bar  */
+                    if( subtotalCart <= 0) {
+                      document.querySelector('.progress-bar__container #progressBar').value = '0';
+                      document.querySelector('.progress-bar__container .progress-bar__checkpoint.first').classList.remove('checked');
+                      document.querySelector('.progress-bar__container .progress-bar__checkpoint.second').classList.remove('checked');
+                      document.querySelector('.progress-bar__container .progress-bar__checkpoint.third').classList.remove('checked');
+                      document.querySelector('.progress-bar__container .progress-bar__checkpoint.fourth').classList.remove('reached');
+                    } else if( subtotalCart > 0 && subtotalCart < 1500) {
+                      document.querySelector('.progress-bar__container #progressBar').value = '0';
+                      document.querySelector('.progress-bar__container .progress-bar__checkpoint.first').classList.add('checked');
+                      document.querySelector('.progress-bar__container .progress-bar__checkpoint.second').classList.remove('checked');
+                      document.querySelector('.progress-bar__container .progress-bar__checkpoint.third').classList.remove('checked');
+                      document.querySelector('.progress-bar__container .progress-bar__checkpoint.fourth').classList.remove('reached');
+                    } else if( subtotalCart > 1500 && subtotalCart < 3000) {
+                      document.querySelector('.progress-bar__container #progressBar').value = '33.33';
+                      document.querySelector('.progress-bar__container .progress-bar__checkpoint.first').classList.add('checked');
+                      document.querySelector('.progress-bar__container .progress-bar__checkpoint.second').classList.add('checked');
+                      document.querySelector('.progress-bar__container .progress-bar__checkpoint.third').classList.remove('checked');
+                      document.querySelector('.progress-bar__container .progress-bar__checkpoint.fourth').classList.remove('reached');
+                    } else if( subtotalCart > 3000 && subtotalCart < 4500) {
+                      document.querySelector('.progress-bar__container #progressBar').value = '66.66';
+                      document.querySelector('.progress-bar__container .progress-bar__checkpoint.first').classList.add('checked');
+                      document.querySelector('.progress-bar__container .progress-bar__checkpoint.second').classList.add('checked');
+                      document.querySelector('.progress-bar__container .progress-bar__checkpoint.third').classList.add('checked');
+                      document.querySelector('.progress-bar__container .progress-bar__checkpoint.fourth').classList.remove('reached');
+                    } else if( subtotalCart > 4500) {
+                      document.querySelector('.progress-bar__container #progressBar').value = '99.99';
+                      document.querySelector('.progress-bar__container .progress-bar__checkpoint.first').classList.add('checked');
+                      document.querySelector('.progress-bar__container .progress-bar__checkpoint.second').classList.add('checked');
+                      document.querySelector('.progress-bar__container .progress-bar__checkpoint.third').classList.add('checked');
+                      document.querySelector('.progress-bar__container .progress-bar__checkpoint.fourth').classList.add('reached');
                     }
               },
             },
@@ -1395,7 +1428,12 @@
                 document.querySelector('.goal').innerHTML = formatMoney(4500, this.moneyFormat),
                 document.querySelector('.cart-count-bubble').classList.add("is-invisible"),
                 document.querySelector('.go-cart-drawer__upsell').classList.add("is-invisible"),
-                document.querySelector('.go-cart-drawer__order-instructions').classList.add("is-invisible");
+                document.querySelector('.go-cart-drawer__order-instructions').classList.add("is-invisible"),
+                document.querySelector('.progress-bar__container #progressBar').value = '0',
+                document.querySelector('.progress-bar__container .progress-bar__checkpoint.first').classList.remove('checked'),
+                document.querySelector('.progress-bar__container .progress-bar__checkpoint.second').classList.remove('checked'),
+                document.querySelector('.progress-bar__container .progress-bar__checkpoint.third').classList.remove('checked'),
+                document.querySelector('.progress-bar__container .progress-bar__checkpoint.fourth').classList.remove('reached');
               },
             },
             {
