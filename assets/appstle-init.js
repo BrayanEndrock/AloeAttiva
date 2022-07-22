@@ -17,7 +17,7 @@
       };
 
 
-      appstleLoadScript("https://cdn.shopify.com/s/files/1/0468/3730/1414/t/19/assets/appstle-subscription.js?v=1657886638");
+      appstleLoadScript("https://cdn.shopify.com/s/files/1/0468/3730/1414/t/19/assets/appstle-subscription.js?v=1658496946");
 
       window.RS = Window.RS || {};
       RS.Config = {
