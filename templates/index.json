@@ -176,55 +176,11 @@
         "layout": "text_first",
         "desktop_content_position": "top",
         "desktop_content_alignment": "center",
-        "content_layout": "overlap",
+        "content_layout": "no-overlap",
         "color_scheme": "accent-1",
         "mobile_content_alignment": "center",
         "padding_top": 40,
         "padding_bottom": 0
-      }
-    },
-    "165489133704f05170": {
-      "type": "image-with-text",
-      "blocks": {
-        "165489133729937939-0": {
-          "type": "heading",
-          "settings": {
-            "heading": "Build Your Own Bundle",
-            "heading_size": "h1"
-          }
-        },
-        "165489133729937939-1": {
-          "type": "text",
-          "settings": {
-            "text": "<p><strong>NEW!<\/strong><\/p><p><strong>Build your own bundle of our signature skincare products & save.<\/strong><\/p>",
-            "text_style": "body"
-          }
-        },
-        "165489133729937939-2": {
-          "type": "button",
-          "settings": {
-            "button_label": "Build My Bundle",
-            "button_link": "shopify:\/\/collections\/byob"
-          }
-        }
-      },
-      "block_order": [
-        "165489133729937939-0",
-        "165489133729937939-1",
-        "165489133729937939-2"
-      ],
-      "settings": {
-        "image": "shopify:\/\/shop_images\/MDW-BANNER.jpg",
-        "height": "adapt",
-        "desktop_image_width": "medium",
-        "layout": "image_first",
-        "desktop_content_position": "top",
-        "desktop_content_alignment": "left",
-        "content_layout": "no-overlap",
-        "color_scheme": "accent-1",
-        "mobile_content_alignment": "left",
-        "padding_top": 36,
-        "padding_bottom": 36
       }
     },
     "featured-collection": {
@@ -248,19 +204,6 @@
     "1650572323276663ac": {
       "type": "rich-text",
       "blocks": {
-        "16505723233ba3d18f-0": {
-          "type": "heading",
-          "settings": {
-            "heading": "Hundreds of five star reviews say it all...",
-            "heading_size": "h2"
-          }
-        },
-        "16505723233ba3d18f-1": {
-          "type": "text",
-          "settings": {
-            "text": "<p>All of our products are formulated with the highest quality Hyaluronic Acids, Plant-based Collagens, and other natural ingredients to deliver you hydrated, youthful, glowing skin - backed by science!<\/p>"
-          }
-        },
         "16505723233ba3d18f-2": {
           "type": "button",
           "disabled": true,
@@ -272,8 +215,6 @@
         }
       },
       "block_order": [
-        "16505723233ba3d18f-0",
-        "16505723233ba3d18f-1",
         "16505723233ba3d18f-2"
       ],
       "settings": {
@@ -283,110 +224,35 @@
         "padding_bottom": 0
       }
     },
-    "1650572313dbdd9796": {
-      "type": "apps",
+    "1657740634632d933b": {
+      "type": "collapsible-content",
       "blocks": {
-        "52c1ee46-c811-48b1-b691-4bd186161f1c": {
-          "type": "shopify:\/\/apps\/product-reviews-ugc-with-q-a\/blocks\/carousel-widget\/34006358-52bd-4ec7-8c78-200fe58b77ba",
-          "settings": {}
+        "16577406342159826c-0": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Our promise to you & your skin...",
+            "icon": "heart",
+            "row_content": "<p>All of our products are formulated with the highest quality Hyaluronic Acids, Plant-based Collagens, and other natural ingredients to deliver you hydrated, youthful, glowing skin - backed by science!<\/p>",
+            "page": ""
+          }
         }
       },
       "block_order": [
-        "52c1ee46-c811-48b1-b691-4bd186161f1c"
+        "16577406342159826c-0"
       ],
       "settings": {
-        "include_margins": true
-      }
-    },
-    "1651373989375f45ed": {
-      "type": "featured-collection",
-      "settings": {
-        "title": "Bestselling Bundles",
-        "collection": "bundles",
-        "products_to_show": 2,
+        "caption": "",
+        "heading": "Hundreds of five star reviews say it all!",
+        "heading_alignment": "center",
+        "layout": "none",
         "color_scheme": "background-1",
-        "show_view_all": true,
-        "swipe_on_mobile": true,
+        "container_color_scheme": "background-2",
+        "open_first_collapsible_row": false,
+        "image": "shopify:\/\/shop_images\/Screen_Shot_2022-07-13_at_12.10.38_PM.png",
         "image_ratio": "adapt",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
-    "collection-list": {
-      "type": "collection-list",
-      "blocks": {
-        "collection-list-1": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "acne-blemish-treatment"
-          }
-        },
-        "collection-list-2": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "ageless-skin"
-          }
-        },
-        "collection-list-0": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "uneven-tone-texture"
-          }
-        }
-      },
-      "block_order": [
-        "collection-list-1",
-        "collection-list-2",
-        "collection-list-0"
-      ],
-      "settings": {
-        "title": "Skincare Solutions",
-        "image_ratio": "portrait",
-        "color_scheme": "background-1",
-        "swipe_on_mobile": false,
-        "show_view_all": false,
-        "padding_top": 0,
-        "padding_bottom": 0
-      }
-    },
-    "16463407623c24c9d8": {
-      "type": "rich-text",
-      "blocks": {
-        "1646340762040eeb27-0": {
-          "type": "heading",
-          "settings": {
-            "heading": "Skincare solutions for you!",
-            "heading_size": "h1"
-          }
-        },
-        "f964a242-fe42-4a5a-bc74-c69d79f4c3b7": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Take our skincare quiz to get paired with the products and bundles that fit your needs and routine.<\/p>"
-          }
-        },
-        "1646340762040eeb27-2": {
-          "type": "button",
-          "settings": {
-            "button_label": "Take Quiz",
-            "button_link": "https:\/\/aloeattiva.com\/#quiz-wnHrYZ",
-            "button_style_secondary": false
-          }
-        }
-      },
-      "block_order": [
-        "1646340762040eeb27-0",
-        "f964a242-fe42-4a5a-bc74-c69d79f4c3b7",
-        "1646340762040eeb27-2"
-      ],
-      "settings": {
-        "color_scheme": "accent-1",
-        "full_width": true,
+        "desktop_layout": "image_second",
         "padding_top": 36,
-        "padding_bottom": 44
+        "padding_bottom": 36
       }
     },
     "image-with-text": {
@@ -431,6 +297,147 @@
         "mobile_content_alignment": "center",
         "padding_top": 0,
         "padding_bottom": 0
+      }
+    },
+    "1650572313dbdd9796": {
+      "type": "apps",
+      "settings": {
+        "include_margins": true
+      }
+    },
+    "16463407623c24c9d8": {
+      "type": "rich-text",
+      "blocks": {
+        "1646340762040eeb27-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "Skincare solutions for you!",
+            "heading_size": "h1"
+          }
+        },
+        "f964a242-fe42-4a5a-bc74-c69d79f4c3b7": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Take our skincare quiz to get paired with the products and bundles that fit your needs and routine.<\/p>"
+          }
+        },
+        "1646340762040eeb27-2": {
+          "type": "button",
+          "settings": {
+            "button_label": "Take Quiz",
+            "button_link": "https:\/\/aloeattiva.com\/#quiz-wnHrYZ",
+            "button_style_secondary": false
+          }
+        }
+      },
+      "block_order": [
+        "1646340762040eeb27-0",
+        "f964a242-fe42-4a5a-bc74-c69d79f4c3b7",
+        "1646340762040eeb27-2"
+      ],
+      "settings": {
+        "color_scheme": "accent-1",
+        "full_width": true,
+        "padding_top": 36,
+        "padding_bottom": 44
+      }
+    },
+    "collection-list": {
+      "type": "collection-list",
+      "blocks": {
+        "collection-list-1": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "acne-blemish-treatment"
+          }
+        },
+        "collection-list-2": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "ageless-skin"
+          }
+        },
+        "collection-list-0": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "uneven-tone-texture"
+          }
+        }
+      },
+      "block_order": [
+        "collection-list-1",
+        "collection-list-2",
+        "collection-list-0"
+      ],
+      "settings": {
+        "title": "Skincare Solutions",
+        "image_ratio": "portrait",
+        "color_scheme": "background-1",
+        "swipe_on_mobile": true,
+        "show_view_all": false,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "1651373989375f45ed": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Bestselling Bundles",
+        "collection": "bundles",
+        "products_to_show": 2,
+        "color_scheme": "background-1",
+        "show_view_all": true,
+        "swipe_on_mobile": true,
+        "image_ratio": "adapt",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "165489133704f05170": {
+      "type": "image-with-text",
+      "blocks": {
+        "165489133729937939-0": {
+          "type": "heading",
+          "settings": {
+            "heading": "NEW! Build Your Own Bundle and Save",
+            "heading_size": "h2"
+          }
+        },
+        "165489133729937939-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Build your own bundle of our signature skincare products...<\/p><p><strong>The more you bundle the more you save!<\/strong><\/p>",
+            "text_style": "body"
+          }
+        },
+        "165489133729937939-2": {
+          "type": "button",
+          "settings": {
+            "button_label": "Build My Bundle",
+            "button_link": "shopify:\/\/collections\/byob"
+          }
+        }
+      },
+      "block_order": [
+        "165489133729937939-0",
+        "165489133729937939-1",
+        "165489133729937939-2"
+      ],
+      "settings": {
+        "image": "shopify:\/\/shop_images\/MDW-BANNER.jpg",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "color_scheme": "accent-1",
+        "mobile_content_alignment": "center",
+        "padding_top": 36,
+        "padding_bottom": 36
       }
     },
     "collage": {
@@ -570,6 +577,18 @@
         "padding_top": 68,
         "padding_bottom": 52
       }
+    },
+    "1657740565e5a413ba": {
+      "type": "slideshow",
+      "settings": {
+        "layout": "full_bleed",
+        "slide_height": "adapt_image",
+        "slider_visual": "counter",
+        "auto_rotate": false,
+        "change_slides_speed": 5,
+        "show_text_below": true,
+        "accessibility_info": "Slideshow about our brand"
+      }
     }
   },
   "order": [
@@ -578,17 +597,19 @@
     "16445184171eba2d12",
     "1657233795d9a1a050",
     "16517799384a3081e4",
-    "165489133704f05170",
     "featured-collection",
     "1650572323276663ac",
-    "1650572313dbdd9796",
-    "1651373989375f45ed",
-    "collection-list",
-    "16463407623c24c9d8",
+    "1657740634632d933b",
     "image-with-text",
+    "1650572313dbdd9796",
+    "16463407623c24c9d8",
+    "collection-list",
+    "1651373989375f45ed",
+    "165489133704f05170",
     "collage",
     "multicolumn",
     "1651785177bea040d1",
-    "newsletter"
+    "newsletter",
+    "1657740565e5a413ba"
   ]
 }
