@@ -7,8 +7,8 @@
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
     <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
-    <link rel="dns-prefetch" href="https://www.googleoptimize.com/optimize.js?id=OPT-K9KK4B3" crossorigin>
-    <link rel="preconnect" href="https://www.googleoptimize.com/optimize.js?id=OPT-K9KK4B3" crossorigin>
+    <link rel="dns-prefetch" href="https://www.googleoptimize.com" crossorigin>
+    <link rel="preconnect" href="https://www.googleoptimize.com" crossorigin>
 
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | img_url: '32x32' }}">
@@ -44,7 +44,8 @@
     <!-- End Google Tag Manager -->
 
     <script src="{{ 'global.js' | asset_url }}" defer="defer"></script>
-    {% render 'header-scripts.zipifypages', renderctx: 'thm' %}{{ content_for_header }}
+    {% render 'header-scripts.zipifypages', renderctx: 'thm' %}
+    {{ content_for_header }}
 
     {%- liquid
       assign body_font_bold = settings.type_body_font | font_modify: 'weight', 'bold'
@@ -204,7 +205,7 @@
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
-    {{ 'go-cart.scss' | asset_url | stylesheet_tag }}
+    {{ 'go-cart.css' | asset_url | stylesheet_tag }}
 
     {%- unless settings.type_body_font.system? -%}
       <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
@@ -235,7 +236,6 @@
       </script>
       <!-- END: Microsoft Clarity -->
       <!-- Glide.js -->
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide"></script>
       <link rel="stylesheet" href="{{ 'glide.core.min.css' | asset_url }}">
       <link rel="stylesheet" href="{{ 'glide.theme.min.css' | asset_url }}">
