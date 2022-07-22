@@ -6,6 +6,7 @@
     "colors_background_2": "#acbfb3",
     "gradient_background_2": "linear-gradient(20deg, rgba(249, 198, 198, 1) 15%, rgba(255, 255, 255, 1) 33%, rgba(172, 191, 179, 1) 46%)",
     "card_style": "standard",
+    "text_boxes_radius": 22,
     "badge_position": "top left",
     "badge_corner_radius": 8,
     "sale_badge_color_scheme": "accent-2",
@@ -23,9 +24,9 @@
           "announcement-bar-0": {
             "type": "announcement",
             "settings": {
-              "text": "BACK IN STOCK! GET FREE BEAUTY ROUNDS WITH OUR BEAUTY BUNDLE WHILE SUPPLIES LAST",
+              "text": "Try our BESTSELLING natural lip treatment today",
               "color_scheme": "accent-1",
-              "link": "shopify:\/\/products\/aloe-beauty-bundle"
+              "link": "shopify:\/\/products\/xl-powerlip"
             }
           }
         },
@@ -68,7 +69,7 @@
             "type": "text",
             "settings": {
               "heading": "Better World",
-              "subtext": "<p>Did you know that 1 in 9 people lack access to safe water? <\/p><p>We don't formulate with water, we donate it.<\/p><p>Through our partnership with water.org we donate 10 years of safe water access to someone in need with every <a href=\"https:\/\/aloe-attiva-italia.myshopify.com\/power-couple-bundle\/\">Power Couple Bundle purchase.<\/a><\/p>"
+              "subtext": "<p>Did you know that 1 in 9 people lack access to safe water? <\/p><p>We don't formulate with water, we donate it.<\/p><p>Through our partnership with water.org we donate 10 years of safe water access to someone in need with <a href=\"\/collections\/bundles\" title=\"BUNDLES\">every bundle purchase!<\/a> <\/p><p>*excludes The Beauty Bundle<\/p>"
             }
           }
         },

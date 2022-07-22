@@ -8,9 +8,11 @@
   <div class="flex-row zpa-bv3-container zp zps_brdblclassescape">
     <div class="xs-12 zpa-text-center">
       <div class="zpa-offset-bottom-sm zpa-mobile-offset-bottom-xs zp zps_imgblclassescape">
-        <a role="button" data-zp-product-image-link>
-          <img class="zpa-img-fluid zp zps_brd2blclassescape" zps_imgimgattr>
-        </a>
+        <div class="zpa-image-wrap">{% if zp_show_product_image_label == true %}<div zps_imglblattr>zps_imglblttl</div>{% endif %}
+          <a role="button" data-zp-product-image-link>
+            <img class="zpa-img-fluid zp zps_brd2blclassescape" zps_imgimgattr>
+          </a>
+        </div>
       </div>
       <div class="zpa-offset-bottom-sm zpa-mobile-offset-bottom-xs">
         <div class="default-styles-wrapper zpa-word-wrap disable-internal-link zp zps_ttl1blclassescape">zps_ttl1cont</div>

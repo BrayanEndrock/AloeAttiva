@@ -17,7 +17,7 @@
       };
 
 
-      appstleLoadScript("https://cdn.shopify.com/s/files/1/0468/3730/1414/t/19/assets/appstle-subscription.js?v=1657065158");
+      appstleLoadScript("https://cdn.shopify.com/s/files/1/0468/3730/1414/t/19/assets/appstle-subscription.js?v=1657886638");
 
       window.RS = Window.RS || {};
       RS.Config = {
@@ -91,6 +91,9 @@
         "quantitySelector": "",
         "enableAddJSInterceptor": "false",
         "reBuyEnabled": "false",
+        "loyaltyDetailsLabelText": "",
+        "loyaltyPerkDescriptionText": "",
+        "widgetTemplateHtml": ``,
         "css": {
             "appstle_subscription_widget": {
                 "margin-top": "" ,
