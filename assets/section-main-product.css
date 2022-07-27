@@ -269,6 +269,19 @@ fieldset.product-form__input .form__label {
   display: none;
 }
 
+.product-form .form {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-form .form .appstle_sub_widget {
+  order: 2;
+}
+
+.product-form .form  .product-form__buttons {
+  order: 1;
+}
+
 @media screen and (forced-colors: active) {
   .product-form__submit[aria-disabled="true"] {
     color: Window;
