@@ -99,6 +99,16 @@
           "link": "shopify:\/\/collections\/all",
           "upsell-title": "Recommended Products"
         }
+      },
+      "home-feature-large-banner": {
+        "type": "home-feature-large-banner",
+        "settings": {
+          "background-image": "shopify:\/\/shop_images\/large-banner-desktop.png",
+          "mobile-background-image": "shopify:\/\/shop_images\/large-banner-mobile.png",
+          "title": "We don't formulate with water, we donate it with every bundle purchase",
+          "link": "shopify:\/\/collections\/all",
+          "label": "Shop Now"
+        }
       }
     },
     "content_for_index": [],

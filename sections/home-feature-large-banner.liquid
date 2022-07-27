@@ -1,0 +1,132 @@
+<div class="home-large-banner__template">
+    <div class="home-large-banner__template--wrapper">
+        <h2>{{ section.settings.title }}</h2>
+        <a class="large-banner__button" href="{{ section.settings.link }}">{{ section.settings.label }}</a>
+    </div>
+</div>
+
+<style>
+    .home-large-banner {
+        display: none;  
+    }
+    .home-large-banner .home-large-banner__template {
+        align-items: center;
+        {% if section.settings.background-image %}
+            background-image: url({{ section.settings.background-image | img_url: 'master' }});
+        {% else %}
+            background-color: #83AAA6;
+        {% endif %}
+        background-position: bottom center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: flex;
+        height: 128px;
+        justify-content: center;
+    }
+    .home-large-banner__template--wrapper {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        gap: 11px;
+        justify-content: center;
+    }
+    .home-large-banner__template--wrapper h2 {
+        color: #FFFFFF;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        line-height: 24px;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        text-transform: uppercase;
+    }
+    .home-large-banner__template--wrapper .large-banner__button {
+        background: #83AAA6;
+        border-radius: 5px;
+        color: #FAF6F0;
+        padding: 12px 40px;
+        text-decoration: none;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 21px;
+        text-align: center;
+    }
+    .home-large-banner__template--wrapper .large-banner__button:hover {
+        background-color: #FAF6F0;
+        border: 1px solid #83AAA6;
+        color: #83AAA6;
+        transition: all 0.5s ease-in-out;
+    }
+    @media screen and (max-width: 768px) {
+        .home-large-banner .home-large-banner__template {
+            {% if section.settings.background-image %}
+                background-image: url({{ section.settings.mobile-background-image | img_url: 'master' }});
+            {% else %}
+                background-color: #83AAA6;
+            {% endif %}
+            background-position: right;
+            height: 82px;
+            justify-content: flex-start;
+            padding-left: 14px;
+        }
+        .home-large-banner__template--wrapper {
+            gap: 5px;
+        }
+        .home-large-banner__template--wrapper h2 {
+            font-size: 10px;
+            line-height: 14px;
+            max-width: 267px;
+        }
+        .home-large-banner__template--wrapper .large-banner__button {
+            font-size: 14px;
+            line-height: 19px;
+            padding: 4px 32px;
+        }
+    }
+</style>
+
+{% schema %}
+    {
+        "name":"Home Large Banner",
+        "class":"home-large-banner",
+        "tag": "section",
+        "settings":[
+            {
+                "type": "image_picker",
+                "id": "background-image",
+                "label": "Background Image"
+            },
+            {
+                "type": "image_picker",
+                "id": "mobile-background-image",
+                "label": "Mobile Background Image"
+            },
+            {
+                "type": "text",
+                "id": "title",
+                "label": "Main Title",
+                "default": "We don't formulate with water, we donate it with every bundle purchase"
+            },
+            {
+                "type": "url",
+                "id": "link",
+                "label": "Link"
+            },
+            {
+                "type": "text",
+                "id": "label",
+                "label": "Button Label",
+                "default": "Shop Now"
+            }
+        ],   
+        "presets": [
+            {
+                "name":"Large Banner",
+                "category": "Home"
+            }
+        ]
+    }
+{% endschema %}
